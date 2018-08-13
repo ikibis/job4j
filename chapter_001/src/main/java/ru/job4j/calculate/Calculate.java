@@ -12,8 +12,7 @@ public class Calculate {
 	* @param args - args.
 	* @return вывод Фразы "Hello world"
 	*/
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		System.out.println("Hello world");	
 	}
 	/**
