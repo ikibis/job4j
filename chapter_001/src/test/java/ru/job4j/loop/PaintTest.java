@@ -1,8 +1,6 @@
 package ru.job4j.loop;
-
-import org.junit.Test;
-
-import static org.hamcrest.core.Is.is;
+ import org.junit.Test;
+ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import java.util.StringJoiner;
 /**
@@ -10,8 +8,7 @@ import java.util.StringJoiner;
  * @version $Id$
  * @since 0.1
  */
-
-public class PaintTest {
+ public class PaintTest {
     @Test
     public void whenPyramid4Left() {
         Paint paint = new Paint();
@@ -28,4 +25,4 @@ public class PaintTest {
             )
         );
     }
-}
+} 
