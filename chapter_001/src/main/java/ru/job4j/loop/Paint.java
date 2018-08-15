@@ -12,22 +12,6 @@ public class Paint {
      * @param  height целое число.
      * @return Результат - вывод пирамиды.
      */
-    public String rightTrl(final int height) {
-        return this.loopBy(
-                height,
-                height,
-                (row, column) -> row >= column
-        );
-    }
-
-    public String leftTrl(final int height) {
-        return this.loopBy(
-                height,
-                height,
-                (row, column) -> row >= height - column - 1
-        );
-    }
-
     public String pyramid(final int height) {
         return this.loopBy(
                 height,
