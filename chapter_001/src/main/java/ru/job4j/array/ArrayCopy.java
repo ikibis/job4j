@@ -4,6 +4,7 @@ package ru.job4j.array;
  * @version $Id$
  * @since 0.1
  */
+import java.util.Arrays;
 
 public class ArrayCopy {
     /**
@@ -18,15 +19,7 @@ public class ArrayCopy {
             outputArray[i] = array1[i];
         for (int i = 0; i < array2.length; i++)
             outputArray[i + array1.length] = array2[i];
-        for (int i = outputArray.length - 1; i > 0; i--) {
-            for (int j = 0; j < i; j++) {
-                if (outputArray[j] > outputArray[j + 1]) {
-                    int tmp = outputArray[j];
-                    outputArray[j] = outputArray[j + 1];
-                    outputArray[j + 1] = tmp;
-                }
-            }
-        }
+        Arrays.sort(outputArray);
         return outputArray;
     }
 }
