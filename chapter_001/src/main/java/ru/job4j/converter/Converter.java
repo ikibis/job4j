@@ -44,3 +44,4 @@ public class Converter {
         return value * DOLLAR;
     }
 }
+

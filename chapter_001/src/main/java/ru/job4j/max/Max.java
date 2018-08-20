@@ -11,14 +11,14 @@ public class Max {
      * @return Результат-максимальное число.
      */
     public int max(int first, int second) {
-        return (first > second) ? first : second ;
+        return (first > second) ? first : second;
     }
         /**
      * Выводит максимальное из трех чисел.
      * @ int first, int second , int third сравниваемые числа.
      * @return Результат-максимальное число.
      */
-    public int max(int first, int second , int third) {
+    public int max(int first, int second, int third) {
         return this.max(
                 this.max(first, second), third
         );

@@ -9,7 +9,7 @@ import static org.junit.Assert.assertThat;
  * @version $Id$
  * @since 0.1
  */
-public class MaxTest{
+public class MaxTest {
     @Test
     public void whenFirstLessSecond() {
         Max maxim = new Max();

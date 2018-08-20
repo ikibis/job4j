@@ -5,16 +5,16 @@ package ru.job4j.array;
  * @since 0.1
  */
 public class Square {
-            /**
+    /**
      * Вывод массива.
      * @param  bound целое число.
      * @return Результат - вывод массива.
      */
     public int[] calculate(final int bound) {
-        int[] rst = new int[bound];
-        for (int i = 0; i < rst.length; i++) {
-            rst[i] = ++i * i--;
+        int[] result = new int[bound];
+        for (int i = 0; i < result.length; i++) {
+            result[i] = ++i * i--;
         }
-        return rst;
+        return result;
     }
 }
