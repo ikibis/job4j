@@ -14,11 +14,13 @@ public class ArrayCopy {
      * @return – результат - отсортированный массив.
      */
     public int[] consolidation(final int[] array1, final int[] array2) {
-        int [] outputArray = new int[array1.length + array2.length];
-        for (int i = 0; i < array1.length; i++)
+        int[] outputArray = new int[array1.length + array2.length];
+        for (int i = 0; i < array1.length; i++) {
             outputArray[i] = array1[i];
-        for (int i = 0; i < array2.length; i++)
+        }
+        for (int i = 0; i < array2.length; i++) {
             outputArray[i + array1.length] = array2[i];
+        }
         Arrays.sort(outputArray);
         return outputArray;
     }
