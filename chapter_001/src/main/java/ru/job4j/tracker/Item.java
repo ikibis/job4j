@@ -12,7 +12,7 @@ public class Item {
     public long created;
     public String[] comments;
 
-    public Item() {}
+    public Item() { }
     public Item(String name, String description, long created) {
         this.name = name;
         this.description = description;

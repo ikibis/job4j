@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 import java.util.*;
 
 public class Tracker {
-    public Item[] items = new Item[100];
+    private final Item[] items = new Item[100];
     private int position = 0;
     private static final Random RN = new Random();
     public Item add(Item item) {
@@ -19,7 +19,7 @@ public class Tracker {
      * Для этого необходимо найти ячейку в массиве по id
      */
     public void replace(String id, Item item) {
-        for (int i = 0; i < this.items.length; i++) {
+        for (int i = 0; i < this.position; i++) {
             if (this.items[i].getId().equals(id)) {
                 this.items[i] = item;
             }
@@ -31,7 +31,11 @@ public class Tracker {
      * помощью System.arrayCopy();
      */
     public void delete(String id) {
-
+        for (int i = 0; i < this.position; i++) {
+            if (this.items[i].getId().equals(id)) {
+                this.items[i] = null;
+            }
+        }
     }
     /**
      * возвращает копию массива this.items без null элементов;
@@ -39,7 +43,9 @@ public class Tracker {
     public Item[] findAll() {
         Item[] result = new Item[this.position];
         for (int index = 0; index < this.position; index++) {
-            result[index] = this.items[index];
+            if (this.items[index] != null) {
+                result[index] = this.items[index];
+            }
         }
         return result;
     }
@@ -49,7 +55,13 @@ public class Tracker {
      * результирующий массив и возвращает его;
      **/
     public Item[] findByName(String key) {
-        return null;
+        Item[] result = new Item[this.position];
+        for (int index = 0; index < this.position; index++) {
+            if (this.items[index] != null && this.items[index].getName().equals(key)) {
+                result[index] = this.items[index];
+            }
+        }
+        return result;
     }
     /**
      * проверяет в цикле все элементы массива this.items, сравнивая id с аргументом String id и
