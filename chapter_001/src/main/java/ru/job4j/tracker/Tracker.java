@@ -32,24 +32,23 @@ public class Tracker {
      * id.  Далее сместить все значения справа от удаляемого элемента - на одну ячейку влево с
      * помощью System.arrayCopy();
      */
-    public void delete(String id) {
-        for (int i = 0; i < this.position; i++) {
-            if (this.items[i].getId().equals(id)) {
-                this.items[i] = null;
+    public boolean delete(String id) {
+        boolean result = false;
+        for (int index = 0; index < this.position; index++) {
+            if (id.equals(items[index].getId())) {
+                System.arraycopy(items, index + 1, items, index, items.length - index - 1);
+                position--;
+                result = true;
+                break;
             }
         }
+        return result;
     }
     /**
      * возвращает копию массива this.items без null элементов;
      **/
     public Item[] findAll() {
-        Item[] result = new Item[this.position];
-        for (int index = 0; index < this.position; index++) {
-            if (this.items[index] != null) {
-                result[index] = this.items[index];
-            }
-        }
-        return result;
+        return Arrays.copyOf(this.items, this.position);
     }
     /**
      * проверяет в цикле все элементы массива this.items, сравнивая name (используя метод getName
@@ -58,12 +57,13 @@ public class Tracker {
      **/
     public Item[] findByName(String key) {
         Item[] result = new Item[this.position];
+        int count = 0;
         for (int index = 0; index < this.position; index++) {
             if (this.items[index] != null && this.items[index].getName().equals(key)) {
-                result[index] = this.items[index];
+                result[count++] = this.items[index];
             }
         }
-        return result;
+        return Arrays.copyOf(result, count);
     }
     /**
      * проверяет в цикле все элементы массива this.items, сравнивая id с аргументом String id и
