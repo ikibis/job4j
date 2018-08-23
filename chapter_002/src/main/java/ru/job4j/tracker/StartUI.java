@@ -87,36 +87,48 @@ public class StartUI {
     private void showItems() {
         System.out.println("------------ Show all items : --------------");
         for (Item item : this.tracker.findAll()) {
-            System.out.println("Id : " + item.getId() + " Item : " + item.getName() + " Description : " + item.getDescription());
+            System.out.println(item.toString());
         }
     }
     private void editItem() {
         System.out.println("------------ Edit item : --------------");
         String id = this.input.ask("Enter ID of the item :");
-        String name = this.input.ask("Enter the name of the item :");
-        String desc = this.input.ask("Enter a description of the item :");
-        Item item = new Item(name, desc);
-        this.tracker.replace(id, item);
-        System.out.println("Item with ID : " + id + " replaced");
+        if (this.tracker.findById(id) != null) {
+            String name = this.input.ask("Enter the name of the item :");
+            String desc = this.input.ask("Enter a description of the item :");
+            Item item = new Item(name, desc);
+            this.tracker.replace(id, item);
+            System.out.println("Item with ID : " + id + " replaced");
+        } else {
+            System.out.println("Item not found");
+        }
+
     }
     private void deleteItem() {
         System.out.println("------------ Delete item : --------------");
         String id = this.input.ask("Enter ID of the item :");
-        this.tracker.delete(id);
-        System.out.println("Item with ID : " + id + " deleted");
+        if (this.tracker.delete(id)) {
+            System.out.println("Item with ID : " + id + " deleted");
+        } else {
+            System.out.println("Item not found");
+        }
     }
     private void findIdItem() {
         System.out.println("------------ Find item by Id : --------------");
         String id = this.input.ask("Enter ID of the item :");
         Item item = this.tracker.findById(id);
-        System.out.println("Id : " + item.getId() + " Item : " + item.getName() + " Description : " + item.getDescription());
+        if (item != null) {
+            System.out.println(item.toString());
+        } else {
+            System.out.println("Item not found");
+        }
     }
     private void findNameItem() {
         System.out.println("------------ Find item by Name : --------------");
         String name = this.input.ask("Enter Name of the item :");
         Item[] items = this.tracker.findByName(name);
-        for (int i = 0; i < items.length; i++) {
-            System.out.println("Id : " + items[i].getId() + " Item : " + items[i].getName() + " Description : " + items[i].getDescription());
+        for (Item item : items) {
+            System.out.println(item.toString());
         }
     }
     private void showMenu() {
