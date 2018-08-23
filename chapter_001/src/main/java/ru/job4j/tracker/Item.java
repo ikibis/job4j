@@ -13,10 +13,9 @@ public class Item {
     public String[] comments;
 
     public Item() { }
-    public Item(String name, String description, long created) {
+    public Item(String name, String description) {
         this.name = name;
         this.description = description;
-        this.created = created;
     }
     public String getId() {
         return this.id;
@@ -27,8 +26,9 @@ public class Item {
     public String getDescription() {
         return this.description;
     }
-    public long getCreated() {
-        return this.created;
+    public void setName(String name) { this.name = name;}
+    public void setDescription(String description) {
+        this.description = description;
     }
     public void setId(String id) {
         this.id = id;
