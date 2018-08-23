@@ -25,7 +25,7 @@ public class CalculatorTest {
     @Test
     public void whenDivSixOnThreeThenTwo() {
         Calculator calc = new Calculator();
-        calc.add(6D, 3D);
+        calc.div(6D, 3D);
         double result = calc.getResult();
         double expected = 2D;
         assertThat(result, is(expected));
@@ -33,7 +33,7 @@ public class CalculatorTest {
     @Test
     public void whenMultipleThreeOnFourThenTwelve() {
         Calculator calc = new Calculator();
-        calc.add(3D, 4D);
+        calc.multiple(3D, 4D);
         double result = calc.getResult();
         double expected = 12D;
         assertThat(result, is(expected));

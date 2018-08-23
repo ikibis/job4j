@@ -11,25 +11,25 @@ public class ConverterTest {
     public void when60RubleToDollarThen1() {
         Converter converter = new Converter();
         double result = converter.rubleToDollar(60);
-        assertThat(result, is(1));
+        assertThat(result, is(1.0));
     }
 
     @Test
     public void when70RubleToEuroThen1() {
         Converter converter = new Converter();
         double result = converter.rubleToEuro(70);
-        assertThat(result, is(1));
+        assertThat(result, is(1.0));
     }
     @Test
     public void when3EuroToRubleThen210() {
         Converter converter = new Converter();
         double result = converter.euroToRuble(3);
-        assertThat(result, is(210));
+        assertThat(result, is(210.0));
     }
     @Test
     public void when2DollarToRubleThen120() {
         Converter converter = new Converter();
         double result = converter.dollarToRuble(2);
-        assertThat(result, is(120));
+        assertThat(result, is(120.0));
     }
 }

@@ -9,20 +9,19 @@ import java.util.Arrays;
 public class ArrayCopy {
     /**
      * Метод должен два отсортированных массива.
-     * @param array1 входной массив.
-     * @param array2 входной массив.
+     * @param a входной массив.
+     * @param b входной массив.
      * @return – результат - отсортированный массив.
      */
-    public int[] consolidation(final int[] array1, final int[] array2) {
-        int[] outputArray = new int[array1.length + array2.length];
-        for (int i = 0; i < array1.length; i++) {
-            outputArray[i] = array1[i];
+    public int[] join(int[] a,  int[] b) {
+        int i = a.length - 1;
+        int j = b.length - 1;
+        int k = a.length + b.length;
+        int[] out = new int[k];
+        while (k > 0) {
+            out[--k] = (j < 0 || (i >= 0 && a[i] >= b[j])) ? a[i--] : b[j--];
         }
-        for (int i = 0; i < array2.length; i++) {
-            outputArray[i + array1.length] = array2[i];
-        }
-        Arrays.sort(outputArray);
-        return outputArray;
+        return out;
     }
 }
 
