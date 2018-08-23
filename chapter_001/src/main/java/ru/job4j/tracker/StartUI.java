@@ -68,8 +68,7 @@ public class StartUI {
                 this.findIdItem();
             } else if (FIND_NAME.equals(answer)) {
                 this.findNameItem();
-            }
-            else if (EXIT.equals(answer)) {
+            } else if (EXIT.equals(answer)) {
                 exit = true;
             }
         }
@@ -87,8 +86,9 @@ public class StartUI {
     }
     private void showItems() {
         System.out.println("------------ Show all items : --------------");
-        for (Item item : this.tracker.findAll())
+        for (Item item : this.tracker.findAll()) {
             System.out.println("Id : " + item.getId() + " Item : " + item.getName() + " Description : " + item.getDescription());
+        }
     }
     private void editItem() {
         System.out.println("------------ Edit item : --------------");
@@ -96,13 +96,13 @@ public class StartUI {
         String name = this.input.ask("Enter the name of the item :");
         String desc = this.input.ask("Enter a description of the item :");
         Item item = new Item(name, desc);
-        this.tracker.replace( id, item);
+        this.tracker.replace(id, item);
         System.out.println("Item with ID : " + id + " replaced");
     }
     private void deleteItem() {
         System.out.println("------------ Delete item : --------------");
         String id = this.input.ask("Enter ID of the item :");
-        this.tracker.delete( id);
+        this.tracker.delete(id);
         System.out.println("Item with ID : " + id + " deleted");
     }
     private void findIdItem() {
