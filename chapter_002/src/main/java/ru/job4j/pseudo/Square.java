@@ -5,8 +5,11 @@ public class Square implements Shape {
     public String draw() {
         StringBuilder pic = new StringBuilder();
         pic.append("++++");
+        pic.append("\\r\\n");
         pic.append("+  +");
+        pic.append("\\r\\n");
         pic.append("+  +");
+        pic.append("\\r\\n");
         pic.append("++++");
         return pic.toString();
     }
