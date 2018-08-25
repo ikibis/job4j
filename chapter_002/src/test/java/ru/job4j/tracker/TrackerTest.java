@@ -8,25 +8,25 @@ public class TrackerTest {
     @Test
     public void whenAddNewItemThenTrackerHasSameItem() {
         Tracker tracker = new Tracker();
-        Item item = new Item("test1", "testDescription", 123L);
+        Item item = new Item("test1", "testDescription");
         tracker.add(item);
         assertThat(tracker.findAll()[0], is(item));
     }
     @Test
     public void whenReplaceNameThenReturnNewName() {
         Tracker tracker = new Tracker();
-        Item previous = new Item("test1", "testDescription", 123L);
+        Item previous = new Item("test1", "testDescription");
         tracker.add(previous);
-        Item next = new Item("test2", "testDescription2", 1234L);
+        Item next = new Item("test2", "testDescription2");
         tracker.replace(previous.getId(), next);
         assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
     }
     @Test
     public void whenAddNewItemsAndDeleteFirstItem() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item("test1", "testDescription", 123L);
+        Item item1 = new Item("test1", "testDescription");
         tracker.add(item1);
-        Item item2 = new Item("test2", "testDescription2", 1234L);
+        Item item2 = new Item("test2", "testDescription2");
         tracker.add(item2);
         String deletedId = item2.getId();
         tracker.delete(item2.getId());
@@ -39,9 +39,9 @@ public class TrackerTest {
     @Test
     public void whenAddNewItemsAndFindAll() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item("test1", "testDescription", 123L);
+        Item item1 = new Item("test1", "testDescription");
         tracker.add(item1);
-        Item item2 = new Item("test2", "testDescription2", 1234L);
+        Item item2 = new Item("test2", "testDescription2");
         tracker.add(item2);
         int result = tracker.findAll().length;
         assertThat(result, is(2));
@@ -49,14 +49,14 @@ public class TrackerTest {
     @Test
     public void whenAddNewItemsAndFindByName() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item("test1", "testDescription", 123L);
+        Item item1 = new Item("test1", "testDescription");
         tracker.add(item1);
         assertThat(tracker.findByName(item1.getName())[0].equals(item1), is(true));
     }
     @Test
     public void whenAddNewItemsAndFindById() {
         Tracker tracker = new Tracker();
-        Item item1 = new Item("test1", "testDescription", 123L);
+        Item item1 = new Item("test1", "testDescription");
         tracker.add(item1);
         assertThat(tracker.findById(item1.getId()).equals(item1), is(true));
     }
