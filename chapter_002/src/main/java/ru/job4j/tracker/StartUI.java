@@ -1,5 +1,7 @@
 package ru.job4j.tracker;
 
+import java.util.*;
+
 public class StartUI {
     /**
      * Константа меню для добавления новой заявки.
@@ -52,26 +54,16 @@ public class StartUI {
      * Основой цикл программы.
      */
     public void init() {
-        boolean exit = false;
-        while (!exit) {
-            this.showMenu();
-            String answer = this.input.ask("Enter a menu item : ");
-            if (ADD.equals(answer)) {
-                this.createItem();
-            } else if (SHOW_ALL.equals(answer)) {
-                this.showItems();
-            } else if (EDIT.equals(answer)) {
-                this.editItem();
-            } else if (DELETE.equals(answer)) {
-                this.deleteItem();
-            } else if (FIND_ID.equals(answer)) {
-                this.findIdItem();
-            } else if (FIND_NAME.equals(answer)) {
-                this.findNameItem();
-            } else if (EXIT.equals(answer)) {
-                exit = true;
-            }
+        MenuTracker menu = new MenuTracker(this.input, this.tracker);
+        List<Integer> range = new ArrayList<>();
+        menu.fillActions();
+        for (int i = 0; i < menu.getActionsLentgh(); i++) {
+            range.add(i);
         }
+        do {
+            menu.show();
+            menu.select(input.ask("select:", range));
+        } while (!"y".equals(this.input.ask("Exit?(y): ")));
     }
     /**
      * Метод реализует добавленяи новый заявки в хранилище.
@@ -143,6 +135,7 @@ public class StartUI {
         System.out.println("6. Exit Program");
         System.out.println("---------------------");
     }
+
     /**
      * Запускт программы.
      * @param args аргументы
