@@ -10,10 +10,6 @@ public class MenuTracker {
      * @param хранит ссылку на объект .
      */
     private Tracker tracker;
-
-    private int point;
-    private String pointName;
-
     /**
      * @param хранит ссылку на массив типа UserAction.
      */
@@ -49,9 +45,11 @@ public class MenuTracker {
     }
 
     public class AddItem implements UserAction {
+        private int point;
+        private String pointName;
         public AddItem(int point, String pointName) {
-            MenuTracker.this.point = point;
-            MenuTracker.this.pointName = pointName;
+            this.point = point;
+            this.pointName = pointName;
         }
         @Override
         public int key() {
@@ -70,13 +68,15 @@ public class MenuTracker {
         }
         @Override
         public String info() {
-            return pointName;
+            return String.format("%s. %s", this.key(), pointName);
         }
     }
     public class ShowItems implements UserAction {
+        private int point;
+        private String pointName;
         public ShowItems(int point, String pointName) {
-            MenuTracker.this.point = point;
-            MenuTracker.this.pointName = pointName;
+            this.point = point;
+            this.pointName = pointName;
         }
         @Override
         public int key() {
@@ -95,9 +95,11 @@ public class MenuTracker {
         }
     }
     public class EditItem implements UserAction {
+        private int point;
+        private String pointName;
         public EditItem(int point, String pointName) {
-            MenuTracker.this.point = point;
-            MenuTracker.this.pointName = pointName;
+            this.point = point;
+            this.pointName = pointName;
         }
         @Override
         public int key() {
@@ -123,9 +125,11 @@ public class MenuTracker {
         }
     }
     public class DeleteItem implements UserAction {
+        private int point;
+        private String pointName;
         public DeleteItem(int point, String pointName) {
-            MenuTracker.this.point = point;
-            MenuTracker.this.pointName = pointName;
+            this.point = point;
+            this.pointName = pointName;
         }
         @Override
         public int key() {
@@ -147,9 +151,11 @@ public class MenuTracker {
         }
     }
     public class FindItemById implements UserAction {
+        private int point;
+        private String pointName;
         public FindItemById(int point, String pointName) {
-            MenuTracker.this.point = point;
-            MenuTracker.this.pointName = pointName;
+            this.point = point;
+            this.pointName = pointName;
         }
         @Override
         public int key() {
@@ -172,9 +178,11 @@ public class MenuTracker {
         }
     }
     public class FindItemsByName implements UserAction {
+        private int point;
+        private String pointName;
         public FindItemsByName(int point, String pointName) {
-            MenuTracker.this.point = point;
-            MenuTracker.this.pointName = pointName;
+            this.point = point;
+            this.pointName = pointName;
         }
         @Override
         public int key() {
@@ -195,9 +203,11 @@ public class MenuTracker {
         }
     }
     public class ExitProgram implements UserAction {
+        private int point;
+        private String pointName;
         public ExitProgram(int point, String pointName) {
-            MenuTracker.this.point = point;
-            MenuTracker.this.pointName = pointName;
+            this.point = point;
+            this.pointName = pointName;
         }
         @Override
         public int key() {
