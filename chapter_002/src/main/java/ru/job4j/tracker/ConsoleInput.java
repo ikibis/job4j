@@ -12,4 +12,3 @@ public class ConsoleInput implements Input {
         return scanner.next();
     }
 }
-
