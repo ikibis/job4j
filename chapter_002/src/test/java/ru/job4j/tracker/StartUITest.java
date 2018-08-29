@@ -12,9 +12,9 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
-    private final PrintStream stdout = System.out;
-    private final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    private String ls = System.lineSeparator();
+    private static final PrintStream stdout = System.out;
+    private static final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private static String ls = System.lineSeparator();
     private StringBuilder menu = new StringBuilder()
         .append("Menu.").append(ls)
         .append("---------------------").append(ls)
@@ -42,7 +42,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "6"});
+        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
@@ -51,7 +51,9 @@ public class StartUITest {
                         System.lineSeparator())
                         .add(menu)
                         .add("------------ Adding a new item --------------")
-                        .add("------------ New item with Id : " + tracker.findByName("test name")[0].getId() + "-----------")
+                        .add("------------ New item with Id : ")
+                        .add(tracker.findByName("test name")[0].getId())
+                        .add("-----------")
                         .add(menu)
                         .toString()
                 )
@@ -71,7 +73,9 @@ public class StartUITest {
                         System.lineSeparator())
                         .add(menu)
                         .add("------------ Edit item : --------------")
-                        .add("Item with ID : " + item.getId() + " replaced")
+                        .add("Item with ID : ")
+                        .add(item.getId())
+                        .add(" replaced")
                         .add(menu)
                         .toString()
                 )
@@ -91,7 +95,9 @@ public class StartUITest {
                         System.lineSeparator())
                         .add(menu)
                         .add("------------ Delete item : --------------")
-                        .add("Item with ID : " + item.getId() + " deleted")
+                        .add("Item with ID : ")
+                        .add(item.getId())
+                        .add(" deleted")
                         .add(menu)
                         .toString()
                 )
