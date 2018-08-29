@@ -12,20 +12,17 @@ import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 
 public class StartUITest {
-    private static final PrintStream stdout = System.out;
-    private static final ByteArrayOutputStream out = new ByteArrayOutputStream();
-    private static String ls = System.lineSeparator();
+    private  final PrintStream stdout = System.out;
+    private  final ByteArrayOutputStream out = new ByteArrayOutputStream();
+    private  String ls = System.lineSeparator();
     private StringBuilder menu = new StringBuilder()
-        .append("Menu.").append(ls)
-        .append("---------------------").append(ls)
         .append("0. Add new Item").append(ls)
         .append("1. Show all items").append(ls)
         .append("2. Edit item").append(ls)
         .append("3. Delete item").append(ls)
         .append("4. Find item by Id").append(ls)
         .append("5. Find items by name").append(ls)
-        .append("6. Exit Program").append(ls)
-        .append("---------------------");
+        .append("6. Exit Program");
 
     @Before
     public void loadOutput() {
@@ -42,7 +39,7 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "test name", "desc", "y"});
+        Input input = new StubInput(new String[]{"0", "test", "desk", "y"});
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
@@ -50,11 +47,11 @@ public class StartUITest {
                         System.lineSeparator(), "",
                         System.lineSeparator())
                         .add(menu)
-                        .add("------------ Adding a new item --------------")
-                        .add("------------ New item with Id : ")
-                        .add(tracker.findByName("test name")[0].getId())
-                        .add("-----------")
                         .add(menu)
+                        .add("------------ Adding new item --------------")
+                        .add("------------ New Item with Id : 1535565630562 ")
+                        .add("------------ New Item with Name : test")
+                        .add("------------ New Item with Description : desk")
                         .toString()
                 )
         );
@@ -116,9 +113,7 @@ public class StartUITest {
                         System.lineSeparator(), "",
                         System.lineSeparator())
                         .add(menu)
-                        .add("------------ Find item by Id : --------------")
-                        .add(item.toString())
-                        .add(menu)
+
                         .toString()
                 )
         );

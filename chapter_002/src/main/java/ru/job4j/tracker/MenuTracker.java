@@ -34,19 +34,14 @@ public class MenuTracker {
     /**
      * Метод заполняет массив.
      */
-    public List<Integer> fillActions(MenuTracker menu) {
-        this.actions.add(new AddItem(0, "Add new Item."));
+    public void fillActions() {
+        this.actions.add(new AddItem(0, "Add new Item"));
         this.actions.add(new ShowItems(1, "Show all items"));
         this.actions.add(new MenuTracker.EditItem(2, "Edit item"));
         this.actions.add(new MenuTracker.DeleteItem(3, "Delete item"));
         this.actions.add(new FindItemById(4, "Find item by Id"));
         this.actions.add(new FindItemsByName(5, "Find items by name"));
         this.actions.add(new ExitProgram(6, "Exit Program"));
-        List<Integer> range = new ArrayList<>();
-        for (int i = 0; i < menu.getActionsLentgh(); i++) {
-            range.add(i);
-        }
-        return range;
     }
 
     public class AddItem implements UserAction {
