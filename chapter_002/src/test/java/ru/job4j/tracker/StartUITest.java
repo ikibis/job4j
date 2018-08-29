@@ -39,7 +39,8 @@ public class StartUITest {
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
-        Input input = new StubInput(new String[]{"0", "test", "desk", "y"});
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[]{"0", "test", "desk", "y"}));
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
