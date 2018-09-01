@@ -5,7 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.List;
 import java.util.StringJoiner;
 
 import static org.hamcrest.core.Is.is;
@@ -29,13 +28,11 @@ public class StartUITest {
         System.out.println("execute before method");
         System.setOut(new PrintStream(this.out));
     }
-
     @After
     public void backOutput() {
         System.setOut(this.stdout);
         System.out.println("execute after method");
     }
-
     @Test
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
@@ -48,21 +45,21 @@ public class StartUITest {
                         System.lineSeparator(), "",
                         System.lineSeparator())
                         .add(menu)
-                        .add(menu)
                         .add("------------ Adding new item --------------")
-                        .add("------------ New Item with Id : 1535565630562 ")
+                        .add("------------ New Item with Id : " + tracker.findAll()[0].getId())
                         .add("------------ New Item with Name : test")
                         .add("------------ New Item with Description : desk")
                         .toString()
                 )
         );
     }
-
     @Test
     public void whenUpdateThenTrackerHasUpdatedValue() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"2", item.getId(), "test replace", "заменили заявку", "6"});
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[]{
+                        "2", item.getId(), "test replace", "заменили заявку", "y"}));
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
@@ -71,20 +68,17 @@ public class StartUITest {
                         System.lineSeparator())
                         .add(menu)
                         .add("------------ Edit item : --------------")
-                        .add("Item with ID : ")
-                        .add(item.getId())
-                        .add(" replaced")
-                        .add(menu)
+                        .add("Item with ID : " + item.getId() + " replaced")
                         .toString()
                 )
         );
     }
-
     @Test
     public void whenUserAddAndDeleteItemThenTrackerHasShowAllItems() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"3", item.getId(), "6"});
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[]{"3", item.getId(), "y"}));
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
@@ -93,20 +87,17 @@ public class StartUITest {
                         System.lineSeparator())
                         .add(menu)
                         .add("------------ Delete item : --------------")
-                        .add("Item with ID : ")
-                        .add(item.getId())
-                        .add(" deleted")
-                        .add(menu)
+                        .add("Item with ID : " + item.getId() + " deleted")
                         .toString()
                 )
         );
     }
-
     @Test
     public void whenUserAddItemThenFindById() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"4", item.getId(), "6"});
+        ValidateInput input = new ValidateInput(
+                new StubInput(new String[]{"4", item.getId(), "y"}));
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
@@ -114,7 +105,8 @@ public class StartUITest {
                         System.lineSeparator(), "",
                         System.lineSeparator())
                         .add(menu)
-
+                        .add("------------ Find item by Id : --------------")
+                        .add(item.toString())
                         .toString()
                 )
         );
@@ -123,7 +115,8 @@ public class StartUITest {
     public void whenUserAddItemThenFindByName() {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
-        Input input = new StubInput(new String[]{"5", item.getName(), "6"});
+        ValidateInput input = new ValidateInput(
+            new StubInput(new String[]{"5", item.getName(), "y"}));
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
@@ -133,7 +126,6 @@ public class StartUITest {
                         .add(menu)
                         .add("------------ Find item by Name : --------------")
                         .add(item.toString())
-                        .add(menu)
                         .toString()
                 )
         );

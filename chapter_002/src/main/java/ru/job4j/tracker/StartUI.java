@@ -6,11 +6,11 @@ public class StartUI {
     /**
      * Получение данных от пользователя.
      */
-    private final Input input;
+    private  Input input;
     /**
      * Хранилище заявок.
      */
-    private final Tracker tracker;
+    private  Tracker tracker;
 
     /**
      * Конструтор инициализирующий поля.
@@ -21,6 +21,7 @@ public class StartUI {
         this.input = input;
         this.tracker = tracker;
     }
+
 
     /**
      * Основой цикл программы.
@@ -49,5 +50,4 @@ public class StartUI {
                 new Tracker()
         ).init();
     }
-
 }
