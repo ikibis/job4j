@@ -4,6 +4,10 @@ import java.util.*;
 
 public class StartUI {
     /**
+     * Программа работает пока значение истинно.
+     */
+    private boolean working = true;
+    /**
      * Получение данных от пользователя.
      */
     private  Input input;
@@ -28,11 +32,14 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        List<Integer> range = menu.fillActions(menu);
+        List<Integer> range = menu.fillActions(menu, this);
         do {
             menu.show();
             menu.select(input.ask("select:", range));
-        } while (!"y".equals(this.input.ask("Exit?(y): ")));
+        } while (this.working);
+    }
+    public void stop() {
+        this.working = false;
     }
     /**
      * Запускт программы.
