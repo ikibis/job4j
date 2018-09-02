@@ -15,7 +15,7 @@ import javafx.stage.Stage;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 import ru.job4j.chess.firuges.black.*;
-
+import ru.job4j.chess.firuges.white.*;
 
 public class Chess extends Application {
     private static final String JOB4J = "Шахматы на www.job4j.ru";
@@ -109,6 +109,7 @@ public class Chess extends Application {
         Group grid = this.buildGrid();
         this.logic.clean();
         border.setCenter(grid);
+        this.buildWhiteTeam(grid);
         this.buildBlackTeam(grid);
     }
 
@@ -131,7 +132,24 @@ public class Chess extends Application {
         this.add(new RookBlack(Cell.H8), grid);
     }
 
-
+    public void buildWhiteTeam(Group grid) {
+        this.add(new PawnWhite(Cell.A2), grid);
+        this.add(new PawnWhite(Cell.B2), grid);
+        this.add(new PawnWhite(Cell.C2), grid);
+        this.add(new PawnWhite(Cell.D2), grid);
+        this.add(new PawnWhite(Cell.E2), grid);
+        this.add(new PawnWhite(Cell.F2), grid);
+        this.add(new PawnWhite(Cell.G2), grid);
+        this.add(new PawnWhite(Cell.H2), grid);
+        this.add(new RookWhite(Cell.A1), grid);
+        this.add(new KnightWhite(Cell.B1), grid);
+        this.add(new BishopWhite(Cell.C1), grid);
+        this.add(new QeenWhite(Cell.D1), grid);
+        this.add(new KingWhite(Cell.E1), grid);
+        this.add(new BishopWhite(Cell.F1), grid);
+        this.add(new KnightWhite(Cell.G1), grid);
+        this.add(new RookWhite(Cell.H1), grid);
+    }
 
     public void add(Figure figure, Group grid) {
         this.logic.add(figure);

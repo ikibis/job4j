@@ -13,4 +13,5 @@ public interface Figure {
     }
 
     Figure copy(Cell dest);
+
 }
