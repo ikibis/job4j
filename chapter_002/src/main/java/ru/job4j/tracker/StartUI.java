@@ -28,11 +28,7 @@ public class StartUI {
      */
     public void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
-        List<Integer> range = new ArrayList<>();
-        menu.fillActions();
-        for (int i = 0; i < menu.getActionsLentgh(); i++) {
-            range.add(i);
-        }
+        List<Integer> range = menu.fillActions(menu);
         do {
             menu.show();
             menu.select(input.ask("select:", range));
@@ -51,3 +47,4 @@ public class StartUI {
         ).init();
     }
 }
+

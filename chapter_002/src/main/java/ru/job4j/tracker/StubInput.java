@@ -19,3 +19,4 @@ public class StubInput implements Input {
         return Integer.valueOf(this.ask(question));
     }
 }
+

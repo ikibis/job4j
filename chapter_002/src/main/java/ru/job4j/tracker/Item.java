@@ -3,7 +3,7 @@ package ru.job4j.tracker;
 
 /**
  * @version $Id$
- * @since 0.1
+ * @since 0.1 Ilya Kibis
  */
 public class Item {
     private String id;

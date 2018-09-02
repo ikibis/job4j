@@ -32,7 +32,7 @@ public class MenuTracker {
     /**
      * Метод заполняет массив.
      */
-    public void fillActions() {
+    public List<Integer> fillActions(MenuTracker menu) {
         this.actions.add(new MenuTracker.AddItem(0, "Add new Item"));
         this.actions.add(new MenuTracker.ShowItems(1, "Show all items"));
         this.actions.add(new MenuTracker.EditItem(2, "Edit item"));
@@ -40,6 +40,11 @@ public class MenuTracker {
         this.actions.add(new MenuTracker.FindItemById(4, "Find item by Id"));
         this.actions.add(new MenuTracker.FindItemsByName(5, "Find items by name"));
         this.actions.add(new MenuTracker.ExitProgram(6, "Exit Program"));
+        List<Integer> range = new ArrayList<>();
+        for (int i = 0; i < menu.getActionsLentgh(); i++) {
+            range.add(i);
+        }
+        return range;
     }
 
     public class AddItem extends BaseAction {
@@ -162,3 +167,4 @@ public class MenuTracker {
         }
     }
 }
+

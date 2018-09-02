@@ -18,3 +18,4 @@ public interface UserAction {
      */
     String info();
 }
+

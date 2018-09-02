@@ -5,3 +5,4 @@ public class MenuOutException extends RuntimeException  {
         super(msg);
     }
 }
+
