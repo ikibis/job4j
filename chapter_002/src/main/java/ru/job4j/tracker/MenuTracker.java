@@ -42,16 +42,9 @@ public class MenuTracker {
         this.actions.add(new MenuTracker.ExitProgram(6, "Exit Program"));
     }
 
-    public class AddItem implements UserAction {
-        private int point;
-        private String pointName;
-        public AddItem(int point, String pointName) {
-            this.point = point;
-            this.pointName = pointName;
-        }
-        @Override
-        public int key() {
-            return point;
+    public class AddItem extends BaseAction {
+        public AddItem(int key, String name) {
+            super(key, name);
         }
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -64,21 +57,10 @@ public class MenuTracker {
             System.out.println("------------ New Item with Name : " + item.getName());
             System.out.println("------------ New Item with Description : " + item.getDescription());
         }
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), pointName);
-        }
     }
-    public class ShowItems implements UserAction {
-        private int point;
-        private String pointName;
-        public ShowItems(int point, String pointName) {
-            this.point = point;
-            this.pointName = pointName;
-        }
-        @Override
-        public int key() {
-            return point;
+    public class ShowItems extends BaseAction {
+        public ShowItems(int key, String name) {
+            super(key, name);
         }
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -87,21 +69,10 @@ public class MenuTracker {
                 System.out.println(item.toString());
             }
         }
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), pointName);
-        }
     }
-    public class EditItem implements UserAction {
-        private int point;
-        private String pointName;
-        public EditItem(int point, String pointName) {
-            this.point = point;
-            this.pointName = pointName;
-        }
-        @Override
-        public int key() {
-            return point;
+    public class EditItem extends BaseAction {
+        public EditItem(int key, String name) {
+            super(key, name);
         }
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -117,21 +88,10 @@ public class MenuTracker {
                 System.out.println("Item not found");
             }
         }
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), pointName);
-        }
     }
-    public class DeleteItem implements UserAction {
-        private int point;
-        private String pointName;
-        public DeleteItem(int point, String pointName) {
-            this.point = point;
-            this.pointName = pointName;
-        }
-        @Override
-        public int key() {
-            return point;
+    public class DeleteItem extends BaseAction {
+        public DeleteItem(int key, String name) {
+            super(key, name);
         }
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -143,21 +103,10 @@ public class MenuTracker {
                 System.out.println("Item not found");
             }
         }
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), pointName);
-        }
     }
-    public class FindItemById implements UserAction {
-        private int point;
-        private String pointName;
-        public FindItemById(int point, String pointName) {
-            this.point = point;
-            this.pointName = pointName;
-        }
-        @Override
-        public int key() {
-            return point;
+    public class FindItemById extends BaseAction {
+        public FindItemById(int key, String name) {
+            super(key, name);
         }
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -170,21 +119,10 @@ public class MenuTracker {
                 System.out.println("Item not found");
             }
         }
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), pointName);
-        }
     }
-    public class FindItemsByName implements UserAction {
-        private int point;
-        private String pointName;
-        public FindItemsByName(int point, String pointName) {
-            this.point = point;
-            this.pointName = pointName;
-        }
-        @Override
-        public int key() {
-            return point;
+    public class FindItemsByName extends BaseAction {
+        public FindItemsByName(int key, String name) {
+            super(key, name);
         }
         @Override
         public void execute(Input input, Tracker tracker) {
@@ -195,29 +133,14 @@ public class MenuTracker {
                 System.out.println(item.toString());
             }
         }
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), pointName);
-        }
     }
-    public class ExitProgram implements UserAction {
-        private int point;
-        private String pointName;
-        public ExitProgram(int point, String pointName) {
-            this.point = point;
-            this.pointName = pointName;
-        }
-        @Override
-        public int key() {
-            return point;
+    public class ExitProgram extends BaseAction {
+        public ExitProgram(int key, String name) {
+            super(key, name);
         }
         @Override
         public void execute(Input input, Tracker tracker) {
             input.ask("Exit?(y): ");
-        }
-        @Override
-        public String info() {
-            return String.format("%s. %s", this.key(), pointName);
         }
     }
     /**

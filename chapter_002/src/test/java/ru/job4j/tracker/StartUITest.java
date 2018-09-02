@@ -41,7 +41,7 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
-                is(    new StringJoiner(
+                is(new StringJoiner(
                         System.lineSeparator(), "",
                         System.lineSeparator())
                         .add(menu)
@@ -63,7 +63,7 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
-                is(    new StringJoiner(
+                is(new StringJoiner(
                         System.lineSeparator(), "",
                         System.lineSeparator())
                         .add(menu)
@@ -82,7 +82,7 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
-                is(    new StringJoiner(
+                is(new StringJoiner(
                         System.lineSeparator(), "",
                         System.lineSeparator())
                         .add(menu)
@@ -101,7 +101,7 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
-                is(    new StringJoiner(
+                is(new StringJoiner(
                         System.lineSeparator(), "",
                         System.lineSeparator())
                         .add(menu)
@@ -120,7 +120,7 @@ public class StartUITest {
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
-                is(    new StringJoiner(
+                is(new StringJoiner(
                         System.lineSeparator(), "",
                         System.lineSeparator())
                         .add(menu)
