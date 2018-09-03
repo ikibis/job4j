@@ -22,20 +22,12 @@ public class BishopBlack implements Figure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest) {
-        Cell[] steps = new Cell[64];
-        int deltaX = 1;
-        int deltaY = 1;
-        if (source.y != dest.y && source.x != dest.x) {
-            for (int i = 0; i < 8; i++) {
-                if (dest.x >= 0 && dest.y >= 0 && dest.x < 8 && dest.y < 8)
-                    steps[index] = dest.x
-
+    public Cell[] way(Cell source, Cell dest)  {
+        Cell[] steps = new Cell[0];
+        if (!isDiagonal(source, dest)) {
+            System.out.println("Нельзя так ходить!!!");
         }
-        return steps;
-        if (source.y != dest.y + 1 && source.x != dest.x) {
-            steps = new Cell[] { dest };
-        }
+        steps = new Cell[]{dest};
         return steps;
     }
 
@@ -43,7 +35,49 @@ public class BishopBlack implements Figure {
     public Figure copy(Cell dest) {
         return new BishopBlack(dest);
     }
+
+    private boolean isDiagonal(Cell source, Cell dest) {
+        boolean result = false;
+        int deltaX = 1;
+        int deltaY = 1;
+        int i = 1;
+        while((source.x + deltaX * i < 8) && (source.y + deltaY * i < 8)) {
+            if (dest.x == (source.x + deltaX * i) && dest.y == (source.y + deltaY * i)) {
+                result = true;
+                break;
+            }
+            i++;
+        }
+        deltaX = 1;
+        deltaY = -1;
+        i = 1;
+        while((source.x + deltaX * i < 8) && (source.y + deltaY * i >= 0)) {
+            if (dest.x == (source.x + deltaX * i) && dest.y == (source.y + deltaY * i)) {
+                result = true;
+                break;
+            }
+            i++;
+        }
+        deltaX = -1;
+        deltaY = -1;
+        i = 1;
+        while((source.x + deltaX * i >= 0) && (source.y + deltaY * i >= 0)) {
+            if (dest.x == (source.x + deltaX * i) && dest.y == (source.y + deltaY * i)) {
+                result = true;
+                break;
+            }
+            i++;
+        }
+        deltaX = -1;
+        deltaY = 1;
+        i = 1;
+        while((source.x + deltaX * i >= 0) && (source.y + deltaY * i < 8)) {
+            if (dest.x == (source.x + deltaX * i) && dest.y == (source.y + deltaY * i)) {
+                result = true;
+                break;
+            }
+            i++;
+        }
+        return result;
+    }
 }
-
-
-
