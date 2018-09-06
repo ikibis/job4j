@@ -23,42 +23,35 @@ public class BishopBlackTest {
 
     @Test
     public void testPosition() {
-        BishopBlack testBishop = new BishopBlack(Cell.valueOf("C1"));
+        BishopBlack testBishop = new BishopBlack(Cell.C1);
         Cell pos = testBishop.position();
         assertThat(
                 pos,
-                is(Cell.valueOf("C1"))
+                is(Cell.C1)
         );
     }
     @Test
     public void testCopy() {
-        BishopBlack testBishop = new BishopBlack(Cell.valueOf("C1"));
-        Figure testBishop2 = testBishop.copy(Cell.valueOf("G1"));
+        BishopBlack testBishop = new BishopBlack(Cell.C1);
+        Figure testBishop2 = testBishop.copy(Cell.G1);
         Cell pos2 = testBishop2.position();
         assertThat(
                 pos2,
-                is(Cell.valueOf("G1"))
+                is(Cell.G1)
         );
     }
     @Test
     public void whenWayTurnDiagonal() {
-        BishopBlack testBishop = new BishopBlack(Cell.valueOf("C1"));
-        Cell[] testTurn = testBishop.way(Cell.valueOf("C1"), Cell.valueOf("G5"));
+        BishopBlack testBishop = new BishopBlack(Cell.C1);
+        Cell[] testTurn = testBishop.way(Cell.C1, Cell.G5);
         assertThat(
-                testTurn[0],
-                is(Cell.valueOf("G5"))
+                testTurn.length,
+                is(4)
         );
-    }
-    @Test
-    public void whenWayTurnNotDiagonal() {
-        System.setOut(new PrintStream(this.out));
-        BishopBlack testBishop = new BishopBlack(Cell.valueOf("C1"));
-        testBishop.way(Cell.valueOf("C1"), Cell.valueOf("G4"));
         assertThat(
-                new String(this.out.toByteArray()),
-                is("Нельзя так ходить!!!\r\n")
+                testTurn,
+                is(new Cell[]{Cell.D2, Cell.E3, Cell.F4, Cell.G5})
         );
-        System.setOut(this.stdout);
     }
 }
 

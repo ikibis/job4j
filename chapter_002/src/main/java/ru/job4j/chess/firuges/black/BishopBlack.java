@@ -23,10 +23,13 @@ public class BishopBlack implements Figure {
 
     @Override
     public Cell[] way(Cell source, Cell dest)  {
-        if (!isDiagonal(source, dest)) {
-            System.out.println("Нельзя так ходить!!!");
+        int size = Math.abs(source.x - dest.x);
+        Cell[] steps = new Cell[size];
+        int deltaX = Integer.compare(dest.x, source.x);
+        int deltaY = Integer.compare(dest.y, source.y);
+        for (int index = 0; index != size; index++) {
+            steps[index] = Cell.find(source.x + deltaX * (++index), source.y + deltaY * (index--));
         }
-        Cell[] steps = new Cell[]{dest};
         return steps;
     }
 
@@ -34,20 +37,5 @@ public class BishopBlack implements Figure {
     public Figure copy(Cell dest) {
         return new BishopBlack(dest);
     }
-
-    private boolean isDiagonal(Cell source, Cell dest) {
-        boolean result = false;
-        int delta = 1;
-        for (int i = 1; i < 8; i++) {
-            if (
-                    ((dest.x == (source.x + delta * i)) && (dest.y == (source.y + delta * i)))
-                            || ((dest.x == (source.x + delta * i)) && (dest.y == (source.y - delta * i)))
-                            || ((dest.x == (source.x - delta * i)) && (dest.y == (source.y - delta * i)))
-                            || ((dest.x == (source.x - delta * i)) && (dest.y == (source.y + delta * i)))
-                ) {
-                    result = true;
-            }
-        }
-        return result;
-    }
 }
+

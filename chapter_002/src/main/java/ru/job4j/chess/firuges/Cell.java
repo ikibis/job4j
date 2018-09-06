@@ -17,4 +17,12 @@ public enum Cell {
         this.x = x;
         this.y = y;
     }
+    public static Cell find(int x, int y) {
+        for (Cell cell : values()) {
+            if ((cell.x == x) && (cell.y == y)) {
+                return cell;
+            }
+        }
+        throw new IllegalStateException("Not found" + x + " " + y);
+    }
 }
