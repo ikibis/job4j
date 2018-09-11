@@ -12,20 +12,19 @@ public class PriorityQueue {
      * @param task задача
      */
     public void put(Task task) {
-        if (this.tasks.isEmpty()) {
-            tasks.add(task);
-            System.out.println("First " + this.tasks.getFirst().getPriority() + " " + task.getPriority());
-        } else {
-            if (this.tasks.getFirst().getPriority() < task.getPriority()) {
-                System.out.println(this.tasks.getFirst().getPriority() + " " + task.getPriority());
-                this.tasks.addLast(task);
-            } else {
-                this.tasks.addFirst(task);
+        if (this.tasks.size() < task.getPriority()) {
+            for(int i = this.tasks.size(); i < task.getPriority(); i++) {
+                this.tasks.add(i, null);
             }
         }
+        System.out.println(this.tasks.size());
+        this.tasks.set(task.getPriority() - 1, task);
     }
 
     public Task take() {
+        while(this.tasks.getFirst() == null) {
+            this.tasks.poll();
+        }
         return this.tasks.poll();
     }
 }

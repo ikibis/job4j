@@ -16,7 +16,4 @@ public class Task {
     public int getPriority() {
         return priority;
     }
-    public String toString() {
-        return priority + " " + desc;
-    }
 }
