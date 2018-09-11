@@ -1,5 +1,6 @@
 package ru.job4j.chess.firuges.black;
 
+import ru.job4j.chess.ImposibleMoveException;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
@@ -22,18 +23,18 @@ public class BishopBlack implements Figure {
     }
 
     @Override
-    public Cell[] way(Cell source, Cell dest)  {
-        if (Math.abs(source.x - dest.x) != Math.abs(source.y - dest.y)) {
-            throw new IllegalStateException("an Bishop can't walk like that");
-        }
-        int size = Math.abs(source.x - dest.x);
-        Cell[] steps = new Cell[size];
-        int deltaX = Integer.compare(dest.x, source.x);
-        int deltaY = Integer.compare(dest.y, source.y);
-        for (int index = 0; index != size; index++) {
-            steps[index] = Cell.find(source.x + deltaX * (index + 1), source.y + deltaY * (index + 1));
-        }
-        return steps;
+    public Cell[] way(Cell source, Cell dest) throws ImposibleMoveException {
+            if (Math.abs(source.x - dest.x) != Math.abs(source.y - dest.y)) {
+                throw new ImposibleMoveException("an Bishop can't walk like that");
+            }
+            int size = Math.abs(source.x - dest.x);
+            Cell[] steps = new Cell[size];
+            int deltaX = Integer.compare(dest.x, source.x);
+            int deltaY = Integer.compare(dest.y, source.y);
+            for (int index = 0; index != size; index++) {
+                steps[index] = Cell.find(source.x + deltaX * (index + 1), source.y + deltaY * (index + 1));
+            }
+            return steps;
     }
 
     @Override
