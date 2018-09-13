@@ -9,13 +9,29 @@ public class PriorityQueueTest {
     public void whenHigherPriority() {
         PriorityQueue queue = new PriorityQueue();
         queue.put(new Task("low", 5));
-        queue.put(new Task("urgent", 1));
+        queue.put(new Task("middle", 3));
+        queue.put(new Task("low", 5));
         queue.put(new Task("middle", 3));
         queue.put(new Task("middle1", 2));
-        Task result = queue.take();
-        assertThat(result.getDesc(), is("urgent"));
+        queue.put(new Task("middle", 3));
+        queue.put(new Task("middle1", 2));
+        queue.put(new Task("urgent", 1));
+        queue.put(new Task("middle1", 2));
+        queue.put(new Task("middle", 3));
+        queue.put(new Task("low", 5));
+        queue.put(new Task("urgent", 1));
+
+        assertThat(queue.take().getDesc(), is("urgent"));
+        assertThat(queue.take().getDesc(), is("urgent"));
+        assertThat(queue.take().getDesc(), is("middle1"));
+        assertThat(queue.take().getDesc(), is("middle1"));
         assertThat(queue.take().getDesc(), is("middle1"));
         assertThat(queue.take().getDesc(), is("middle"));
+        assertThat(queue.take().getDesc(), is("middle"));
+        assertThat(queue.take().getDesc(), is("middle"));
+        assertThat(queue.take().getDesc(), is("middle"));
+        assertThat(queue.take().getDesc(), is("low"));
+        assertThat(queue.take().getDesc(), is("low"));
         assertThat(queue.take().getDesc(), is("low"));
     }
 }
