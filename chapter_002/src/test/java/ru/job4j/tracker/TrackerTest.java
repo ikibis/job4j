@@ -10,7 +10,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item = new Item("test1", "testDescription");
         tracker.add(item);
-        assertThat(tracker.findAll()[0], is(item));
+        assertThat(tracker.findAll().get(0), is(item));
     }
     @Test
     public void whenReplaceNameThenReturnNewName() {
@@ -19,7 +19,7 @@ public class TrackerTest {
         tracker.add(previous);
         Item next = new Item("test2", "testDescription2");
         tracker.replace(previous.getId(), next);
-        assertThat(tracker.findById(previous.getId()).getName(), is("test2"));
+        assertThat(tracker.findAll().get(0).getName(), is("test2"));
     }
     @Test
     public void whenAddNewItemsAndDeleteFirstItem() {
@@ -43,7 +43,7 @@ public class TrackerTest {
         tracker.add(item1);
         Item item2 = new Item("test2", "testDescription2");
         tracker.add(item2);
-        int result = tracker.findAll().length;
+        int result = tracker.findAll().size();
         assertThat(result, is(2));
     }
     @Test
@@ -51,7 +51,7 @@ public class TrackerTest {
         Tracker tracker = new Tracker();
         Item item1 = new Item("test1", "testDescription");
         tracker.add(item1);
-        assertThat(tracker.findByName(item1.getName())[0].equals(item1), is(true));
+        assertThat(tracker.findByName(item1.getName()).get(0).getName(), is("test1"));
     }
     @Test
     public void whenAddNewItemsAndFindById() {

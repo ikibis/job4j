@@ -1,5 +1,11 @@
 package ru.job4j.tracker;
 /**
+ * @version $Id$
+ * @since 0.1
+ * @autor Ilya Kibis
+ */
+
+/**
  * Абстрактный класс для пунктов в MenuTracker.
  */
 public abstract class BaseAction implements UserAction {

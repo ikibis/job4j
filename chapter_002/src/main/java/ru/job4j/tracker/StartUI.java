@@ -1,7 +1,9 @@
 package ru.job4j.tracker;
 
-import java.util.*;
-
+import java.util.List;
+/**
+ * Класс, для взаимодействия с пользователем.
+ */
 public class StartUI {
     /**
      * Программа работает пока значение истинно.
@@ -21,16 +23,14 @@ public class StartUI {
      * @param input ввод данных.
      * @param tracker хранилище заявок.
      */
-    public StartUI(Input input, Tracker tracker) {
+    public StartUI(final Input input, final Tracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
-
-
     /**
      * Основой цикл программы.
      */
-    public void init() {
+    public final void init() {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         List<Integer> range = menu.fillActions(menu, this);
         do {
@@ -38,14 +38,17 @@ public class StartUI {
             menu.select(input.ask("select:", range));
         } while (this.working);
     }
-    public void stop() {
+    /**
+     * Метод для остановки программы.
+     */
+    public final void stop() {
         this.working = false;
     }
     /**
      * Запускт программы.
      * @param args аргументы
      */
-    public static void main(String[] args) {
+    public static void main(final String[] args) {
         new StartUI(
                 new ValidateInput(
                         new ConsoleInput()

@@ -37,7 +37,7 @@ public class StartUITest {
     public void whenUserAddItemThenTrackerHasNewItemWithSameName() {
         Tracker tracker = new Tracker();
         ValidateInput input = new ValidateInput(
-                new StubInput(new String[]{"0", "test", "desk", "y"}));
+                new StubInput(new String[]{"0", "test", "desk", "6"}));
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
@@ -46,9 +46,10 @@ public class StartUITest {
                         System.lineSeparator())
                         .add(menu)
                         .add("------------ Adding new item --------------")
-                        .add("------------ New Item with Id : " + tracker.findAll()[0].getId())
+                        .add("------------ New Item with Id : " + tracker.findAll().get(0).getId())
                         .add("------------ New Item with Name : test")
                         .add("------------ New Item with Description : desk")
+                        .add(menu)
                         .toString()
                 )
         );
@@ -59,7 +60,7 @@ public class StartUITest {
         Item item = tracker.add(new Item("test name", "desc"));
         ValidateInput input = new ValidateInput(
                 new StubInput(new String[]{
-                        "2", item.getId(), "test replace", "заменили заявку", "y"}));
+                        "2", item.getId(), "test replace", "заменили заявку", "6"}));
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
@@ -69,6 +70,7 @@ public class StartUITest {
                         .add(menu)
                         .add("------------ Edit item : --------------")
                         .add("Item with ID : " + item.getId() + " replaced")
+                        .add(menu)
                         .toString()
                 )
         );
@@ -78,7 +80,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
         ValidateInput input = new ValidateInput(
-                new StubInput(new String[]{"3", item.getId(), "y"}));
+                new StubInput(new String[]{"3", item.getId(), "6"}));
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
@@ -88,6 +90,7 @@ public class StartUITest {
                         .add(menu)
                         .add("------------ Delete item : --------------")
                         .add("Item with ID : " + item.getId() + " deleted")
+                        .add(menu)
                         .toString()
                 )
         );
@@ -97,7 +100,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
         ValidateInput input = new ValidateInput(
-                new StubInput(new String[]{"4", item.getId(), "y"}));
+                new StubInput(new String[]{"4", item.getId(), "6"}));
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
@@ -107,6 +110,7 @@ public class StartUITest {
                         .add(menu)
                         .add("------------ Find item by Id : --------------")
                         .add(item.toString())
+                        .add(menu)
                         .toString()
                 )
         );
@@ -116,7 +120,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = tracker.add(new Item("test name", "desc"));
         ValidateInput input = new ValidateInput(
-            new StubInput(new String[]{"5", item.getName(), "y"}));
+            new StubInput(new String[]{"5", item.getName(), "6"}));
         new StartUI(input, tracker).init();
         assertThat(
                 new String(this.out.toByteArray()),
@@ -126,6 +130,7 @@ public class StartUITest {
                         .add(menu)
                         .add("------------ Find item by Name : --------------")
                         .add(item.toString())
+                        .add(menu)
                         .toString()
                 )
         );
