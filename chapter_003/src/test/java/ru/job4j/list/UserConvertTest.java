@@ -10,15 +10,18 @@ import static org.junit.Assert.assertThat;
 public class UserConvertTest {
     @Test
     public void whenAddUsersAndConvert() {
+        User firstUser = new User(12, "Mark", "Ekaterinburg");
+        User secondUser = new User(14, "Eva", "Moscow");
+        User thirdUser = new User(16, "Ekaterina", "Novouralsk");
         List<User> list = new ArrayList<>();
-        list.add(new User(1, "Mark","Ekaterinburg"));
-        list.add(new User(2, "Eva","Moscow"));
-        list.add(new User(3, "Ekaterina","Novouralsk"));
+        list.add(firstUser);
+        list.add(secondUser);
+        list.add(thirdUser);
         HashMap<Integer, User> result = new UserConvert().process(list);
         HashMap<Integer, User> expect = new HashMap<Integer, User>();
-        expect.put(1, new User("Mark","Ekaterinburg"));
-        expect.put(2, new User("Eva","Moscow"));
-        expect.put(3, new User("Ekaterina","Novouralsk"));
+        expect.put(12, firstUser);
+        expect.put(14, secondUser);
+        expect.put(16, thirdUser);
         assertThat(result, is(expect));
     }
 }

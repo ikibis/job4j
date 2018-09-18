@@ -10,10 +10,6 @@ public class User {
         this.name = name;
         this.city = city;
     }
-    public User(String name, String city) {
-        this.name = name;
-        this.city = city;
-    }
 
     public int getId() {
         return id;
