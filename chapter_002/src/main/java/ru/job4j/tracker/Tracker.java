@@ -24,6 +24,7 @@ public class Tracker {
             Item currentItem = iterator.next();
             if (id.equals(currentItem.getId())) {
                 this.items.set(count, item);
+                break;
             }
             count++;
         }
@@ -41,6 +42,7 @@ public class Tracker {
             if (id.equals(currentItem.getId())) {
                 iterator.remove();
                 result = true;
+                break;
             }
         }
         return result;
@@ -78,6 +80,7 @@ public class Tracker {
             Item currentItem = iterator.next();
             if (id.equals(currentItem.getId())) {
                 result = currentItem;
+                break;
             }
         }
         return result;
