@@ -7,7 +7,7 @@ public class Tracker {
     private static final Random RN = new Random();
     public Item add(Item item) {
         item.setId(this.generateId());
-        this.items.add( item);
+        this.items.add(item);
         return item;
     }
     private String generateId() {
