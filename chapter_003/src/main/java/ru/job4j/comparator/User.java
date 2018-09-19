@@ -8,8 +8,11 @@ public class User implements Comparable<User> {
         this.name = name;
         this.age = age;
     }
-    private int getAge() {
+    public int getAge() {
         return age;
+    }
+    public String getName() {
+        return name;
     }
 
     @Override
