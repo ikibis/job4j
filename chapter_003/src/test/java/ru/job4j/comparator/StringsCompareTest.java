@@ -10,6 +10,15 @@ import static org.hamcrest.MatcherAssert.assertThat;
 
 public class StringsCompareTest {
     @Test
+    public void whenLeftShortAndGreatThanRightResultShouldBeNegative() {
+        ListCompare compare = new ListCompare();
+        int rst = compare.compare(
+                "га",
+                "велосипед"
+        );
+        assertThat(rst, greaterThan(0));
+    }
+    @Test
     public void whenStringsAreEqualThenZero() {
         ListCompare compare = new ListCompare();
         int rst = compare.compare(
