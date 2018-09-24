@@ -1,7 +1,5 @@
 package ru.job4j.bank;
 
-import java.util.*;
-
 public class Account {
 
     private double value;

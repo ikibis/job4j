@@ -41,46 +41,28 @@ public class Bank {
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
-        boolean result;
-        double oldValue;
-        User userSrc = this.findByPassport(srcPassport);
-        int srcNum = findByRequisites(userSrc, srcRequisite);
-        User userDest = this.findByPassport(destPassport);
-        int destNum = findByRequisites(userDest, dstRequisite);
-        if (srcNum != -1 && destNum != -1) {
-            oldValue = this.accounts.get(userSrc).get(srcNum).getValue();
-            if (oldValue < amount) {
-                result = false;
-            } else {
-                this.accounts.get(userSrc).get(srcNum).setValue(oldValue - amount);
-                oldValue = this.accounts.get(userDest).get(destNum).getValue();
-                this.accounts.get(userDest).get(destNum).setValue(oldValue + amount);
-                result = true;
-            }
-        } else {
-            result = false;
+        boolean result = false;
+        Account accountSrc = this.find(srcPassport, srcRequisite);
+        Account accountDst = this.find(destPassport, dstRequisite);
+        if (accountSrc != null && accountDst != null && accountSrc.getValue() > amount) {
+            accountSrc.setValue(accountSrc.getValue() - amount);
+            accountDst.setValue(accountDst.getValue() + amount);
+            result = true;
         }
         return result;
     }
 
-    public User findByPassport(String passport) {
-        User result = null;
+    public Account find(String passport, String requisites) {
+        Account result = null;
         for (Map.Entry<User, ArrayList<Account>> entry : this.accounts.entrySet()) {
             if (passport.equals(entry.getKey().getPassport())) {
-                result = entry.getKey();
-                break;
-            }
-        }
-        return result;
-    }
-
-    public int findByRequisites(User user, String requisites) {
-        int result = -1;
-        ArrayList<Account> accounts = new ArrayList<>(this.accounts.get(user));
-        for (Account a : accounts) {
-            if (requisites.equals(a.getReqs())) {
-                result = accounts.indexOf(a);
-                break;
+                List<Account> accounts = getUserAccounts(entry.getKey());
+                for (Account a : accounts) {
+                    if (requisites.equals(a.getReqs())) {
+                        result = a;
+                        break;
+                    }
+                }
             }
         }
         return result;

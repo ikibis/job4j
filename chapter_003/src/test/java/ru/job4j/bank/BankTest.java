@@ -83,6 +83,8 @@ public class BankTest {
         bank.addAccountToUser("400500600", accountTwo);
         boolean result = bank.transferMoney(userOne.getPassport(), accountOne.getReqs(),
                                              userTwo.getPassport(), accountTwo.getReqs(), 1000);
+
+        assertThat(accountTwo.getValue(), is(21000.0));
         assertThat(result, is(true));
     }
 }
