@@ -6,6 +6,8 @@ package ru.job4j.tracker;
  */
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Consumer;
+
 /**
  * Класс, описывающий меню и работу пользователя с ним.
  */
@@ -239,10 +241,10 @@ public class MenuTracker {
     /**
      * Метод выводит на экран меню.
      */
-    public final void show() {
+    public final void show(Consumer<String> media) {
         for (UserAction action : this.actions) {
             if (action != null) {
-                System.out.println(action.info());
+                media.accept(action.info());
             }
         }
     }

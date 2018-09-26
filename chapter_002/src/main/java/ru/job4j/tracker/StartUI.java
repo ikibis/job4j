@@ -34,7 +34,7 @@ public class StartUI {
         MenuTracker menu = new MenuTracker(this.input, this.tracker);
         List<Integer> range = menu.fillActions(menu, this);
         do {
-            menu.show();
+            menu.show(result -> System.out.println(result));
             menu.select(input.ask("select:", range));
         } while (this.working);
     }
