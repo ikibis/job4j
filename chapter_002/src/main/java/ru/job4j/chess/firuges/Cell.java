@@ -2,6 +2,8 @@ package ru.job4j.chess.firuges;
 
 import ru.job4j.chess.FigureNotFoundException;
 
+import java.util.function.BiPredicate;
+
 public enum Cell {
     A1(0, 0), A2(0, 1), A3(0, 2), A4(0, 3), A5(0, 4), A6(0, 5), A7(0, 6), A8(0, 7),
     B1(1, 0), B2(1, 1), B3(1, 2), B4(1, 3), B5(1, 4), B6(1, 5), B7(1, 6), B8(1, 7),
@@ -20,8 +22,9 @@ public enum Cell {
         this.y = y;
     }
     public static Cell find(int x, int y) throws FigureNotFoundException {
+        BiPredicate<Integer, Integer> predicate = (p1, p2) -> p1.equals(x) && p2.equals(y);
         for (Cell cell : values()) {
-            if ((cell.x == x) && (cell.y == y)) {
+            if (predicate.test(cell.x, cell.y)) {
                 return cell;
             }
         }

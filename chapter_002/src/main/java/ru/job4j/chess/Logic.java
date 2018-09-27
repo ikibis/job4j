@@ -3,7 +3,7 @@ package ru.job4j.chess;
 import ru.job4j.chess.firuges.Cell;
 import ru.job4j.chess.firuges.Figure;
 
-import java.util.Optional;
+import java.util.function.Predicate;
 
 /**
  * //TODO add comments.
@@ -47,8 +47,9 @@ public class Logic {
 
     private int findBy(Cell cell) {
         int rst = -1;
+        Predicate<Cell> predicate = p -> p.equals(cell);
         for (int index = 0; index != this.figures.length; index++) {
-            if (this.figures[index] != null && this.figures[index].position().equals(cell)) {
+            if (predicate.test(this.figures[index].position())) {
                 rst = index;
                 break;
             }
