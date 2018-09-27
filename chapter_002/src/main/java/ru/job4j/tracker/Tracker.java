@@ -1,6 +1,7 @@
 package ru.job4j.tracker;
 
 import java.util.*;
+import java.util.function.Predicate;
 
 public class Tracker {
     private final List<Item> items = new ArrayList<>();
@@ -22,7 +23,8 @@ public class Tracker {
         int count = 0;
         while (iterator.hasNext()) {
             Item currentItem = iterator.next();
-            if (id.equals(currentItem.getId())) {
+            Predicate<String> predicate = p -> p.equals(id);
+            if (predicate.test(currentItem.getId())) {
                 this.items.set(count, item);
                 break;
             }
@@ -39,7 +41,8 @@ public class Tracker {
         Iterator<Item> iterator = items.iterator();
         while (iterator.hasNext()) {
             Item currentItem = iterator.next();
-            if (id.equals(currentItem.getId())) {
+            Predicate<String> predicate = p -> p.equals(id);
+            if (predicate.test(currentItem.getId())) {
                 iterator.remove();
                 result = true;
                 break;
@@ -58,12 +61,15 @@ public class Tracker {
      * класса Item) с аргументом метода String key. Элементы, у которых совпадает name, копирует в
      * результирующий массив и возвращает его;
      **/
+
+
     public List<Item> findByName(String key) {
         List<Item> itemsCopyByName = new ArrayList<>();
         Iterator<Item> iterator = items.iterator();
         while (iterator.hasNext()) {
             Item currentItem = iterator.next();
-            if (key.equals(currentItem.getName())) {
+            Predicate<String> predicate = p -> p.equals(key);
+            if (predicate.test(currentItem.getName())) {
                 itemsCopyByName.add(currentItem);
             }
         }
@@ -78,7 +84,8 @@ public class Tracker {
         Iterator<Item> iterator = items.iterator();
         while (iterator.hasNext()) {
             Item currentItem = iterator.next();
-            if (id.equals(currentItem.getId())) {
+            Predicate<String> predicate = p -> p.equals(id);
+            if (predicate.test(currentItem.getId())) {
                 result = currentItem;
                 break;
             }
