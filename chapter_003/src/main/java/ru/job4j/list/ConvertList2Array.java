@@ -1,7 +1,10 @@
 package ru.job4j.list;
 
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ConvertList2Array {
     public int[][] toArray(List<Integer> list, int rows) {
@@ -21,13 +24,11 @@ public class ConvertList2Array {
     }
 
     public List<Integer> convert(List<int[]> list) {
-        List<Integer> result = new ArrayList<>();
-        for (int[] l : list) {
-            for (int i : l) {
-                result.add(i);
-            }
-        }
-        return result;
+        return list.stream()
+                .flatMapToInt(Arrays::stream)
+                .boxed()
+                .collect(Collectors.toCollection(ArrayList::new));
+
     }
 }
 
