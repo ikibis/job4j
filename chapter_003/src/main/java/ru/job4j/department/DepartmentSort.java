@@ -7,10 +7,11 @@ import java.util.TreeSet;
 
 public class DepartmentSort {
 
-    public List<String> generating(List<String> source) {
+    private List<String> generating(List<String> source) {
         Set<String> set = new TreeSet<>();
         for (String l : source) {
             int count = 0;
+            l = l.substring(1, l.length() - 1);
             String result = "";
             for (String s : l.split("\\\\")) {
                 if (count == 0) {
@@ -28,8 +29,21 @@ public class DepartmentSort {
     }
 
     public List<String> reverse(List<String> source) {
-        Set<String> result = new TreeSet<>(new Department());
-        result.addAll(this.generating(source));
-        return new LinkedList<>(result);
+        List<String> result = new LinkedList<>();
+        Set<String> source4 = new TreeSet<>(new Department());
+        source4.addAll(this.generating(source));
+        for (String s : source4) {
+            result.add("\"" + s + "\"");
+        }
+        return result;
+    }
+
+    public List<String> sort(List<String> source) {
+        List<String> result = new LinkedList<>();
+        Set<String> source4 = new TreeSet<>(this.generating(source));
+        for (String s : source4) {
+            result.add("\"" + s + "\"");
+        }
+        return result;
     }
 }
