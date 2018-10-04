@@ -1,8 +1,8 @@
 package ru.job4j.search;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PhoneDictionary {
     private List<Person> persons = new ArrayList<Person>();
@@ -13,25 +13,15 @@ public class PhoneDictionary {
 
     /**
      * Вернуть список всех пользователей, который содержат key в любых полях.
+     *
      * @param key Ключ поиска.
      * @return Список подощедщих пользователей.
      */
     public List<Person> find(String key) {
-        List<Person> result = new ArrayList<>();
-        Person searchedPerson;
-        Iterator<Person> iterator = persons.iterator();
-        while (iterator.hasNext()) {
-            searchedPerson = iterator.next();
-            if (
-                               searchedPerson.getName().contains(key)
-                            || searchedPerson.getSurname().contains(key)
-                            || searchedPerson.getPhone().contains(key)
-                            || searchedPerson.getAddress().contains(key)
-            ) {
-                result.add(searchedPerson);
-            }
-        }
-        return result;
+        List<Person> findedPersons = persons.stream().filter(
+                person -> person.getName().contains(key)
+        ).collect(Collectors.toList());
+        return findedPersons;
     }
 }
 

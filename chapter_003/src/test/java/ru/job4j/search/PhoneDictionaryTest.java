@@ -18,7 +18,6 @@ public class PhoneDictionaryTest {
         );
         List<Person> persons = phones.find("r1");
         for (Person person : persons) {
-            System.out.println(person.toString(person));
             assertThat(person.getSurname(), is("Arsentev1"));
         }
     }
