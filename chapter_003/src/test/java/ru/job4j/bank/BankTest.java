@@ -60,7 +60,6 @@ public class BankTest {
         bank.addUser(user);
         bank.addAccountToUser(user.getPassport(), accountOne);
         bank.addAccountToUser(user.getPassport(), accountTwo);
-        bank.getUserAccounts(user);
         List<Account> result = bank.accounts.get(user);
         List<Account> expect = new ArrayList<>();
         expect.add(accountOne);

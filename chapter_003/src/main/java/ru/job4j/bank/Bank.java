@@ -15,29 +15,17 @@ public class Bank {
     }
 
     public void addAccountToUser(String passport, Account account) {
-        for (Map.Entry<User, ArrayList<Account>> entry : this.accounts.entrySet()) {
-            if (passport.equals(entry.getKey().getPassport())) {
-                ArrayList<Account> accs = new ArrayList<>(entry.getValue());
-                accs.add(account);
-                entry.setValue(accs);
-                break;
-            }
-        }
+        this.accounts.entrySet().stream()
+                .filter(x -> passport.equals(x.getKey().getPassport()))
+                .map(Map.Entry::getValue)
+                .forEach(x -> x.add(account));
     }
 
     public void deleteAccountFromUser(User user, Account account) {
-        for (Map.Entry<User, ArrayList<Account>> entry : this.accounts.entrySet()) {
-            if (user.equals(entry.getKey())) {
-                ArrayList<Account> accs = new ArrayList<>(entry.getValue());
-                accs.remove(account);
-                entry.setValue(accs);
-                break;
-            }
-        }
-    }
-
-    public List<Account> getUserAccounts(User user) {
-        return this.accounts.get(user);
+        this.accounts.entrySet().stream()
+                .filter(x -> user.equals(x.getKey()))
+                .map(Map.Entry::getValue)
+                .forEach(x -> x.remove(account));
     }
 
     public boolean transferMoney(String srcPassport, String srcRequisite, String destPassport, String dstRequisite, double amount) {
@@ -53,19 +41,14 @@ public class Bank {
     }
 
     public Account find(String passport, String requisites) {
-        Account result = null;
-        for (Map.Entry<User, ArrayList<Account>> entry : this.accounts.entrySet()) {
-            if (passport.equals(entry.getKey().getPassport())) {
-                List<Account> accounts = getUserAccounts(entry.getKey());
-                for (Account a : accounts) {
-                    if (requisites.equals(a.getReqs())) {
-                        result = a;
-                        break;
-                    }
-                }
-            }
-        }
-        return result;
+        return this.accounts.entrySet().stream()
+                .filter(a -> passport.equals(a.getKey().getPassport()))
+                .findFirst().get().getValue()
+                .stream()
+                .filter(Objects::nonNull)
+                .filter(a -> requisites.equals(a.getReqs()))
+                .findFirst()
+                .orElse(null);
     }
 }
 
