@@ -11,17 +11,19 @@ public class MatrixIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        this.check();
         return values.length > outIndex;
     }
 
     @Override
     public Object next() throws NoSuchElementException {
-        int result;
-        try {
-            this.check();
+        Object result;
+        if (this.hasNext()) {
             result = values[outIndex][inIndex++];
-        } catch (ArrayIndexOutOfBoundsException e) {
+            if (inIndex == values[outIndex].length) {
+                outIndex++;
+                inIndex = 0;
+            }
+        } else {
             throw new NoSuchElementException();
         }
         return result;
@@ -29,12 +31,5 @@ public class MatrixIterator implements Iterator {
 
     public MatrixIterator(final int[][] values) {
         this.values = values;
-    }
-
-    private void check() {
-        if (inIndex == values[outIndex].length) {
-            outIndex++;
-            inIndex = 0;
-        }
     }
 }
