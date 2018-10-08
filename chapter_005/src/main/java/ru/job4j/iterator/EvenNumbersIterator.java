@@ -9,29 +9,31 @@ public class EvenNumbersIterator implements Iterator {
 
     @Override
     public boolean hasNext() {
-        boolean result = false;
-        for (int i = index; i < values.length; i++) {
-            if (values[i] % 2 == 0) {
-                result = true;
-                break;
-            }
-        }
-        return result;
+        getEvenIndex();
+        return values.length > index;
     }
 
     @Override
     public Object next() throws NoSuchElementException {
-        try {
-            while (values[index] % 2 != 0) {
-                index++;
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
+        if (!this.hasNext()) {
             throw new NoSuchElementException();
         }
+        getEvenIndex();
         return values[index++];
     }
 
     public EvenNumbersIterator(final int[] values) {
         this.values = values;
+    }
+
+    private void getEvenIndex() {
+        for (int i = index; i < values.length; i++) {
+            if (values[i] % 2 == 0) {
+                this.index = i;
+                break;
+            } else {
+                index++;
+            }
+        }
     }
 }
