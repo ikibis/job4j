@@ -16,20 +16,21 @@ public class MatrixIterator implements Iterator {
 
     @Override
     public Object next() throws NoSuchElementException {
-        Object result;
-        if (this.hasNext()) {
-            result = values[outIndex][inIndex++];
-            if (inIndex == values[outIndex].length) {
-                outIndex++;
-                inIndex = 0;
-            }
-        } else {
+        if (!this.hasNext()) {
             throw new NoSuchElementException();
         }
+        Object result = values[outIndex][inIndex++];
+        checkIndex();
         return result;
     }
 
     public MatrixIterator(final int[][] values) {
         this.values = values;
+    }
+    private void checkIndex() {
+        if (inIndex == values[outIndex].length) {
+            outIndex++;
+            inIndex = 0;
+        }
     }
 }
