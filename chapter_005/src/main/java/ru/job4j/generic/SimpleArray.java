@@ -2,7 +2,6 @@ package ru.job4j.generic;
 
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.function.Predicate;
 
 public class SimpleArray<T> implements Iterable<T> {
     private Object[] objects;
@@ -21,18 +20,8 @@ public class SimpleArray<T> implements Iterable<T> {
     }
 
     public void delete(int index) {
-        Iterator<T> iterator = this.iterator();
-        while (iterator.hasNext()) {
-            T current = iterator.next();
-            Predicate<T> predicate = p -> p.equals(this.objects[index]);
-            if (predicate.test(current)) {
-                for (int i = index; i <= this.index; i++) {
-                    this.objects[i] = this.objects[i + 1];
-                }
-                this.objects[this.index--] = null;
-                break;
-            }
-        }
+        System.arraycopy(this.objects, index + 1, this.objects, index, this.index + 1 - index);
+        this.objects[this.index--] = null;
     }
 
     public T get(int index) {
