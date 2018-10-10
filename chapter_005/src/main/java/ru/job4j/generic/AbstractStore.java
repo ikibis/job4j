@@ -1,6 +1,6 @@
 package ru.job4j.generic;
 
-public abstract class AbstractStore<E extends Base> implements Store<E> {
+public abstract class AbstractStore implements Store {
     public SimpleArray<Base> storeArray;
 
     public AbstractStore(int size) {
@@ -33,7 +33,7 @@ public abstract class AbstractStore<E extends Base> implements Store<E> {
     }
 
     @Override
-    public E findById(String id) {
-        return (E) storeArray.get(Integer.parseInt(id));
+    public Base findById(String id) {
+        return storeArray.get(Integer.parseInt(id));
     }
 }
