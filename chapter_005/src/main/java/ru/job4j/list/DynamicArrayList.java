@@ -43,7 +43,6 @@ public class DynamicArrayList<T> implements Iterable<T> {
 
             @Override
             public T next() throws NoSuchElementException, ConcurrentModificationException {
-                checkModCount();
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
