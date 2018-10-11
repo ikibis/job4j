@@ -7,7 +7,6 @@ import java.util.NoSuchElementException;
 public class DynamicLinkedList<E> implements Iterable<E> {
     private int size;
     private Node<E> first;
-    private Node<E> last;
     private int modCount;
 
     /**
@@ -39,14 +38,13 @@ public class DynamicLinkedList<E> implements Iterable<E> {
     public int getSize() {
         return this.size;
     }
+
     /**
      * Класс предназначен для хранения данных.
      */
     private static class Node<E> {
-
         E date;
         Node<E> next;
-        Node<E> prev;
 
         Node(E date) {
             this.date = date;
@@ -60,13 +58,13 @@ public class DynamicLinkedList<E> implements Iterable<E> {
             private int modCountCopy = modCount;
 
             @Override
-            public boolean hasNext() throws ConcurrentModificationException {
+            public boolean hasNext() {
                 checkModCount();
                 return iteratorIndex < size;
             }
 
             @Override
-            public E next() throws NoSuchElementException, ConcurrentModificationException {
+            public E next() throws NoSuchElementException {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
