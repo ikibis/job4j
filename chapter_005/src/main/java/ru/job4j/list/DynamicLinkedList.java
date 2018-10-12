@@ -3,7 +3,7 @@ package ru.job4j.list;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-import java.util.LinkedList;
+import java.util.Queue;
 public class DynamicLinkedList<E> implements Iterable<E> {
     private int size;
     private Node<E> first;
