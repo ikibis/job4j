@@ -15,14 +15,19 @@ public class DynamicLinkedListTest {
     @Before
     public void beforeTest() {
         list = new DynamicLinkedList<>();
-        list.add(1);
-        list.add(2);
-        list.add(3);
+        list.addFirst(1);
+        list.addFirst(2);
+        list.addFirst(3);
     }
 
     @Test
     public void whenAddThreeElementsThenUseGetOneResultTwo() {
         assertThat(list.get(1), is(2));
+    }
+
+    @Test
+    public void whenAddThreeElementsDeleteOne() {
+        assertThat(list.removeFirst(), is(3));
     }
 
     @Test(expected = NoSuchElementException.class)

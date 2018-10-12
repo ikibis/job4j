@@ -3,22 +3,41 @@ package ru.job4j.list;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
-
+import java.util.LinkedList;
 public class DynamicLinkedList<E> implements Iterable<E> {
     private int size;
     private Node<E> first;
+    private Node<E> last;
     private int modCount;
 
     /**
      * Метод вставляет в начало списка данные.
      */
-    public void add(E date) {
-
+    public void addFirst(E date) {
         Node<E> newLink = new Node<>(date);
         newLink.next = this.first;
         this.first = newLink;
         this.size++;
         modCount++;
+    }
+    public E removeFirst() {
+        final Node<E> f = first;
+        if (f == null) {
+        throw new NoSuchElementException();
+        }
+        final E element = f.date;
+        final Node<E> next = f.next;
+        f.date = null;
+        f.next = null; // help GC
+        first = next;
+        if (next == null) {
+            last = null;
+        } else {
+            next.prev = null;
+        }
+        size--;
+        modCount++;
+        return element;
     }
 
     /**
@@ -45,7 +64,7 @@ public class DynamicLinkedList<E> implements Iterable<E> {
     private static class Node<E> {
         E date;
         Node<E> next;
-
+        Node<E> prev;
         Node(E date) {
             this.date = date;
         }
@@ -77,6 +96,5 @@ public class DynamicLinkedList<E> implements Iterable<E> {
                 }
             }
         };
-
     }
 }
