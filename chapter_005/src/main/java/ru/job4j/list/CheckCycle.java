@@ -2,17 +2,29 @@ package ru.job4j.list;
 
 public class CheckCycle {
     boolean hasCycle(Node first) {
-        Node elementFirst = first;
-        Node elementNow = first;
-        Node elementNext = first.next;
-        boolean result = false;
-        while (elementNow != null && elementNext != null) {
-            if (elementFirst.equals(elementNext) || elementNow.equals(elementNext)) {
+        boolean result;
+        Node tortoise = first;
+        Node hare = first;
+        while (true) {
+            tortoise = tortoise.next;
+            if (first == null) {
+                result = false;
+                break;
+            }
+            if (hare.next != null) {
+                hare = hare.next.next;
+            } else {
+                result = false;
+                break;
+            }
+            if ((tortoise == null) || (hare == null)) {
+                result = false;
+                break;
+            }
+            if (tortoise == hare) {
                 result = true;
                 break;
             }
-            elementNow = elementNow.next;
-            elementNext = elementNext.next;
         }
         return result;
     }
