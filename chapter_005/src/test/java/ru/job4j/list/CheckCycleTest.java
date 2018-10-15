@@ -38,8 +38,8 @@ public class CheckCycleTest {
         two.next = third;
         third.next = four;
         four.next = five;
-        five.next = two;
-        six.next = seven;
+        five.next = six;
+        six.next = third;
         assertThat(cycle.hasCycle(first), is(true));
     }
 }

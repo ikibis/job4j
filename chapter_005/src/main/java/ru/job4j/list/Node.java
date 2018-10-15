@@ -7,7 +7,5 @@ int size = 0;
         this.date = date;
         this.size++;
     }
-
-    E value;
     Node<E> next;
 }
