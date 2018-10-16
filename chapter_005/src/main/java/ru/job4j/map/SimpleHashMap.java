@@ -4,29 +4,38 @@ import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class SimpleHashMap<K, V> implements Iterable<K> {
-    HashMapElement[] hashmap;
+    private HashBox[] hashmap;
     private int size = 0;
 
     public SimpleHashMap() {
-        this.hashmap = new HashMapElement[5];
+        this.hashmap = new HashBox[5];
     }
 
     private void checkSize() {
         if (size == this.hashmap.length) {
-            HashMapElement[] containerCopy = new HashMapElement[size + 5];
+            HashBox[] containerCopy = new HashBox[this.hashmap.length + 5];
             int i = 0;
-            for (HashMapElement element : hashmap) {
+            for (HashBox element : hashmap) {
                 containerCopy[i++] = element;
             }
             this.hashmap = containerCopy;
         }
     }
 
+    private int generateHash(K key) {
+        return 17 + 31 * key.hashCode();
+    }
+
+    private int indexFor(int h) {
+        return h & (hashmap.length - 1);
+    }
+
     boolean insert(K key, V value) {
         boolean result = true;
         if (size > 0) {
-            for (int i = 0; i < size; i++) {
-                if (key.equals(hashmap[i].getKey())) {
+            int hash = this.generateHash(key);
+            for (HashBox elements : hashmap) {
+                if (elements != null && hash == (int) elements.getHash()) {
                     result = false;
                     break;
                 }
@@ -34,15 +43,20 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
         }
         if (result) {
             checkSize();
-            hashmap[size++] = new HashMapElement(key, value);
+            HashMapElement toInsert = new HashMapElement(key, value);
+            int hash = this.generateHash(key);
+            int index = this.indexFor(hash);
+            hashmap[index] = new HashBox(hash, toInsert);
+            size++;
         }
         return result;
     }
 
     V get(K key) {
         V result = null;
-        for (HashMapElement elements : hashmap) {
-            if (key.equals(elements.getKey())) {
+        for (HashBox elements : hashmap) {
+            int hash = this.generateHash(key);
+            if (hash == (int) elements.getHash()) {
                 result = (V) elements.getValue();
             }
             break;
@@ -65,7 +79,7 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return (K) hashmap[iteratorIndex++].getKey();
+                return (K) hashmap[iteratorIndex++].getValue();
             }
         };
     }
