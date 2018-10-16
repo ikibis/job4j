@@ -15,7 +15,7 @@ public class SimpleHashMapTest<K, V> {
     @Before
     public void beforeTest() {
         hashmap = new SimpleHashMap<>();
-        iter = hashmap.iterator();
+
         hashmap.insert(1, "mark");
         hashmap.insert(2, "eva");
         hashmap.insert(3, "dasha");
@@ -26,17 +26,19 @@ public class SimpleHashMapTest<K, V> {
         assertThat(hashmap.insert(4, "katya"), is(true));
         assertThat(hashmap.insert(4, "lena"), is(false));
     }
-/*
+
     @Test
     public void whenAddThreeElementsAndIterate() {
-        iter.next();
+        iter = hashmap.iterator();
         assertThat(iter.hasNext(), is(true));
         iter.next();
         assertThat(iter.hasNext(), is(true));
+        iter.next();
         iter.next();
         assertThat(iter.hasNext(), is(false));
+
     }
-*/
+
     @Test
     public void whenAddElementsAndSizeUp() {
         hashmap.insert(4, "mark");
@@ -47,5 +49,12 @@ public class SimpleHashMapTest<K, V> {
         hashmap.insert(9, "dasha");
         assertThat(hashmap.insert(10, "mark"), is(true));
         assertThat(hashmap.insert(11, "mark"), is(true));
+        assertThat(hashmap.insert(12, "mark"), is(true));
+        hashmap.insert(13, "mark");
+        hashmap.insert(14, "eva");
+        hashmap.insert(15, "dasha");
+        hashmap.insert(16, "mark");
+        hashmap.insert(17, "eva");
+        assertThat(hashmap.insert(18, "mark"), is(true));
     }
 }

@@ -1,19 +1,21 @@
 package ru.job4j.map;
 
+import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class SimpleHashMap<K, V> implements Iterable<K> {
     private HashBox[] hashmap;
     private int size = 0;
+    private int modCount = 0;
 
     public SimpleHashMap() {
-        this.hashmap = new HashBox[5];
+        this.hashmap = new HashBox[16];
     }
 
     private void checkSize() {
-        if (size == this.hashmap.length) {
-            HashBox[] containerCopy = new HashBox[this.hashmap.length + 5];
+        if (size >= 0.75 * this.hashmap.length) {
+            HashBox[] containerCopy = new HashBox[this.hashmap.length + 16];
             int i = 0;
             for (HashBox element : hashmap) {
                 containerCopy[i++] = element;
@@ -22,8 +24,9 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
         }
     }
 
-    private int generateHash(K key) {
-        return 17 + 31 * key.hashCode();
+    private int generateHash(int h) {
+        h ^= (h >>> 20) ^ (h >>> 12);
+        return h ^ (h >>> 7) ^ (h >>> 4);
     }
 
     private int indexFor(int h) {
@@ -31,47 +34,36 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
     }
 
     boolean insert(K key, V value) {
-        boolean result = true;
-        if (size > 0) {
-            int hash = this.generateHash(key);
-            for (HashBox elements : hashmap) {
-                if (elements != null && hash == (int) elements.getHash()) {
-                    result = false;
-                    break;
-                }
-            }
-        }
-        if (result) {
-            checkSize();
-            HashMapElement toInsert = new HashMapElement(key, value);
-            int hash = this.generateHash(key);
-            int index = this.indexFor(hash);
-            hashmap[index] = new HashBox(hash, toInsert);
+        boolean result = false;
+        int hash = this.generateHash(key.hashCode());
+        int index = indexFor(hash);
+        if (hashmap[index] == null) {
+            hashmap[index] = new HashBox(key, value);
             size++;
+            modCount++;
+            checkSize();
+            result = true;
         }
         return result;
     }
 
     V get(K key) {
         V result = null;
-        for (HashBox elements : hashmap) {
-            int hash = this.generateHash(key);
-            if (hash == (int) elements.getHash()) {
-                result = (V) elements.getValue();
-            }
-            break;
-        }
-        return result;
+        int hash = this.generateHash(key.hashCode());
+        int index = indexFor(hash);
+        return (V) this.hashmap[index];
     }
 
     @Override
     public Iterator<K> iterator() {
         return new Iterator<K>() {
             private int iteratorIndex = 0;
+            private int entryModCount = modCount;
 
             @Override
             public boolean hasNext() {
-                return iteratorIndex < size;
+                checkModCount();
+                return iteratorIndex <= size;
             }
 
             @Override
@@ -79,8 +71,18 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
+                while (hashmap[iteratorIndex] == null) {
+                    iteratorIndex++;
+                }
                 return (K) hashmap[iteratorIndex++].getValue();
+            }
+
+            private void checkModCount() throws ConcurrentModificationException {
+                if (entryModCount != modCount) {
+                    throw new ConcurrentModificationException();
+                }
             }
         };
     }
 }
+
