@@ -1,6 +1,5 @@
 package ru.job4j.map;
 
-import java.util.Arrays;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
@@ -16,7 +15,15 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
 
     private void checkSize() {
         if (size >= 0.75 * this.hashmap.length) {
-            hashmap = Arrays.copyOf(hashmap, 16 + hashmap.length);
+            HashBox[] hashmapCopy = new HashBox[16 + hashmap.length];
+            for (HashBox element : this.hashmap) {
+                if (element != null) {
+                    int hash = this.generateHash(element.getKey().hashCode());
+                    int index = indexFor(hash);
+                    hashmapCopy[index] = element;
+                }
+            }
+            this.hashmap = hashmapCopy;
         }
     }
 
