@@ -62,11 +62,12 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
         return new Iterator<K>() {
             private int iteratorIndex = 0;
             private int entryModCount = modCount;
+            private int count = 0;
 
             @Override
             public boolean hasNext() {
                 checkModCount();
-                return iteratorIndex <= size;
+                return count < size;
             }
 
             @Override
@@ -75,8 +76,9 @@ public class SimpleHashMap<K, V> implements Iterable<K> {
                     throw new NoSuchElementException();
                 }
                 while (hashmap[iteratorIndex] == null) {
-                    iteratorIndex++;
+                    ++iteratorIndex;
                 }
+                count++;
                 return (K) hashmap[iteratorIndex++].getValue();
             }
 

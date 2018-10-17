@@ -8,14 +8,12 @@ import java.util.Iterator;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.assertThat;
 
-public class SimpleHashMapTest<K, V> {
+public class SimpleHashMapTest<K> {
     SimpleHashMap<Integer, String> hashmap;
-    Iterator<Integer> iter;
 
     @Before
     public void beforeTest() {
         hashmap = new SimpleHashMap<>();
-
         hashmap.insert(1, "mark");
         hashmap.insert(2, "eva");
         hashmap.insert(3, "dasha");
@@ -29,14 +27,14 @@ public class SimpleHashMapTest<K, V> {
 
     @Test
     public void whenAddThreeElementsAndIterate() {
-        iter = hashmap.iterator();
+        Iterator<K> iter = (Iterator<K>) hashmap.iterator();
         assertThat(iter.hasNext(), is(true));
         iter.next();
         assertThat(iter.hasNext(), is(true));
         iter.next();
+        assertThat(iter.hasNext(), is(true));
         iter.next();
         assertThat(iter.hasNext(), is(false));
-
     }
 
     @Test
