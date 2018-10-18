@@ -4,10 +4,10 @@ import org.junit.Test;
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
 
-public class TreeTest {
+public class TreeTest<E> {
     @Test
     public void when6ElFindLastThen6() {
-        SimpleTree<Integer> tree = new SimpleTreeClass<>(1);
+        SimpleTree<Integer> tree = new Node<E>(1);
         tree.add(1, 2);
         tree.add(1, 3);
         tree.add(1, 4);
