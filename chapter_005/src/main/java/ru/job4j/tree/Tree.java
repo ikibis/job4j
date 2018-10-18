@@ -7,7 +7,7 @@ import java.util.Queue;
 
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     private Node<E> root;
-
+    private LinkedList<Node<E>> treeList = new LinkedList<>();
     public Tree(E root) {
         this.root = new Node<>(root);
     }
@@ -28,7 +28,9 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         if (chil.isPresent()) {
             result = false;
         } else {
-            par.get().add(new Node<>(child));
+            Node<E> element = new Node<>(child);
+            treeList.add(element);
+            par.get().add(element);
         }
         return result;
     }
@@ -53,6 +55,17 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
 
     @Override
     public Iterator iterator() {
-        return null;
+        return new Iterator() {
+            LinkedList<Node<E>> treeCopy = treeList;
+            @Override
+            public boolean hasNext() {
+                return treeCopy.size() > 0;
+            }
+
+            @Override
+            public Object next() {
+                return treeCopy.poll();
+            }
+        };
     }
 }
