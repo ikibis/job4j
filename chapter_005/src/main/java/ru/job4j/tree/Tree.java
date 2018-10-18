@@ -1,15 +1,14 @@
 package ru.job4j.tree;
 
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.Optional;
-import java.util.Queue;
+import java.util.*;
 
 public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     private Node<E> root;
-    private LinkedList<Node<E>> treeList = new LinkedList<>();
+    private int size;
+
     public Tree(E root) {
         this.root = new Node<>(root);
+        size++;
     }
 
     /**
@@ -27,10 +26,10 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         Optional<Node<E>> chil = this.findBy(child);
         if (chil.isPresent()) {
             result = false;
-        } else {
+        } else if (par.isPresent()) {
             Node<E> element = new Node<>(child);
-            treeList.add(element);
-            par.get().add(element);
+            par.get().leaves().add(element);
+            size++;
         }
         return result;
     }
@@ -53,19 +52,39 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         return rsl;
     }
 
+    public boolean isBinary() {
+        return false;
+    }
+
     @Override
     public Iterator iterator() {
         return new Iterator() {
-            LinkedList<Node<E>> treeCopy = treeList;
+            int count = 0;
+            List<Node<E>> res = findBy((E)root).get().leaves();
+            LinkedList<Node<E>> list = new LinkedList<>();
+            private void getNext() {
+                for (Node<E> elements : element.leaves()) {
+                    list.add(elements);
+                }
+            }
             @Override
             public boolean hasNext() {
-                return treeCopy.size() > 0;
+                return count < size;
             }
 
             @Override
             public Object next() {
-                return treeCopy.poll();
+                Object result = null;
+                if (count == 0) {
+                    result = root;
+                    count++;
+                } else {
+                    getNext();
+                }
+                count++;
+                return result;
             }
         };
     }
 }
+
