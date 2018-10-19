@@ -37,7 +37,7 @@ public class TreeTest {
                 is(false)
         );
     }
-/*
+
     @Test
     public void when6ElCreateIterator() {
         it = tree.iterator();
@@ -53,8 +53,10 @@ public class TreeTest {
         it.next();
         assertThat(it.hasNext(), is(true));
         it.next();
+        assertThat(it.hasNext(), is(true));
+        it.next();
         assertThat(it.hasNext(), is(false));
 
-    }*/
+    }
 
 }

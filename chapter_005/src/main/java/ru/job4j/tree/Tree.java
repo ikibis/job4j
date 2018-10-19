@@ -60,7 +60,8 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
     public Iterator iterator() {
         return new Iterator() {
             int count = 0;
-            Queue<Node<E>> res;
+            Queue<Node<E>> treeCopy = new LinkedList<>();
+
             @Override
             public boolean hasNext() {
                 return count < size;
@@ -69,18 +70,16 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
             @Override
             public Object next() {
                 Object result;
-                Object element;
                 if (count == 0) {
-                    result = root;
-                    res = (Queue<Node<E>>) findBy((E)root).get().leaves();
+                    result = root.getValue();
+                    treeCopy.addAll(root.leaves());
                     count++;
                 } else {
-                    element = res.poll();
-                    for (List<Node<E>> elements : element.leaves()) {
-                        res.offer(elements);
-                    }
+                    result = treeCopy.poll();
+                    treeCopy.addAll(((Node<E>) result).leaves());
                     count++;
                 }
+
                 return result;
             }
         };
