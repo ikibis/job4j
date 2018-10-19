@@ -75,8 +75,9 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
                     treeCopy.addAll(root.leaves());
                     count++;
                 } else {
-                    result = treeCopy.poll();
-                    treeCopy.addAll(((Node<E>) result).leaves());
+                    Node<E> node = treeCopy.poll();
+                    result = node.getValue();
+                    treeCopy.addAll(node.leaves());
                     count++;
                 }
 
