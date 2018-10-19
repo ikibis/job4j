@@ -17,10 +17,10 @@ public class TreeTest {
         tree = new Tree<>(1);
         tree.add(1, 2);
         tree.add(1, 3);
-        tree.add(1, 4);
-        tree.add(4, 5);
-        tree.add(4, 7);
-        tree.add(5, 6);
+        tree.add(2, 4);
+        tree.add(2, 5);
+        tree.add(3, 6);
+        tree.add(3, 7);
     }
     @Test
     public void when6ElFindLastThen6() {
@@ -56,7 +56,11 @@ public class TreeTest {
         assertThat(it.hasNext(), is(true));
         it.next();
         assertThat(it.hasNext(), is(false));
-
     }
-
+    @Test
+    public void when6ElCreateCheckOnBinary() {
+        assertThat(tree.isBinary(), is(true));
+        tree.add(2, 8);
+        assertThat(tree.isBinary(), is(false));
+    }
 }
