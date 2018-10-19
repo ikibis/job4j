@@ -57,24 +57,14 @@ public class Tree<E extends Comparable<E>> implements SimpleTree<E> {
         if (root.getValue() == null || root.leaves().size() > 2) {
             result = false;
         } else {
-            Queue<Node<E>> treeCopySource = new LinkedList<>(root.leaves());
-            Queue<Node<E>> treeCopy = new LinkedList<>();
-            while (treeCopySource.peek() != null) {
-                Node<E> node = treeCopySource.poll();
+            Queue<Node<E>> treeCopy = new LinkedList<>(root.leaves());
+            while (treeCopy.peek() != null) {
+                Node<E> node = treeCopy.poll();
                 if (node.leaves().size() < 3) {
                     treeCopy.addAll(node.leaves());
                 } else {
                     result = false;
                     break;
-                }
-                while (treeCopy.peek() != null) {
-                    Node<E> node2 = treeCopy.poll();
-                    if (node2.leaves().size() < 3) {
-                        treeCopySource.addAll(node.leaves());
-                    } else {
-                        result = false;
-                        break;
-                    }
                 }
             }
         }
