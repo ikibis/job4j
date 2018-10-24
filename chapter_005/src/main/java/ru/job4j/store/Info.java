@@ -12,14 +12,6 @@ public class Info {
     }
 
     public int howMuchSetted(Store store) {
-        int result = 0;
-        for (User prevUser : store.previous) {
-            for (User currUser : store.current) {
-                if (prevUser.getId() == currUser.getId()) {
-                    result++;
-                }
-            }
-        }
-        return result;
+        return store.setted;
     }
 }

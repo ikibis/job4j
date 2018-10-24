@@ -6,6 +6,7 @@ import java.util.List;
 public class Store {
     public List<User> previous = new ArrayList<>();
     public List<User> current = new ArrayList<>();
+    public int setted;
 
     public void removeUser(int id) {
         User user = this.findById(id);
@@ -22,6 +23,7 @@ public class Store {
         previous.add(user);
         User settedUser = new User(user.getId(), name);
         current.set(current.indexOf(user), settedUser);
+        setted++;
     }
 
     private User findById(int id) {
