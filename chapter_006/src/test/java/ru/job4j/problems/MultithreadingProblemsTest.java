@@ -3,15 +3,15 @@ package ru.job4j.problems;
 import org.junit.Test;
 
 public class MultithreadingProblemsTest {
-    Simple s = new Simple();
+    Demo.Counter counter = new Demo.Counter();
+    Thread treadA = new Demo.FirstThread(counter);
+    Thread treadB = new Demo.FirstThread(counter);
     @Test
-    public void whenTwoThreads() {
-        new FirstThread(s).start();
-        new SecondThread(s).start();
-        try {
-            Thread.sleep(5);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+    public void whenTwoThreads() throws InterruptedException {
+        treadA.start();
+        treadB.start();
+        //treadA.join();
+        //treadB.join();
+        System.out.println(counter.count);
     }
 }
