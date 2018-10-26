@@ -13,6 +13,23 @@ public class UserStorageTest {
     User user2;
     User user3;
 
+    private class ThreadDemo extends Thread {
+        private User user1;
+        private User user2;
+        private ThreadDemo(final User user1, final User user2) {
+            this.user1 = user1;
+            this.user2 = user2;
+        }
+
+        @Override
+        public void run() {
+            for (int i = 0; i < 10; i++) {
+                storage.transfer(
+                        user1.getIdt(), user2.getIdt(), 10);
+            }
+        }
+    }
+
     @Before
     public void beforeTest() {
         storage = new UserStorage();
@@ -54,5 +71,17 @@ public class UserStorageTest {
                         user2.getIdt(), user1.getIdt(), 150), is(true));
         assertThat(storage.findUser(user2.getIdt()).getAmount(), is(50));
         assertThat(storage.findUser(user1.getIdt()).getAmount(), is(250));
+    }
+
+    @Test
+    public void whenLoopTransfer() {
+        assertThat(storage.add(user1), is(true));
+        assertThat(storage.add(user2), is(true));
+        Thread first = new UserStorageTest.ThreadDemo(user1, user2);
+        Thread second = new UserStorageTest.ThreadDemo(user2, user1);
+        first.start();
+        second.start();
+        assertThat(storage.findUser(user1.getIdt()).getAmount(), is(100));
+        assertThat(storage.findUser(user2.getIdt()).getAmount(), is(200));
     }
 }
