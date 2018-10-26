@@ -45,7 +45,7 @@ public class UserStorage {
         return result;
     }
 
-    public boolean transfer(int fromId, int toId, int amount) {
+    public synchronized boolean transfer(int fromId, int toId, int amount) {
         boolean result = false;
         User fromUser = findUser(fromId);
         User toUser = findUser(toId);
