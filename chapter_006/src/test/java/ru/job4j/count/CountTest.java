@@ -18,7 +18,9 @@ public class CountTest {
 
         @Override
         public void run() {
-            this.count.increment();
+            for (int i = 0; i < 10; i++) {
+                this.count.increment();
+            }
         }
     }
 
@@ -36,7 +38,6 @@ public class CountTest {
         first.join();
         second.join();
         //Проверяем результат.
-        assertThat(count.get(), is(2));
-
+        assertThat(count.get(), is(20));
     }
 }
