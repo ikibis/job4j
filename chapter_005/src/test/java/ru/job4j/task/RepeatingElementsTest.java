@@ -19,10 +19,10 @@ public class RepeatingElementsTest {
 
     @Test
     public void whenFindRepeatElements() {
-        Set<String> expect = new TreeSet<>();
-        expect.add("s");
-        expect.add("o");
-        expect.add("r");
+        Set<Character> expect = new TreeSet<>();
+        expect.add('s');
+        expect.add('o');
+        expect.add('r');
         assertThat(re.checkRepeat("processor"), is(expect));
     }
 }

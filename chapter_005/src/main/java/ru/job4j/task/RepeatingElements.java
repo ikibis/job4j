@@ -4,11 +4,11 @@ import java.util.Set;
 import java.util.TreeSet;
 
 public class RepeatingElements {
-    public Set<String> checkRepeat(String word) {
-        String[] strToArray = word.split("");
-        Set<String> result = new TreeSet<>();
-        Set<String> set = new TreeSet<>();
-        for (String s : strToArray) {
+    public Set<Character> checkRepeat(String word) {
+        char[] strToArray = word.toCharArray();
+        Set<Character> result = new TreeSet<>();
+        Set<Character> set = new TreeSet<>();
+        for (char s : strToArray) {
             if (!set.add(s)) {
                 result.add(s);
             }
