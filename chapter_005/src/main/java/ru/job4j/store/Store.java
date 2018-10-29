@@ -1,36 +1,36 @@
 package ru.job4j.store;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 
 public class Store {
-    public List<User> previous = new ArrayList<>();
-    public List<User> current = new ArrayList<>();
+    public HashMap<Integer, User> previous = new HashMap<>();
+    public HashMap<Integer, User> current = new HashMap<>();
     public int setted;
 
     public void removeUser(int id) {
         User user = this.findById(id);
-        previous.add(user);
+        previous.put(user.getId(), user);
         current.remove(user);
     }
 
     public void addUser(int id, String name) {
-        current.add(new User(id, name));
+        User user = new User(id, name);
+        current.put(user.getId(), user);
     }
 
     public void setUser(int id, String name) {
         User user = this.findById(id);
-        previous.add(user);
+        previous.put(user.getId(), user);
         User settedUser = new User(user.getId(), name);
-        current.set(current.indexOf(user), settedUser);
+        current.put(user.getId(), settedUser);
         setted++;
     }
 
     private User findById(int id) {
         User result = null;
-        for (User users : current) {
-            if (users.getId() == id) {
-                result = users;
+        for (Integer userId : current.keySet()) {
+            if (userId == id) {
+                result = current.get(userId);
                 break;
             }
         }

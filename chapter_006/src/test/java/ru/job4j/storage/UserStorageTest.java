@@ -22,7 +22,7 @@ public class UserStorageTest {
         }
 
         @Override
-        public void run() {
+        public synchronized void run() {
             for (int i = 0; i < 10; i++) {
                 storage.transfer(
                         user1.getIdt(), user2.getIdt(), 10);
