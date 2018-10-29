@@ -74,13 +74,15 @@ public class UserStorageTest {
     }
 
     @Test
-    public void whenLoopTransfer() {
+    public void whenLoopTransfer() throws InterruptedException {
         assertThat(storage.add(user1), is(true));
         assertThat(storage.add(user2), is(true));
         Thread first = new UserStorageTest.ThreadDemo(user1, user2);
         Thread second = new UserStorageTest.ThreadDemo(user2, user1);
         first.start();
         second.start();
+        first.join();
+        second.join();
         assertThat(storage.findUser(user1.getIdt()).getAmount(), is(100));
         assertThat(storage.findUser(user2.getIdt()).getAmount(), is(200));
     }
