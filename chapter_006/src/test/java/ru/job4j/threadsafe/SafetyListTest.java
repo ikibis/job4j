@@ -1,11 +1,16 @@
 package ru.job4j.threadsafe;
 
+import net.jcip.annotations.GuardedBy;
+import net.jcip.annotations.ThreadSafe;
 import org.junit.Before;
 import org.junit.Test;
-import ru.job4j.list.DynamicArrayList;
 import java.util.Iterator;
 
-public class SafetyListTest<T> {
+import static org.hamcrest.Matchers.is;
+import static org.junit.Assert.assertThat;
+@ThreadSafe
+public class SafetyListTest {
+    @GuardedBy("this")
     Iterator<Integer> it;
     SafetyList<Integer> list;
     int sum = 0;
@@ -19,7 +24,7 @@ public class SafetyListTest<T> {
         @Override
         public synchronized void run() {
             it = list.iterator();
-            while (it.hasnext()) {
+            while (it.hasNext()) {
                 sum += it.next();
             }
         }
@@ -28,8 +33,10 @@ public class SafetyListTest<T> {
     @Before
     public void beforeTest() {
         list = new SafetyList<>();
-
         list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
     }
 
     @Test
@@ -40,5 +47,6 @@ public class SafetyListTest<T> {
         second.start();
         first.join();
         second.join();
+        assertThat(sum, is(20));
     }
 }

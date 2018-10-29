@@ -12,6 +12,9 @@ public class SafetyList<T> implements Iterable<T> {
     public SafetyList() {
         this.safetyList = new DynamicArrayList<>();
     }
+    public void add(T item) {
+        safetyList.add(item);
+    }
     private synchronized DynamicArrayList copy (DynamicArrayList list) {
         DynamicArrayList result = new DynamicArrayList();
         for (Object element : list) {
