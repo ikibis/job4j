@@ -9,10 +9,7 @@ import java.util.List;
 @ThreadSafe
 public class UserStorage {
     @GuardedBy("this")
-    List<User> list;
-    public UserStorage() {
-        list = new ArrayList<>();
-    }
+    List<User> list = new ArrayList<>();
 
     public synchronized boolean add(User user) {
         boolean result = false;
