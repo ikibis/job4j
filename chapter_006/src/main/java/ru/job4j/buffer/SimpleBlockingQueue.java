@@ -17,13 +17,13 @@ public class SimpleBlockingQueue<T> {
     }
 
     public synchronized void offer(T value) throws InterruptedException {
-        while (!queue.isEmpty()) {
+        while (queue.size() > 5) {
             wait();
         }
         this.queue.offer(value);
         notify();
     }
-    public int size() {
+    public synchronized int size() {
         return this.queue.size();
     }
     public synchronized T poll() throws InterruptedException {

@@ -17,6 +17,7 @@ public class SimpleBlockingQueueTest {
             for (int i = 0; i < 15; i++) {
                 try {
                     queue.offer(i);
+                    System.out.println("offer " + i);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -29,7 +30,8 @@ public class SimpleBlockingQueueTest {
         public void run() {
             for (int i = 0; i < 15; i++) {
                 try {
-                    queue.poll();
+                    Integer poll = queue.poll();
+                    System.out.println("poll " + poll);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
