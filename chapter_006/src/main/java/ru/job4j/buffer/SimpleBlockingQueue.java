@@ -16,30 +16,20 @@ public class SimpleBlockingQueue<T> {
         this.queue = new LinkedList<>();
     }
 
-    public synchronized void offer(T value){
-        while (queue.size() > 0) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+    public synchronized void offer(T value) throws InterruptedException {
+        while (!queue.isEmpty()) {
+            wait();
         }
         this.queue.offer(value);
-        System.out.println("+ " + value);
         notify();
     }
 
-    public synchronized T poll(){
+    public synchronized T poll() throws InterruptedException {
         while (queue.isEmpty()) {
-            try {
-                wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+            wait();
         }
         T result = this.queue.poll();
         notify();
-        System.out.println("- " + result);
         return result;
     }
 }
