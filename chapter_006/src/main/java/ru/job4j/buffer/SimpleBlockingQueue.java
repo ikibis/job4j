@@ -1,4 +1,4 @@
-package ru.job4j.producer;
+package ru.job4j.buffer;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
@@ -16,13 +16,13 @@ public class SimpleBlockingQueue<T> {
         this.queue = new LinkedList<>();
     }
 
-    public void offer(T value) {
+    public synchronized void offer(T value) {
         this.queue.offer(value);
     }
-    public int size() {
+    public synchronized int size() {
         return this.queue.size();
     }
-    public T poll() {
+    public synchronized T poll() {
         return this.queue.poll();
     }
 }

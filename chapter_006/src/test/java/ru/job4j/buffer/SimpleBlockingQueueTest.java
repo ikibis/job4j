@@ -1,4 +1,4 @@
-package ru.job4j.producer;
+package ru.job4j.buffer;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -38,13 +38,12 @@ public class SimpleBlockingQueueTest {
 
     private class Consumer<T> extends Thread {
         private SimpleBlockingQueue queue;
-        final Random random = new Random();
 
         private Consumer(final SimpleBlockingQueue queue) {
             this.queue = queue;
         }
 
-        private T output() {
+        private synchronized T output() {
             return (T) queue.poll();
         }
 
