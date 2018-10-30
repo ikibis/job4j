@@ -10,10 +10,9 @@ public class SimpleBlockingQueueTest {
     SimpleBlockingQueue<Integer> queue;
     Thread producer;
     Thread consumer;
-
     private class Producer extends Thread {
         @Override
-        public void run() {
+        public synchronized void run() {
             for (int i = 0; i < 15; i++) {
                 try {
                     queue.offer(i);
@@ -27,7 +26,7 @@ public class SimpleBlockingQueueTest {
 
     private class Consumer extends Thread {
         @Override
-        public void run() {
+        public synchronized void run() {
             for (int i = 0; i < 15; i++) {
                 try {
                     Integer poll = queue.poll();
