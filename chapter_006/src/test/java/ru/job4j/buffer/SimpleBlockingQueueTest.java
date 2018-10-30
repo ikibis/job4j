@@ -21,13 +21,13 @@ public class SimpleBlockingQueueTest {
 
         @Override
         public synchronized void run() {
-            for (int i = 0; i < 5; i++) {
+            for (int i = 0; i < 15; i++) {
                 if (this.queue.size() < 5) {
                     queue.offer(random.nextInt());
                 } else {
                     try {
-                        notifyAll();
                         currentThread().wait();
+                        consumer.notify();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -49,13 +49,13 @@ public class SimpleBlockingQueueTest {
 
         @Override
         public synchronized void run() {
-            for (int i = 0; i < 5; i++) {
-                if (this.queue.size() > 0) {
+            for (int i = 0; i < 15; i++) {
+                if (this.queue.peek() != null) {
                     this.output();
                 } else {
                     try {
-                        notifyAll();
                         currentThread().wait();
+                        producer.notify();
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
@@ -68,11 +68,11 @@ public class SimpleBlockingQueueTest {
     public void beforeTest() {
         queue = new SimpleBlockingQueue<Integer>();
     }
+    Thread producer = new Producer(queue);
+    Thread consumer = new Consumer(queue);
 
     @Test
     public void when2Threads() throws InterruptedException {
-        Thread producer = new Producer(queue);
-        Thread consumer = new Consumer(queue);
         producer.start();
         consumer.start();
         producer.join();

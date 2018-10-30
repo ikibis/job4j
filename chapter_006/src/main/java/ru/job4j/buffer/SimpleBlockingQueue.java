@@ -25,4 +25,7 @@ public class SimpleBlockingQueue<T> {
     public synchronized T poll() {
         return this.queue.poll();
     }
+    public synchronized T peek() {
+        return this.queue.peek();
+    }
 }
