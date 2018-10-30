@@ -4,7 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.stringContainsInOrder;
 import static org.junit.Assert.assertThat;
 
 public class SimpleBlockingQueueTest {
@@ -16,7 +15,6 @@ public class SimpleBlockingQueueTest {
         @Override
         public void run() {
             for (int i = 0; i < 15; i++) {
-                System.out.println("+ " + i);
                 try {
                     queue.offer(i);
                 } catch (InterruptedException e) {
@@ -30,7 +28,6 @@ public class SimpleBlockingQueueTest {
         @Override
         public void run() {
             for (int i = 0; i < 15; i++) {
-                System.out.println("- " + i);
                 try {
                     queue.poll();
                 } catch (InterruptedException e) {
@@ -53,6 +50,6 @@ public class SimpleBlockingQueueTest {
         producer.start();
         consumer.join();
         producer.join();
-        //assertThat(queue.size(), is(0));
+        assertThat(queue.size(), is(0));
     }
 }

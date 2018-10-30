@@ -23,7 +23,9 @@ public class SimpleBlockingQueue<T> {
         this.queue.offer(value);
         notify();
     }
-
+    public int size() {
+        return this.queue.size();
+    }
     public synchronized T poll() throws InterruptedException {
         while (queue.isEmpty()) {
             wait();
