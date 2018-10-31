@@ -2,13 +2,13 @@ package ru.job4j.buffer;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
-
+import org.apache.log4j.Logger;
 import java.util.LinkedList;
 import java.util.Queue;
 
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
-
+    private static final Logger logger = Logger.getLogger(SimpleBlockingQueue.class);
     @GuardedBy("this")
     private final Queue<T> queue;
 
@@ -16,28 +16,26 @@ public class SimpleBlockingQueue<T> {
         this.queue = new LinkedList<>();
     }
 
-    public void offer(T value) throws InterruptedException {
-        synchronized (queue) {
+    public synchronized void offer(T value) throws InterruptedException {
             while (queue.size() > 5) {
-                queue.wait();
+                wait();
             }
-            System.out.println("offer " + value);
+        logger.info("Это информационное сообщение!" + "offer " + value);
             queue.offer(value);
-            queue.notify();
+            notify();
         }
-    }
+
     public int size() {
         return this.queue.size();
     }
-    public T poll() throws InterruptedException {
-        synchronized (queue) {
+    public synchronized T poll() throws InterruptedException {
             while (queue.isEmpty()) {
-                queue.wait();
+                wait();
             }
             T result = this.queue.poll();
-            System.out.println("poll " + result);
-            queue.notify();
+        logger.info("Это информационное сообщение!" + "poll " + result);
+            notify();
             return result;
-        }
+
     }
 }
