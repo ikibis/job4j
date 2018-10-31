@@ -8,7 +8,7 @@ import java.util.Queue;
 
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
-    private static final Logger logger = Logger.getLogger(SimpleBlockingQueue.class);
+    private static final Logger LOGGER = Logger.getLogger(SimpleBlockingQueue.class);
     @GuardedBy("this")
     private final Queue<T> queue;
 
@@ -20,7 +20,7 @@ public class SimpleBlockingQueue<T> {
             while (queue.size() > 5) {
                 wait();
             }
-        logger.info("Это информационное сообщение!" + "offer " + value);
+        LOGGER.info("Это информационное сообщение!" + "offer " + value);
             queue.offer(value);
             notify();
         }
@@ -33,7 +33,7 @@ public class SimpleBlockingQueue<T> {
                 wait();
             }
             T result = this.queue.poll();
-        logger.info("Это информационное сообщение!" + "poll " + result);
+        LOGGER.info("Это информационное сообщение!" + "poll " + result);
             notify();
             return result;
 
