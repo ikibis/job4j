@@ -1,27 +1,18 @@
 package ru.job4j.buffer;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
-import static java.lang.Thread.currentThread;
-
 public class ParallelSearch {
 
     public static void main(String[] args) {
         SimpleBlockingQueue<Integer> queue = new SimpleBlockingQueue<>();
-        AtomicBoolean flag = new AtomicBoolean(true);
         final Thread consumer = new Thread(
                 () -> {
-                    while (flag.get()) {
+                    while (!Thread.currentThread().isInterrupted()) {
                         try {
                             System.out.println(queue.poll());
-                            Thread.sleep(500);
                         } catch (InterruptedException e) {
                             e.printStackTrace();
                             Thread.currentThread().interrupt();
                         }
-                    }
-                    if (!flag.get()) {
-                        Thread.currentThread().interrupt();
                     }
                 }
         );
@@ -36,7 +27,7 @@ public class ParallelSearch {
                             e.printStackTrace();
                         }
                     }
-                    flag.set(false);
+                    consumer.interrupt();
                 }
         ).start();
     }
