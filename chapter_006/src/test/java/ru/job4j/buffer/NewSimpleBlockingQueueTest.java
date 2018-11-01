@@ -1,4 +1,5 @@
 package ru.job4j.buffer;
+
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -7,6 +8,7 @@ import java.util.stream.IntStream;
 
 import static org.hamcrest.Matchers.is;
 import static org.junit.Assert.*;
+
 public class NewSimpleBlockingQueueTest {
     @Test
     public void whenFetchAllThenGetIt() throws InterruptedException {
@@ -44,4 +46,4 @@ public class NewSimpleBlockingQueueTest {
         consumer.join();
         assertThat(buffer, is(Arrays.asList(0, 1, 2, 3, 4)));
     }
-    }
+}
