@@ -15,7 +15,8 @@ public class Cache {
 
     public void update(Base model) {
         cache.replace(model.getId(), model);
-        model.setVersion(model.getVersion() + 1);
+        int ver = model.getVersion();
+        cache.computeIfPresent(model.getId(), (k, v) -> v).setVersion(ver + 1);
     }
 
     public void delete(Base model) {
@@ -29,5 +30,5 @@ public class Cache {
     public Object get(Object key) {
         return cache.get(key);
     }
-
 }
+

@@ -63,10 +63,8 @@ public class CacheTest {
         producer.start();
         firstConsumer.start();
         secondConsumer.start();
-
         firstConsumer.join();
         secondConsumer.join();
-
         for (int i = 0; i < 16; i++) {
             Base element = (Base) cache.get(i);
             System.out.println("Version " + element.getVersion() + ", Name : " + element.getName());
