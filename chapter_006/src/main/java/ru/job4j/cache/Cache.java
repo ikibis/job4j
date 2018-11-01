@@ -23,10 +23,6 @@ public class Cache {
         cache.remove(model.getId(), model);
     }
 
-    public ConcurrentHashMap.KeySetView<Integer, Base> keySet() {
-        return cache.keySet();
-    }
-
     public Object get(Object key) {
         return cache.get(key);
     }
