@@ -20,7 +20,6 @@ public class Cache {
                         throw new OptimisticException();
                     }
                     v.setVersion(ver + 1);
-                    cache.replace(model.getId(), v);
                     return v;
                 }
         );

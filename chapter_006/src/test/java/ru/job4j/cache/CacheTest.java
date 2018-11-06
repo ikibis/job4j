@@ -22,7 +22,7 @@ public class CacheTest {
 
     private class DataSetThreadOne extends Thread {
         @Override
-        public void run() throws OptimisticException {
+        public void run() {
             for (int i = 0; i < 16; i++) {
                 Base element = (Base) cache.get(i);
                 String name = i + " ThreadOne";
@@ -33,7 +33,7 @@ public class CacheTest {
 
     private class DataSetThreadTwo extends Thread {
         @Override
-        public void run() throws OptimisticException {
+        public void run() {
             for (int i = 0; i < 16; i++) {
                 Base element = (Base) cache.get(i);
                 String name = i + " ThreadTwo";
