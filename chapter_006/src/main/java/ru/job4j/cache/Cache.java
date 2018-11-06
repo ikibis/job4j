@@ -25,11 +25,11 @@ public class Cache {
         );
     }
 
-        public void delete (Base model){
+        public void delete(Base model) {
             cache.remove(model.getId(), model);
         }
 
-        public Object get (Object key){
+        public Object get(Object key) {
             return cache.get(key);
         }
     }
