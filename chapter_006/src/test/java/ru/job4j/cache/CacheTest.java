@@ -25,11 +25,7 @@ public class CacheTest {
         public void run() throws OptimisticException {
             for (int i = 0; i < 16; i++) {
                 Base element = (Base) cache.get(i);
-                int ver = element.getVersion();
                 String name = i + " ThreadOne";
-                if (ver != element.getVersion()) {
-                    throw new OptimisticException();
-                }
                 cache.update(new Base(element.getId(), name));
             }
         }
@@ -40,11 +36,7 @@ public class CacheTest {
         public void run() throws OptimisticException {
             for (int i = 0; i < 16; i++) {
                 Base element = (Base) cache.get(i);
-                int ver = element.getVersion();
                 String name = i + " ThreadTwo";
-                if (ver != element.getVersion()) {
-                    throw new OptimisticException();
-                }
                 cache.update(new Base(element.getId(), name));
             }
         }

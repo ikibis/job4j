@@ -13,9 +13,12 @@ public class Cache {
         cache.put(model.getId(), model);
     }
 
-    public void update(Base model) {
+    public void update(Base model) throws OptimisticException {
         cache.replace(model.getId(), model);
         int ver = model.getVersion();
+        if (ver != model.getVersion()) {
+            throw new OptimisticException();
+        }
         cache.computeIfPresent(model.getId(), (k, v) -> v).setVersion(ver + 1);
     }
 

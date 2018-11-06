@@ -18,7 +18,7 @@ public class Base {
         return name;
     }
 
-    public synchronized int getVersion() {
+    public int getVersion() {
         return version;
     }
     public void setVersion(int version) {

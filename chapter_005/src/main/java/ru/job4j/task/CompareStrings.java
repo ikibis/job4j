@@ -48,7 +48,9 @@ public class CompareStrings {
                 map2.put(s.hashCode(), s);
             }
         }
-        return map1.keySet().containsAll(map2.keySet()) && map2.keySet().containsAll(map1.keySet());
+        return map1.equals(map2);
+        //  а  смысл? нужно было сразу получить ключ. если нет элемента. то есть тебе надо сделать вот без этой проверки.
+                // map1.keySet().containsAll(map2.keySet()) && map2.keySet().containsAll(map1.keySet());
     }
 }
 
