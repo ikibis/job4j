@@ -14,20 +14,24 @@ public class Cache {
     }
 
     public void update(Base model) throws OptimisticException {
-        cache.replace(model.getId(), model);
         int ver = model.getVersion();
-        if (ver != model.getVersion()) {
-            throw new OptimisticException();
+        cache.computeIfPresent(model.getId(), (k, v) -> {
+                    if (ver != v.getVersion()) {
+                        throw new OptimisticException();
+                    }
+                    v.setVersion(ver + 1);
+                    cache.replace(model.getId(), v);
+                    return v;
+                }
+        );
+    }
+
+        public void delete (Base model){
+            cache.remove(model.getId(), model);
         }
-        cache.computeIfPresent(model.getId(), (k, v) -> v).setVersion(ver + 1);
-    }
 
-    public void delete(Base model) {
-        cache.remove(model.getId(), model);
+        public Object get (Object key){
+            return cache.get(key);
+        }
     }
-
-    public Object get(Object key) {
-        return cache.get(key);
-    }
-}
 
