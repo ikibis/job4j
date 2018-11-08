@@ -1,17 +1,18 @@
 package ru.job4j.bomberman;
 
-import java.util.concurrent.locks.ReentrantLock;
-
 public class Board {
-    public ReentrantLock[][] board;
+    Hero hero;
 
-    public Board(int sizeX, int sizeY) {
-        board = new ReentrantLock[sizeX][sizeY];
+    public Board(Hero hero) {
+        this.hero = hero;
     }
 
-    public boolean move(ReentrantLock source, ReentrantLock dest) {
-        boolean result = true;
-
+    public boolean move(Cell source, Cell dest) {
+        boolean result = false;
+        if (source.equals(hero.position)) {
+            hero.position = dest;
+            result = true;
+        }
         return result;
     }
 }
