@@ -6,7 +6,6 @@ import org.junit.Test;
 public class BombermanTest {
 
     Hero hero;
-    Move move;
     Board board;
     Thread one;
     Thread two;
@@ -14,16 +13,18 @@ public class BombermanTest {
     private class ThreadOne extends Thread {
         @Override
         public void run() {
-            Move move = new Move();
-            move.run();
+            for (int i = 0; i < 100; i++) {
+                hero.run();
+            }
         }
     }
 
     private class ThreadTwo extends Thread {
         @Override
         public void run() {
-            Move move = new Move();
-            move.run();
+            for (int i = 0; i < 100; i++) {
+                hero.run();
+            }
         }
     }
 
@@ -31,7 +32,6 @@ public class BombermanTest {
     public void beforeTest() {
         hero = new Hero();
         board = new Board(hero);
-        move = new Move(board, hero);
         one = new ThreadOne();
         two = new ThreadTwo();
     }
@@ -39,8 +39,6 @@ public class BombermanTest {
     @Test
     public void when2Threads() throws InterruptedException {
         one.start();
-
         two.start();
-
     }
 }
