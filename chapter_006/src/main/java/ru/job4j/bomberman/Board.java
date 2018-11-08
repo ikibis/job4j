@@ -3,17 +3,24 @@ package ru.job4j.bomberman;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Board {
-    static Hero hero;
-    ReentrantLock[][] board;
-    public int size;
+    Hero hero;
+    static ReentrantLock[][] board = new ReentrantLock[10][10];
 
-    public Board(Hero hero, int size) {
-        this.hero = hero;
-        this.board = new ReentrantLock[size][size];
-        this.size = size;
+    public Board(Hero hero) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                board[i][j] = new ReentrantLock();
+            }
+        }
+        hero.setPosition(board[4][4]);
     }
 
-    public static boolean move(ReentrantLock source, ReentrantLock dest) {
+    public int length() {
+        System.out.println(board.length);
+        return board.length;
+    }
+
+    public boolean move(ReentrantLock source, ReentrantLock dest) {
         boolean result = false;
         if (source.equals(hero.position)) {
             hero.position.unlock();

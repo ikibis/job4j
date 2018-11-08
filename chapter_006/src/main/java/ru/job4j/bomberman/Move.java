@@ -8,20 +8,25 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Move implements Runnable {
 
     final Random random = new Random();
-    public ReentrantLock[][] board;
     public Hero hero;
+    Board board;
 
-    public Move(ReentrantLock[][] board, Hero hero) {
+    public Move(Board board, Hero hero) {
         this.board = board;
         this.hero = hero;
     }
 
-    public List<ReentrantLock> way() {
+    public Move() {
+    }
+
+    public synchronized List<ReentrantLock> way() {
         int x = 0;
         int y = 0;
-        for (int i = 0; i < board.length; i++) {
-            for (int j = 0; j < board.length; j++) {
-                if (board[i][j].equals(hero.position)) {
+        for (int i = 0; i < 10; i++) {
+            for (int j = 0; j < 10; j++) {
+                //System.out.println(hero.position);
+                //System.out.println(Board.board[i][j]);
+                if ((Board.board[i][j]).equals(null)) {
                     x = i;
                     y = j;
                 }
@@ -29,16 +34,16 @@ public class Move implements Runnable {
         }
         List<ReentrantLock> steps = new ArrayList<>();
         if (x - 1 >= 0) {
-            steps.add(board[x - 1][y]);
+            steps.add(board.board[x - 1][y]);
         }
-        if (x + 1 < board.length) {
-            steps.add(board[x + 1][y]);
+        if (x + 1 < board.length()) {
+            steps.add(board.board[x + 1][y]);
         }
         if (y - 1 >= 0) {
-            steps.add(board[x][y - 1]);
+            steps.add(board.board[x][y - 1]);
         }
-        if (y + 1 < board.length) {
-            steps.add(board[x][y + 1]);
+        if (y + 1 < board.length()) {
+            steps.add(board.board[x][y + 1]);
         }
         return steps;
     }
@@ -46,9 +51,9 @@ public class Move implements Runnable {
     @Override
     public void run() {
         while (!Thread.currentThread().isInterrupted()) {
-            List<ReentrantLock> steps = this.way();
-            ReentrantLock dest = null;
-            while (dest == null) {
+            List<ReentrantLock> steps = way();
+            ReentrantLock dest = steps.get(random.nextInt(steps.size()));
+            while (!dest.tryLock()) {
                 try {
                     Thread.sleep(500);
                     dest = steps.get(random.nextInt(steps.size()));
@@ -57,7 +62,8 @@ public class Move implements Runnable {
                 }
             }
             try {
-                Board.move(hero.position, dest);
+
+                board.move(hero.position, dest);
                 Thread.sleep(1000);
             } catch (InterruptedException e) {
                 e.printStackTrace();
