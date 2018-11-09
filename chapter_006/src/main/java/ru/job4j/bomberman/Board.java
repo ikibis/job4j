@@ -3,7 +3,7 @@ package ru.job4j.bomberman;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Board {
-    Hero hero;
+    private Hero hero;
     static ReentrantLock[][] board = new ReentrantLock[10][10];
 
     public Board(Hero hero) {
@@ -15,6 +15,4 @@ public class Board {
         }
         hero.setPosition(board[4][4]);
     }
-
-
 }
