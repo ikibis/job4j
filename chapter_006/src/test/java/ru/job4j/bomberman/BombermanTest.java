@@ -13,7 +13,8 @@ public class BombermanTest {
     private class ThreadOne extends Thread {
         @Override
         public void run() {
-            for (int i = 0; i < 100; i++) {
+            hero.position.lock();
+            for (int i = 0; i < 5; i++) {
                 hero.run();
             }
         }
@@ -22,7 +23,7 @@ public class BombermanTest {
     private class ThreadTwo extends Thread {
         @Override
         public void run() {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 0; i < 5; i++) {
                 hero.run();
             }
         }
@@ -39,6 +40,6 @@ public class BombermanTest {
     @Test
     public void when2Threads() throws InterruptedException {
         one.start();
-        two.start();
+        one.join();
     }
 }

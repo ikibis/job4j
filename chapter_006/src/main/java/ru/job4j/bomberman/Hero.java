@@ -10,7 +10,6 @@ public class Hero implements Runnable {
 
     public void setPosition(ReentrantLock position) {
         this.position = position;
-        position.lock();
     }
 
     public synchronized void way() {
@@ -37,7 +36,6 @@ public class Hero implements Runnable {
         if (y + 1 < Board.board.length) {
             steps.add(Board.board[x][y + 1]);
         }
-        System.out.println(steps);
     }
 
     public boolean move(ReentrantLock source, ReentrantLock dest) {
@@ -47,9 +45,11 @@ public class Hero implements Runnable {
                 ReentrantLock moveDest = dest;
                 while (!steps.isEmpty()) {
                     if (moveDest.tryLock(500, TimeUnit.MILLISECONDS)) {
-                        this.position = moveDest;
+                        System.out.println("source :" + source + " dest :" + dest);
                         source.unlock();
+                        this.position = moveDest;
                         result = true;
+                        break;
                     } else {
                         moveDest = steps.poll();
                     }
