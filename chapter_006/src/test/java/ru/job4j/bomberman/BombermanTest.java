@@ -1,44 +1,27 @@
 package ru.job4j.bomberman;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class BombermanTest {
 
-    Hero hero;
-    Board board;
-    Thread one;
-    Thread two;
-
     private class ThreadOne extends Thread {
+        Hero hero;
+
+        public ThreadOne(Hero hero) {
+            this.hero = hero;
+        }
+
         @Override
         public void run() {
-            hero.position.lock();
-            for (int i = 0; i < 5; i++) {
-                hero.run();
-            }
+            hero.run();
         }
-    }
-
-    private class ThreadTwo extends Thread {
-        @Override
-        public void run() {
-            for (int i = 0; i < 5; i++) {
-                hero.run();
-            }
-        }
-    }
-
-    @Before
-    public void beforeTest() {
-        hero = new Hero();
-        board = new Board(hero);
-        one = new ThreadOne();
-        two = new ThreadTwo();
     }
 
     @Test
     public void when2Threads() throws InterruptedException {
+        Hero hero = new Hero();
+        Board board = new Board(hero);
+        Thread one = new ThreadOne(hero);
         one.start();
         one.join();
     }

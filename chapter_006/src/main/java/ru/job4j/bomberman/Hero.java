@@ -45,9 +45,10 @@ public class Hero implements Runnable {
                 ReentrantLock moveDest = dest;
                 while (!steps.isEmpty()) {
                     if (moveDest.tryLock(500, TimeUnit.MILLISECONDS)) {
-                        System.out.println("source :" + source + " dest :" + dest);
+
                         source.unlock();
                         this.position = moveDest;
+                        System.out.println("source :" + source + " dest :" + dest);
                         result = true;
                         break;
                     } else {
@@ -64,6 +65,7 @@ public class Hero implements Runnable {
 
     @Override
     public void run() {
+        this.position.lock();
         while (!Thread.currentThread().isInterrupted()) {
             try {
                 Thread.sleep(1000);
