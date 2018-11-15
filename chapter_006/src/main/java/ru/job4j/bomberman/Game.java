@@ -1,14 +1,20 @@
 package ru.job4j.bomberman;
 
 public class Game {
-    private Hero hero = new Hero();
-    private Board board = new Board(hero);
+    private Monster monster;
+
+    public Game(int blocksQuantity, int monsterQuantity) {
+        new Board();
+        new Blocks(blocksQuantity);
+        monster = new Monster(monsterQuantity);
+    }
+
     private Thread bomberThread = new BomberThread();
 
     private class BomberThread extends Thread {
         @Override
         public void run() {
-            hero.run();
+            monster.run();
         }
     }
 
@@ -21,11 +27,3 @@ public class Game {
         }
     }
 }
-
-/*
-все поля сделай private !!!
-создай класс Game  в котором будет создаваться доска, герой
-метод который будет запускать игру
-в котором будут запускаться потоки
-сделай нормальный вывод в консоль с координатами
- */

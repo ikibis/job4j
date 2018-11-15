@@ -32,7 +32,7 @@ public class Hero implements Runnable {
         }
     }
 
-    private Coordinates findCoordinates(ReentrantLock position) {
+    public Coordinates findCoordinates(ReentrantLock position) {
         int x = 0;
         int y = 0;
         for (int i = 0; i < 10; i++) {
@@ -47,7 +47,7 @@ public class Hero implements Runnable {
         return new Coordinates(x, y);
     }
 
-    private boolean move(ReentrantLock source, ReentrantLock dest) {
+    public boolean move(ReentrantLock source, ReentrantLock dest) {
         boolean result = false;
         if (source.equals(this.position)) {
             try {
@@ -58,10 +58,10 @@ public class Hero implements Runnable {
                         Coordinates posDest = findCoordinates(dest);
                         source.unlock();
                         this.position = moveDest;
-                        System.out.println("source : x = " + posCoord.getX(posSource) +
-                                                  "  y = " + posCoord.getY(posSource) +
-                                             " dest : x = " + posCoord.getX(posDest) +
-                                                  "  y = " + posCoord.getY(posDest) );
+                        System.out.println("source : x = " + posCoord.getX(posSource)
+                                + "  y = " + posCoord.getY(posSource)
+                                + " dest : x = " + posCoord.getX(posDest)
+                                + "  y = " + posCoord.getY(posDest));
                         result = true;
                         break;
                     } else {
