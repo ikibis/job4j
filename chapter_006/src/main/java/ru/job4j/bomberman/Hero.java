@@ -5,16 +5,23 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Hero implements Runnable {
+    public String name;
     private ReentrantLock position;
-    private List<ReentrantLock> steps = new ArrayList<>();
+    public List<ReentrantLock> steps = new ArrayList<>();
     private Coordinates posCoord = new Coordinates();
     Random random = new Random();
 
     public void setPosition(ReentrantLock position) {
         this.position = position;
     }
+    public ReentrantLock getPosition() {
+       return this.position;
+    }
+    public Hero(String name) {
+        this.name = name;
+    }
 
-    private synchronized void way() {
+    public synchronized void way() {
         Coordinates pos = findCoordinates(this.position);
         int x = posCoord.getX(pos);
         int y = posCoord.getY(pos);
@@ -32,7 +39,7 @@ public class Hero implements Runnable {
         }
     }
 
-    public Coordinates findCoordinates(ReentrantLock position) {
+    private Coordinates findCoordinates(ReentrantLock position) {
         int x = 0;
         int y = 0;
         for (int i = 0; i < 10; i++) {
@@ -58,7 +65,7 @@ public class Hero implements Runnable {
                         Coordinates posDest = findCoordinates(dest);
                         source.unlock();
                         this.position = moveDest;
-                        System.out.println("source : x = " + posCoord.getX(posSource)
+                        System.out.println(this.name + " source : x = " + posCoord.getX(posSource)
                                 + "  y = " + posCoord.getY(posSource)
                                 + " dest : x = " + posCoord.getX(posDest)
                                 + "  y = " + posCoord.getY(posDest));
@@ -93,4 +100,3 @@ public class Hero implements Runnable {
         }
     }
 }
-
