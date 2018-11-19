@@ -9,6 +9,7 @@ public class Hero implements Runnable {
     private ReentrantLock position;
     public List<ReentrantLock> steps = new ArrayList<>();
     private Coordinates posCoord = new Coordinates();
+
     Random random = new Random();
 
     public void setPosition(ReentrantLock position) {
@@ -20,7 +21,9 @@ public class Hero implements Runnable {
     public Hero(String name) {
         this.name = name;
     }
+    public Hero() {
 
+    }
     public synchronized void way() {
         Coordinates pos = findCoordinates(this.position);
         int x = posCoord.getX(pos);
@@ -42,8 +45,8 @@ public class Hero implements Runnable {
     private Coordinates findCoordinates(ReentrantLock position) {
         int x = 0;
         int y = 0;
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
+        for (int i = 0; i < 8; i++) {
+            for (int j = 0; j < 8; j++) {
                 if ((Board.board[i][j]).equals(position)) {
                     x = i;
                     y = j;
@@ -68,7 +71,7 @@ public class Hero implements Runnable {
                         System.out.println(this.name + " source : x = " + posCoord.getX(posSource)
                                 + "  y = " + posCoord.getY(posSource)
                                 + " dest : x = " + posCoord.getX(posDest)
-                                + "  y = " + posCoord.getY(posDest));
+                                + "  y = " + posCoord.getY(posDest) + " " + Thread.currentThread().getName());
                         result = true;
                         break;
                     } else {
@@ -87,10 +90,14 @@ public class Hero implements Runnable {
 
     @Override
     public void run() {
-        this.position.lock();
         while (!Thread.currentThread().isInterrupted()) {
+            this.position.lock();
             try {
                 Thread.sleep(1000);
+                if (!Bomberman.live) {
+                    System.out.println("Bomberman is dead");
+                    Thread.currentThread().interrupt();
+                }
                 this.way();
                 int index = random.nextInt(steps.size());
                 this.move(this.position, steps.get(index));

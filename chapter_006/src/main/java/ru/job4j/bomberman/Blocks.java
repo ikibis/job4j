@@ -9,8 +9,8 @@ public class Blocks {
 
     public Blocks(int quantity) {
         while (blocks.size() < quantity) {
-            int x = random.nextInt(10);
-            int y = random.nextInt(10);
+            int x = random.nextInt(8);
+            int y = random.nextInt(8);
             if (Board.board[x][y].tryLock()) {
                 Coordinates blockCoord = new Coordinates(x, y);
                 blocks.put(Board.board[x][y], blockCoord);
