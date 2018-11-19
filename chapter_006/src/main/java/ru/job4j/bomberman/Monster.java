@@ -14,8 +14,8 @@ public class Monster extends Hero {
 
     @Override
     public void run() {
-        int x = random.nextInt(8);
-        int y = random.nextInt(8);
+        int x = random.nextInt(2);
+        int y = random.nextInt(2);
         if (Board.board[x][y].tryLock()) {
             super.setPosition(Board.board[x][y]);
             monsters.add(this);

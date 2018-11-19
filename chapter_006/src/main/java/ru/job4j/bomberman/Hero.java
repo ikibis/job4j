@@ -45,8 +45,8 @@ public class Hero implements Runnable {
     private Coordinates findCoordinates(ReentrantLock position) {
         int x = 0;
         int y = 0;
-        for (int i = 0; i < 8; i++) {
-            for (int j = 0; j < 8; j++) {
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
                 if ((Board.board[i][j]).equals(position)) {
                     x = i;
                     y = j;
@@ -62,7 +62,7 @@ public class Hero implements Runnable {
         if (source.equals(this.position)) {
             try {
                 ReentrantLock moveDest = dest;
-                while (!steps.isEmpty()) {
+                while (true) {
                     if (moveDest.tryLock(500, TimeUnit.MILLISECONDS)) {
                         Coordinates posSource = findCoordinates(source);
                         Coordinates posDest = findCoordinates(dest);
@@ -75,7 +75,7 @@ public class Hero implements Runnable {
                         result = true;
                         break;
                     } else {
-                        steps.remove(moveDest);
+                        //steps.remove(moveDest);
                         int index = random.nextInt(steps.size());
                         moveDest = steps.get(index);
                     }
