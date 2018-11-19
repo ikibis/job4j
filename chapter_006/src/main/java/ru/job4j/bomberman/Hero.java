@@ -45,8 +45,8 @@ public class Hero implements Runnable {
     private Coordinates findCoordinates(ReentrantLock position) {
         int x = 0;
         int y = 0;
-        for (int i = 0; i < 2; i++) {
-            for (int j = 0; j < 2; j++) {
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
                 if ((Board.board[i][j]).equals(position)) {
                     x = i;
                     y = j;
@@ -94,8 +94,8 @@ public class Hero implements Runnable {
             this.position.lock();
             try {
                 Thread.sleep(1000);
-                if (!Bomberman.live) {
-                    System.out.println("Bomberman is dead");
+                if (this.position.hasQueuedThreads()) {
+                    System.out.println("Bomber is dead GAME OVER!!!");
                     Thread.currentThread().interrupt();
                 }
                 this.way();

@@ -14,11 +14,14 @@ public class Monster extends Hero {
 
     @Override
     public void run() {
-        int x = random.nextInt(2);
-        int y = random.nextInt(2);
-        if (Board.board[x][y].tryLock()) {
-            super.setPosition(Board.board[x][y]);
-            monsters.add(this);
+        while (true) {
+            int x = random.nextInt(3);
+            int y = random.nextInt(3);
+            if (Board.board[x][y].tryLock()) {
+                super.setPosition(Board.board[x][y]);
+                monsters.add(this);
+                break;
+            }
         }
         while (!Thread.currentThread().isInterrupted()) {
             try {
