@@ -62,7 +62,7 @@ public class Hero implements Runnable {
         if (source.equals(this.position)) {
             try {
                 ReentrantLock moveDest = dest;
-                while (true) {
+                while (!Thread.currentThread().isInterrupted()) {
                     if (moveDest.tryLock(500, TimeUnit.MILLISECONDS)) {
                         Coordinates posSource = findCoordinates(source);
                         Coordinates posDest = findCoordinates(dest);
