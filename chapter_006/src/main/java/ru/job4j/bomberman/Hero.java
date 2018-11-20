@@ -21,9 +21,6 @@ public class Hero implements Runnable {
     public Hero(String name) {
         this.name = name;
     }
-    public Hero() {
-
-    }
     public synchronized void way() {
         Coordinates pos = findCoordinates(this.position);
         int x = posCoord.getX(pos);
@@ -57,8 +54,7 @@ public class Hero implements Runnable {
         return new Coordinates(x, y);
     }
 
-    public boolean move(ReentrantLock source, ReentrantLock dest) {
-        boolean result = false;
+    public void move(ReentrantLock source, ReentrantLock dest) {
         if (source.equals(this.position)) {
             try {
                 ReentrantLock moveDest = dest;
@@ -72,10 +68,8 @@ public class Hero implements Runnable {
                                 + "  y = " + posCoord.getY(posSource)
                                 + " dest : x = " + posCoord.getX(posDest)
                                 + "  y = " + posCoord.getY(posDest) + " " + Thread.currentThread().getName());
-                        result = true;
                         break;
                     } else {
-                        //steps.remove(moveDest);
                         int index = random.nextInt(steps.size());
                         moveDest = steps.get(index);
                     }
@@ -85,7 +79,6 @@ public class Hero implements Runnable {
             }
         }
         steps = new LinkedList<>();
-        return result;
     }
 
     @Override

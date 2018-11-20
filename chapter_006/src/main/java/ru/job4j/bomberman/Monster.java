@@ -4,9 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Monster extends Hero {
-    public String name;
-    private Bomberman bomberman = new Bomberman();
-    List<Hero> monsters = new ArrayList<>();
+    private List<Hero> monsters = new ArrayList<>();
 
     public Monster(String name) {
         super(name);
@@ -28,9 +26,6 @@ public class Monster extends Hero {
                 Thread.sleep(1000);
                 super.way();
                 int index = random.nextInt(steps.size());
-                if (steps.get(index).equals(bomberman.getPosition())) {
-                    bomberman.live = false;
-                }
                 super.move(super.getPosition(), steps.get(index));
             } catch (InterruptedException e) {
                 e.printStackTrace();

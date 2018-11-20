@@ -3,7 +3,6 @@ package ru.job4j.bomberman;
 public class Game {
     private int blocksQuantity;
     private int monstersQuantity;
-    private Bomberman bomberman;
 
     private class HeroThread extends Thread {
         private Hero hero;
@@ -35,7 +34,7 @@ public class Game {
     }
 
     public void gameStart() {
-        bomberman = new Bomberman("Bomberman");
+        Bomberman bomberman = new Bomberman("Bomberman");
         new Board(bomberman);
         new Blocks(blocksQuantity);
         Thread bomberThread = new HeroThread(bomberman);
