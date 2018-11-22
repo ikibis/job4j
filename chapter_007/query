@@ -1,0 +1,46 @@
+﻿create table type (
+id serial primary key,
+type_name varchar(2000)
+);
+
+create table product (
+id serial primary key,
+prod_name varchar(2000),
+type_id int references type(id),
+expired_date int,
+price int,
+quantity int
+);
+
+insert into type(type_name) values('СЫР');
+insert into type(type_name) values('МОЛОКО');
+insert into type(type_name) values('МОРОЖЕННОЕ');
+
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Моцарелла', 1, 12, 80, 5);
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Пармезан', 1, 1, 150, 20);
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Пломбир мороженное', 3, 12, 20, 8);
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Эскимо мороженное', 3, 5, 30, 12);
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Молоко 1%', 2, 12, 40, 5);
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Молоко 2%', 2, 1, 50, 12);
+
+-- select * from product as u where type_id = 1;
+
+-- select * from product as u where u.prod_name like '%мороженное%';
+
+-- select * from product as u where u.expired_date = 12;
+
+-- select * from product where price = (
+-- 	SELECT MAX(price) FROM product
+-- 	);
+
+ --select SUM(quantity) 
+--	from product, type
+--	where type_name = 'СЫР';
+
+-- select prod_name, type_name 
+--	from product, type
+--	where product.type_id = type.id AND (type_name = 'СЫР' OR type_name = 'МОЛОКО');
+
+-- select type_name from type, product where product.type_id = type.id AND product.quantity < 10;
+
+-- select prod_name, type_name from product, type where product.type_id = type.id;
