@@ -43,6 +43,7 @@ public class Switcher extends Thread {
             if (message.getSize() == messageFinal) {
                 messageFinal += 10;
                 System.out.println(message.getSize());
+                threadOne.interrupt();
                 this.switchNow();
             }
             semaphore.release();

@@ -1,7 +1,6 @@
 package ru.job4j.tracker;
 
 import org.apache.log4j.Logger;
-import ru.job4j.sql.SQLStorage;
 
 import java.io.InputStream;
 import java.sql.*;
@@ -10,7 +9,7 @@ import java.util.List;
 import java.util.Properties;
 
 public class TrackerSQL implements ITracker, Cloneable {
-    private static final Logger LOGGER = Logger.getLogger(SQLStorage.class);
+    private static final Logger LOGGER = Logger.getLogger(TrackerSQL.class);
     private Connection connection;
 
     public boolean init() {
