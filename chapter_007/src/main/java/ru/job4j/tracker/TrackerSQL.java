@@ -2,13 +2,15 @@ package ru.job4j.tracker;
 
 import org.apache.log4j.Logger;
 
+import java.io.Closeable;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-public class TrackerSQL implements ITracker, Cloneable {
+public class TrackerSQL implements ITracker, Closeable {
     private static final Logger LOGGER = Logger.getLogger(TrackerSQL.class);
     private Connection connection;
 
@@ -40,8 +42,8 @@ public class TrackerSQL implements ITracker, Cloneable {
             } finally {
                 if (this.connection != null) {
                     try {
-                        this.connection.close();
-                    } catch (SQLException e) {
+                        this.close();
+                    } catch (IOException e) {
                         LOGGER.error(e.getMessage(), e);
                     }
                 }
@@ -61,8 +63,8 @@ public class TrackerSQL implements ITracker, Cloneable {
             } finally {
                 if (this.connection != null) {
                     try {
-                        this.connection.close();
-                    } catch (SQLException e) {
+                        this.close();
+                    } catch (IOException e) {
                         LOGGER.error(e.getMessage(), e);
                     }
                 }
@@ -85,8 +87,8 @@ public class TrackerSQL implements ITracker, Cloneable {
             } finally {
                 if (this.connection != null) {
                     try {
-                        this.connection.close();
-                    } catch (SQLException e) {
+                        this.close();
+                    } catch (IOException e) {
                         LOGGER.error(e.getMessage(), e);
                     }
                 }
@@ -111,8 +113,8 @@ public class TrackerSQL implements ITracker, Cloneable {
             } finally {
                 if (this.connection != null) {
                     try {
-                        this.connection.close();
-                    } catch (SQLException e) {
+                        this.close();
+                    } catch (IOException e) {
                         LOGGER.error(e.getMessage(), e);
                     }
                 }
@@ -136,8 +138,8 @@ public class TrackerSQL implements ITracker, Cloneable {
             } finally {
                 if (this.connection != null) {
                     try {
-                        this.connection.close();
-                    } catch (SQLException e) {
+                        this.close();
+                    } catch (IOException e) {
                         result = false;
                         LOGGER.error(e.getMessage(), e);
                     }
@@ -166,8 +168,8 @@ public class TrackerSQL implements ITracker, Cloneable {
             } finally {
                 if (this.connection != null) {
                     try {
-                        this.connection.close();
-                    } catch (SQLException e) {
+                        this.close();
+                    } catch (IOException e) {
                         LOGGER.error(e.getMessage(), e);
                     }
                 }
@@ -196,8 +198,8 @@ public class TrackerSQL implements ITracker, Cloneable {
             } finally {
                 if (this.connection != null) {
                     try {
-                        this.connection.close();
-                    } catch (SQLException e) {
+                        this.close();
+                    } catch (IOException e) {
                         LOGGER.error(e.getMessage(), e);
                     }
                 }
@@ -224,13 +226,22 @@ public class TrackerSQL implements ITracker, Cloneable {
             } finally {
                 if (this.connection != null) {
                     try {
-                        this.connection.close();
-                    } catch (SQLException e) {
+                        this.close();
+                    } catch (IOException e) {
                         LOGGER.error(e.getMessage(), e);
                     }
                 }
             }
         }
         return result;
+    }
+
+    @Override
+    public void close() throws IOException {
+        try {
+            this.connection.close();
+        } catch (SQLException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
     }
 }
