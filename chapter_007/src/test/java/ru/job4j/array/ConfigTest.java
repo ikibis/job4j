@@ -16,20 +16,18 @@ public class ConfigTest {
         config.init();
         config.createNewDB();
     }
+
     @Test
     public void insert() {
-
-        config.add(1);
-    }
-    @Test
-    public void checkfindAll() {
-
-        config.add(5);
+        for (int i = 0; i < 10; i++) {
+            config.add(i);
+        }
         config.findAll();
     }
+/*
     @Test
     public void dropTable() {
-
         config.deleteDB();
     }
+    */
 }
