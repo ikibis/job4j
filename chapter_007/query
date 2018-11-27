@@ -7,7 +7,7 @@ create table product (
 id serial primary key,
 prod_name varchar(2000),
 type_id int references type(id),
-expired_date int,
+expired_date timestamp,
 price int,
 quantity int
 );
@@ -16,31 +16,41 @@ insert into type(type_name) values('СЫР');
 insert into type(type_name) values('МОЛОКО');
 insert into type(type_name) values('МОРОЖЕННОЕ');
 
-insert into product(prod_name, type_id, expired_date, price, quantity) values('Моцарелла', 1, 12, 80, 5);
-insert into product(prod_name, type_id, expired_date, price, quantity) values('Пармезан', 1, 1, 150, 20);
-insert into product(prod_name, type_id, expired_date, price, quantity) values('Пломбир мороженное', 3, 12, 20, 8);
-insert into product(prod_name, type_id, expired_date, price, quantity) values('Эскимо мороженное', 3, 5, 30, 12);
-insert into product(prod_name, type_id, expired_date, price, quantity) values('Молоко 1%', 2, 12, 40, 5);
-insert into product(prod_name, type_id, expired_date, price, quantity) values('Молоко 2%', 2, 1, 50, 12);
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Моцарелла', 1, '2018-12-28 23:00:00', 80, 5);
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Пармезан', 1, '2019-02-28 23:00:00', 150, 20);
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Пломбир мороженное', 3, '2019-01-28 23:00:00', 20, 8);
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Эскимо мороженное', 3, '2018-12-28 23:00:00' , 30, 12);
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Молоко 1%', 2, '2018-12-28 23:00:00', 40, 5);
+insert into product(prod_name, type_id, expired_date, price, quantity) values('Молоко 2%', 2, '2019-03-28 23:00:00', 50, 12);
 
--- select * from product as u where type_id = 1;
+
+
+ -- select * from product as u where type_id = (select id from type where type_name = 'СЫР');
 
 -- select * from product as u where u.prod_name like '%мороженное%';
 
--- select * from product as u where u.expired_date = 12;
+-- select *
+-- from product
+-- where extract(month from expired_date) = extract(month from now() + interval '1 month') ;
 
 -- select * from product where price = (
 -- 	SELECT MAX(price) FROM product
 -- 	);
 
- --select SUM(quantity) 
---	from product, type
---	where type_name = 'СЫР';
+-- select SUM(quantity) 
+-- from product.
+-- where type_id = (select id from type where type_name = 'СЫР');
+
+-- select prod_name
+-- from product
+-- inner join type on type.id = product.type_id 
+-- where  (type.type_name = 'СЫР' OR type.type_name = 'МОЛОКО');
+
+-- select type_name 
+-- from type
+-- inner join product on product.type_id = type.id 
+-- where  product.quantity < 10;
 
 -- select prod_name, type_name 
---	from product, type
---	where product.type_id = type.id AND (type_name = 'СЫР' OR type_name = 'МОЛОКО');
-
--- select type_name from type, product where product.type_id = type.id AND product.quantity < 10;
-
--- select prod_name, type_name from product, type where product.type_id = type.id;
+-- from priduct
+-- inner join type on priduct.type_id = type.id;
