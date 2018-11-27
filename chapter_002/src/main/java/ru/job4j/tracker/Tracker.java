@@ -3,16 +3,17 @@ package ru.job4j.tracker;
 import java.util.*;
 import java.util.function.Predicate;
 
-public class Tracker {
+public class Tracker implements ITracker {
     private final List<Item> items = new ArrayList<>();
     private static final Random RN = new Random();
+    private int entryID = 1;
     public Item add(Item item) {
         item.setId(this.generateId());
         this.items.add(item);
         return item;
     }
     private String generateId() {
-        return String.valueOf(System.currentTimeMillis() + RN.nextInt(100));
+        return String.valueOf(entryID++);
     }
     /**
      * Должен заменить ячейку в массиве this.items

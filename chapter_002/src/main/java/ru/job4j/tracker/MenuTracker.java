@@ -19,7 +19,7 @@ public class MenuTracker {
     /**
      * @param хранит ссылку на объект .
      */
-    private Tracker tracker;
+    private final ITracker tracker;
     /**
      * @param хранит ссылку на массив типа UserAction.
      */
@@ -29,7 +29,7 @@ public class MenuTracker {
      * @param input объект с введенными данными
      * @param tracker объект
      */
-    public MenuTracker(final Input input, final Tracker tracker) {
+    public MenuTracker(final Input input, ITracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
@@ -76,7 +76,7 @@ public class MenuTracker {
             super(key, name);
         }
         @Override
-        public final void execute(final Input input, final Tracker tracker) {
+        public final void execute(final Input input, final ITracker tracker) {
             System.out.println("------------ Adding new item --------------");
             String name = input.ask("Please, provide item name:");
             String desc = input.ask("Please, provide item description:");
@@ -103,7 +103,7 @@ public class MenuTracker {
             super(key, name);
         }
         @Override
-        public final void execute(final Input input, final Tracker tracker) {
+        public final void execute(final Input input, final ITracker tracker) {
             System.out.println("------------ Show all items : --------------");
             for (Item item : tracker.findAll()) {
                 System.out.println(item.toString());
@@ -123,7 +123,7 @@ public class MenuTracker {
             super(key, name);
         }
         @Override
-        public final void execute(final Input input, final Tracker tracker) {
+        public final void execute(final Input input, final ITracker tracker) {
             System.out.println("------------ Edit item : --------------");
             String id = input.ask("Enter ID of the item :");
             if (tracker.findById(id) != null) {
@@ -150,7 +150,7 @@ public class MenuTracker {
             super(key, name);
         }
         @Override
-        public final void execute(final Input input, final Tracker tracker) {
+        public final void execute(final Input input, final ITracker tracker) {
             System.out.println("------------ Delete item : --------------");
             String id = input.ask("Enter ID of the item :");
             if (tracker.delete(id)) {
@@ -173,7 +173,7 @@ public class MenuTracker {
             super(key, name);
         }
         @Override
-        public final void execute(final Input input, final Tracker tracker) {
+        public final void execute(final Input input, final ITracker tracker) {
             System.out.println("------------ Find item by Id : --------------");
             String id = input.ask("Enter ID of the item :");
             Item item = tracker.findById(id);
@@ -197,7 +197,7 @@ public class MenuTracker {
             super(key, name);
         }
         @Override
-        public final void execute(final Input input, final Tracker tracker) {
+        public final void execute(final Input input, final ITracker tracker) {
             System.out.println(
                     "------------ Find item by Name : --------------");
             String name = input.ask("Enter Name of the item :");
@@ -226,7 +226,7 @@ public class MenuTracker {
             this.ui = ui;
         }
         @Override
-        public final void execute(final Input input, final Tracker tracker) {
+        public final void execute(final Input input, ITracker tracker) {
             this.ui.stop();
         }
     }

@@ -16,14 +16,14 @@ public class StartUI {
     /**
      * Хранилище заявок.
      */
-    private  Tracker tracker;
+    private  final ITracker tracker;
 
     /**
      * Конструтор инициализирующий поля.
      * @param input ввод данных.
      * @param tracker хранилище заявок.
      */
-    public StartUI(final Input input, final Tracker tracker) {
+    public StartUI(final Input input, ITracker tracker) {
         this.input = input;
         this.tracker = tracker;
     }
