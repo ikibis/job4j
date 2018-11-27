@@ -158,8 +158,8 @@ public class TrackerSQL implements ITracker, Closeable {
                         "select * from items;"
                 );
                 ResultSet rs = selectedLine.executeQuery();
-                result = new Tracker().findAll();
                 while (rs.next()) {
+                    result.add(new Item(rs.getString("name"), rs.getString("description")));
                     System.out.println(String.format("%s %s", rs.getString("name"), rs.getString("description")));
                 }
                 rs.close();
@@ -188,8 +188,8 @@ public class TrackerSQL implements ITracker, Closeable {
                 );
                 selectedLine.setString(1, key);
                 ResultSet rs = selectedLine.executeQuery();
-                result = new Tracker().findByName(key);
                 while (rs.next()) {
+                    result.add(new Item(rs.getString("name"), rs.getString("description")));
                     System.out.println(String.format("%s %s", rs.getString("name"), rs.getString("description")));
                 }
                 rs.close();
@@ -218,7 +218,7 @@ public class TrackerSQL implements ITracker, Closeable {
                 );
                 selectedLine.setInt(1, Integer.valueOf(id));
                 ResultSet rs = selectedLine.executeQuery();
-                result = new Tracker().findById(id);
+                result = new Item(rs.getString("name"), rs.getString("description"));
                 System.out.println(String.format("%s %s", rs.getString("name"), rs.getString("description")));
                 rs.close();
             } catch (SQLException e) {
