@@ -2,6 +2,7 @@ package ru.job4j.array;
 
 import org.junit.Before;
 import org.junit.Test;
+
 import java.io.File;
 
 public class SQLConnectorTest {
@@ -13,6 +14,7 @@ public class SQLConnectorTest {
     Stylizer stylizer;
     File source;
     File dest;
+    File style;
 
     @Before
     public void createConnection() {
@@ -24,6 +26,7 @@ public class SQLConnectorTest {
         source = new File(fileSource);
         fileDest = "/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/TransformedUsers.xml";
         dest = new File(fileDest);
+        style = new File("/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/style.xml");
     }
 
     @Test
@@ -36,7 +39,7 @@ public class SQLConnectorTest {
         XmlUsage.User toMarshall = new XmlUsage.User(sql.generate(1000));
         try {
             File users = xml.generateFileXML(toMarshall, source);
-            stylizer.convert(users, dest);
+            stylizer.convert(users, dest, style);
         } catch (Exception e) {
             System.out.println("addvalues Exception" + e);
             e.printStackTrace();
