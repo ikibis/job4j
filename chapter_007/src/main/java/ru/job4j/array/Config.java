@@ -1,40 +1,36 @@
 package ru.job4j.array;
 
-
 import org.apache.log4j.Logger;
-
 import java.io.InputStream;
 import java.sql.*;
 import java.util.Properties;
 
 public class Config {
-    private final Properties values = new Properties();
     private static final Logger LOGGER = Logger.getLogger(Config.class);
     private Connection connection;
-
-    public void init() {
+    public boolean init() {
         try (InputStream in = Config.class.getClassLoader().getResourceAsStream("appSQLLite.properties")) {
-            values.load(in);
-
+            Properties config = new Properties();
+            config.load(in);
+            Class.forName(config.getProperty("driver-class-name"));
+            this.connection = DriverManager.getConnection(
+                    config.getProperty("url")
+            );
         } catch (Exception e) {
             throw new IllegalStateException(e);
         }
-    }
-
-    public String get(String key) {
-        return this.values.getProperty(key);
+        return this.connection != null;
     }
 
     public void createNewDB() {
         try {
-            this.connection = DriverManager.getConnection(
-                    values.getProperty("url")
-            );
+
             PreparedStatement tableItems = connection.prepareStatement(
                     "create table entry (id serial primary key, field integer );"
             );
             tableItems.executeUpdate();
         } catch (SQLException e) {
+            System.out.println("public void createNewDB() catch (SQLException e)");
             LOGGER.info("public void createNewDB() catch (SQLException e)");
             LOGGER.error(e.getMessage(), e);
         } finally {
@@ -51,9 +47,6 @@ public class Config {
     public void deleteDB() {
 
         try {
-            this.connection = DriverManager.getConnection(
-                    values.getProperty("url")
-            );
             PreparedStatement tableItems = connection.prepareStatement(
                     "drop table entry;"
             );
@@ -75,10 +68,6 @@ public class Config {
     public boolean add(int number) {
         System.out.println("1");
         try {
-            System.out.println("2");
-            this.connection = DriverManager.getConnection(
-                    values.getProperty("url")
-            );
             System.out.println("3");
             PreparedStatement insertLine = this.connection.prepareStatement(
                     "insert into entry(field) values(?);"
@@ -105,10 +94,6 @@ public class Config {
 
     public void findAll() {
         try {
-            System.out.println("1");
-            this.connection = DriverManager.getConnection(
-                    values.getProperty("url")
-            );
             PreparedStatement selectedLine = connection.prepareStatement(
                     "select * from entry;"
             );
