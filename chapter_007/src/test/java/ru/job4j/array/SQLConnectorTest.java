@@ -6,25 +6,22 @@ import org.junit.Test;
 import java.io.File;
 
 public class SQLConnectorTest {
-    SQLConnector sql;
-    Config config;
-    XmlUsage xml;
-    String fileSource;
-    String fileDest;
-    Stylizer stylizer;
-    File source;
-    File dest;
-    File style;
+    private SQLConnector sql;
+    private XmlUsage xml;
+    private Stylizer stylizer;
+    private File source;
+    private File dest;
+    private File style;
 
     @Before
     public void createConnection() {
-        config = new Config();
+        Config config = new Config();
         sql = new SQLConnector(config);
         xml = new XmlUsage();
         stylizer = new Stylizer();
-        fileSource = "/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/Users.xml";
+        String fileSource = "/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/Users.xml";
         source = new File(fileSource);
-        fileDest = "/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/TransformedUsers.xml";
+        String fileDest = "/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/TransformedUsers.xml";
         dest = new File(fileDest);
         style = new File("/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/style.xml");
     }
