@@ -9,10 +9,6 @@ public class ConfigTest {
     @Before
     public void beforeTest() {
         config = new Config();
-    }
-
-    @Test
-    public void checkConnection() {
         config.init();
         config.createNewDB();
     }

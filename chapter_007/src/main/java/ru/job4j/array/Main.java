@@ -1,12 +1,8 @@
 package ru.job4j.array;
 
-import java.sql.Connection;
-import java.sql.DatabaseMetaData;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 /**
- *
  * @author sqlitetutorial.net
  */
 public class Main {
@@ -25,8 +21,18 @@ public class Main {
                 DatabaseMetaData meta = conn.getMetaData();
                 System.out.println("The driver name is " + meta.getDriverName());
                 System.out.println("A new database has been created.");
+                PreparedStatement tableItems = conn.prepareStatement(
+                        "create table entry (id serial primary key, field integer );"
+                );
+                tableItems.executeUpdate();
+                for(int i = 0; i < 10; i++) {
+                    PreparedStatement insertLine = conn.prepareStatement(
+                            "insert into entry(field) values(i);"
+                    );
+                    insertLine.executeUpdate();
+                }
+                conn.close();
             }
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
