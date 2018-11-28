@@ -1,0 +1,58 @@
+﻿
+CREATE TABLE company(
+id integer NOT NULL,
+name character varying,
+CONSTRAINT company_pkey PRIMARY KEY (id)
+);
+
+CREATE TABLE person(
+id integer NOT NULL,
+name character varying,
+company_id integer,
+CONSTRAINT person_pkey PRIMARY KEY (id)
+);
+
+insert into company(id, name) values(1, 'Company 1');
+insert into company(id, name) values(2, 'Company 2');
+insert into company(id, name) values(3, 'Company 3');
+insert into company(id, name) values(4, 'Company 4');
+insert into company(id, name) values(5, 'Company 5');
+
+insert into person(id, name, company_id) values(1,'Person 1', 1);
+insert into person(id, name, company_id) values(2,'Person 2', 2);
+insert into person(id, name, company_id) values(3,'Person 3', 3);
+insert into person(id, name, company_id) values(4,'Person 4', 4);
+insert into person(id, name, company_id) values(5,'Person 5', 5);
+insert into person(id, name, company_id) values(6,'Person 6', 1);
+insert into person(id, name, company_id) values(7,'Person 7', 2);
+insert into person(id, name, company_id) values(8,'Person 8', 3);
+insert into person(id, name, company_id) values(9,'Person 9', 4);
+insert into person(id, name, company_id) values(10,'Person 10', 5);
+insert into person(id, name, company_id) values(11,'Person 11', 1);
+insert into person(id, name, company_id) values(12,'Person 12', 2);
+insert into person(id, name, company_id) values(13,'Person 13', 3);
+insert into person(id, name, company_id) values(14,'Person 14', 4);
+insert into person(id, name, company_id) values(15,'Person 15', 5);
+insert into person(id, name, company_id) values(16,'Person 16', 1);
+insert into person(id, name, company_id) values(17,'Person 17', 2);
+insert into person(id, name, company_id) values(18,'Person 18', 3);
+insert into person(id, name, company_id) values(19,'Person 19', 4);
+insert into person(id, name, company_id) values(20,'Person 20', 5);
+insert into person(id, name, company_id) values(21,'Person 21', 1);
+
+select person.name
+from person
+inner join company on company.id = person.company_id
+where company.id != 5;
+
+select person.name, company.name
+from person
+inner join company on company.id = person.company_id;
+
+select company.name, count (company_id) as personcount
+from person inner join company on company.id = person.company_id 
+group by company.name 
+order by count(person.company_id) desc limit 1;
+
+
+
