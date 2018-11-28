@@ -48,7 +48,7 @@ public class XmlUsage {
         }
     }
 
-    public File generateFileXML(User user, File source) throws Exception{
+    public File generateFileXML(User user, File source) throws Exception {
         File result = source;
         JAXBContext jaxbContext = JAXBContext.newInstance(User.class);
         Marshaller jaxbMarshaller = jaxbContext.createMarshaller();
