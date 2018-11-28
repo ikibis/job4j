@@ -2,7 +2,12 @@
 language: java
 # используем режим обычного пользователя для сборки проекта.
 sudo: false
-
+services:
+  - sqlite
+addons:
+  sqlite: "3.21.0"
+before_script:
+  - psql -c 'create database tracker;' -U postgres
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
 after_success:
