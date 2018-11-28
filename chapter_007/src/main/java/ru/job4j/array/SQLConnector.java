@@ -3,6 +3,8 @@ package ru.job4j.array;
 import org.apache.log4j.Logger;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SQLConnector {
     private static final Logger LOGGER = Logger.getLogger(SQLConnector.class);
@@ -19,7 +21,7 @@ public class SQLConnector {
                 config.get("password"))) {
             if (conn != null) {
                 PreparedStatement tableItems = conn.prepareStatement(
-                        "create table entry (id serial primary key, field integer );"
+                        "create table entry (field integer );"
                 );
                 tableItems.executeUpdate();
                 conn.close();
@@ -88,5 +90,14 @@ public class SQLConnector {
             System.out.println(e.getMessage());
             LOGGER.error(e.getMessage(), e);
         }
+    }
+
+    public List<XmlUsage.Field> generate(int n) {
+        List<XmlUsage.Field> result = new ArrayList<>();
+        for (int i = 1; i <= n; i++) {
+            this.add(i);
+            result.add(new XmlUsage.Field(i));
+        }
+        return result;
     }
 }

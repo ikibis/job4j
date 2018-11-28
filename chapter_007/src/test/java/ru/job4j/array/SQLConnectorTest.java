@@ -2,15 +2,28 @@ package ru.job4j.array;
 
 import org.junit.Before;
 import org.junit.Test;
+import java.io.File;
 
 public class SQLConnectorTest {
     SQLConnector sql;
     Config config;
+    XmlUsage xml;
+    String fileSource;
+    String fileDest;
+    Stylizer stylizer;
+    File source;
+    File dest;
 
     @Before
     public void createConnection() {
         config = new Config();
         sql = new SQLConnector(config);
+        xml = new XmlUsage();
+        stylizer = new Stylizer();
+        fileSource = "/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/Users.xml";
+        source = new File(fileSource);
+        fileDest = "/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/TransformedUsers.xml";
+        dest = new File(fileDest);
     }
 
     @Test
@@ -20,10 +33,14 @@ public class SQLConnectorTest {
 
     @Test
     public void addvalues() {
-        for (int i = 0; i < 10; i++) {
-            sql.add(i);
+        XmlUsage.User toMarshall = new XmlUsage.User(sql.generate(1000));
+        try {
+            File users = xml.generateFileXML(toMarshall, source);
+            stylizer.convert(users, dest);
+        } catch (Exception e) {
+            System.out.println("addvalues Exception" + e);
+            e.printStackTrace();
         }
-        sql.findAll();
     }
 
     @Test
@@ -39,5 +56,4 @@ public class SQLConnectorTest {
         System.out.println(conf.get("password"));
         System.out.println(conf.get("driver-class-name"));
     }
-
 }
