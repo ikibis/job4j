@@ -27,36 +27,36 @@ public class Program {
         long startTime = System.currentTimeMillis();
         sql.createNewDB();
         long timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("БД создалась за " + timeSpent / 1000 + " секунд");
+        System.out.println("БД создалась за " + timeSpent  + " миллисекунд");
 
         startTime = System.currentTimeMillis();
         XmlUsage.User toMarshall = new XmlUsage.User(sql.generate(elements));
         timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("Сгенерирован список  за " + timeSpent / 1000 + " секунд");
+        System.out.println("Сгенерирован список  за " + timeSpent + " миллисекунд");
 
         startTime = System.currentTimeMillis();
         for (XmlUsage.Field field : toMarshall.getValues()) {
             sql.add(field.getValue());
         }
         timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("Напонение БД за " + timeSpent / 1000 + " секунд");
+        System.out.println("Напонение БД за " + timeSpent + " миллисекунд");
 
         try {
             startTime = System.currentTimeMillis();
             File users = xml.generateFileXML(toMarshall, source);
             timeSpent = System.currentTimeMillis() - startTime;
-            System.out.println("Сгенерирован XML за " + timeSpent / 1000 + " секунд");
+            System.out.println("Сгенерирован XML за " + timeSpent  + " миллисекунд");
 
             startTime = System.currentTimeMillis();
             stylizer.convert(users, dest, style);
             timeSpent = System.currentTimeMillis() - startTime;
-            System.out.println("XML изменен за " + timeSpent / 1000 + " секунд");
+            System.out.println("XML изменен за " + timeSpent + " миллисекунд");
 
             startTime = System.currentTimeMillis();
             sql.deleteDB();
             sql.closeConnection();
             timeSpent = System.currentTimeMillis() - startTime;
-            System.out.println("БД удалена за " + timeSpent / 1000 + " секунд");
+            System.out.println("БД удалена за " + timeSpent + " миллисекунд");
 
         } catch (Exception e) {
             System.out.println("addvalues Exception" + e);
