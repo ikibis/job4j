@@ -16,6 +16,7 @@ public class SQLConnector {
                     config.get("url"),
                     config.get("username"),
                     config.get("password"));
+            conn.setAutoCommit(false);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             LOGGER.error(e.getMessage(), e);
@@ -60,7 +61,7 @@ public class SQLConnector {
         }
     }
 
-    public boolean add(int number) {
+    public boolean add(int number, int count) {
         try {
             if (conn != null) {
                 PreparedStatement tableItems = conn.prepareStatement(
@@ -68,6 +69,9 @@ public class SQLConnector {
                 );
                 tableItems.setString(1, String.valueOf(number));
                 tableItems.executeUpdate();
+            }
+            if (count == 100000) {
+                conn.commit();
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());

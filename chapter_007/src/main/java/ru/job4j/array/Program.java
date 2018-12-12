@@ -23,11 +23,11 @@ public class Program {
     }
 
     public void start(int elements) {
-
+        int count = 0;
         long startTime = System.currentTimeMillis();
         sql.createNewDB();
         long timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("БД создалась за " + timeSpent  + " миллисекунд");
+        System.out.println("БД создалась за " + timeSpent + " миллисекунд");
 
         startTime = System.currentTimeMillis();
         XmlUsage.User toMarshall = new XmlUsage.User(sql.generate(elements));
@@ -36,7 +36,8 @@ public class Program {
 
         startTime = System.currentTimeMillis();
         for (XmlUsage.Field field : toMarshall.getValues()) {
-            sql.add(field.getValue());
+            sql.add(field.getValue(), count);
+            count++;
         }
         timeSpent = System.currentTimeMillis() - startTime;
         System.out.println("Напонение БД за " + timeSpent + " миллисекунд");
@@ -45,7 +46,7 @@ public class Program {
             startTime = System.currentTimeMillis();
             File users = xml.generateFileXML(toMarshall, source);
             timeSpent = System.currentTimeMillis() - startTime;
-            System.out.println("Сгенерирован XML за " + timeSpent  + " миллисекунд");
+            System.out.println("Сгенерирован XML за " + timeSpent + " миллисекунд");
 
             startTime = System.currentTimeMillis();
             stylizer.convert(users, dest, style);
@@ -63,6 +64,7 @@ public class Program {
             e.printStackTrace();
         }
     }
+
     public void dropDB() {
         sql.deleteDB();
     }

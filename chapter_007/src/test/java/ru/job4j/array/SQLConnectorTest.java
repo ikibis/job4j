@@ -14,7 +14,7 @@ public class SQLConnectorTest {
     @Test
     public void startProgram() {
         long startTime = System.currentTimeMillis();
-        program.start(10000);
+        program.start(1000000);
         long timeSpent = System.currentTimeMillis() - startTime;
         System.out.println("программа выполнялась " + timeSpent / 1000 + " секунд");
     }
