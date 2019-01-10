@@ -1,13 +1,15 @@
 package ru.job4j.array;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class SQLConnector {
-    private static final Logger LOGGER = Logger.getLogger(SQLConnector.class);
+
+    private static final Logger LOGGER = LogManager.getLogger(SQLConnector.class.getName());
     Connection conn;
 
     public SQLConnector(Config config) {

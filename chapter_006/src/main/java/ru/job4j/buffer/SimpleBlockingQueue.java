@@ -2,13 +2,16 @@ package ru.job4j.buffer;
 
 import net.jcip.annotations.GuardedBy;
 import net.jcip.annotations.ThreadSafe;
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
 @ThreadSafe
 public class SimpleBlockingQueue<T> {
-    private static final Logger LOGGER = Logger.getLogger(SimpleBlockingQueue.class);
+    private static final Logger LOGGER = LogManager.getLogger(SimpleBlockingQueue.class.getName());
     @GuardedBy("this")
     private final Queue<T> queue;
 

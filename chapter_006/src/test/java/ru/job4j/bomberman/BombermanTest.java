@@ -8,4 +8,6 @@ public class BombermanTest {
         Game game = new Game(4, 0);
         game.gameStart();
     }
+
 }
+
