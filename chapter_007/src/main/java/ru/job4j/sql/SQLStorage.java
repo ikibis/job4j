@@ -1,11 +1,12 @@
 package ru.job4j.sql;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.sql.*;
 
 public class SQLStorage {
-    private static final Logger LOGGER = Logger.getLogger(SQLStorage.class);
+    private static final Logger LOGGER = LogManager.getLogger(SQLStorage.class.getName());
 
     public static void main(String[] args) {
         String url = "jdbc:postgresql://localhost:5432/car_catalog";
