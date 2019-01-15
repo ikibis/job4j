@@ -1,8 +1,9 @@
 package ru.job4j.array;
 
+
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.File;
 import java.util.List;
 
