@@ -11,6 +11,7 @@ public class SQLConnector {
 
     private static final Logger LOGGER = LogManager.getLogger(SQLConnector.class.getName());
     Connection conn;
+    int count;
 
     public SQLConnector(Config config) {
         try {
@@ -18,7 +19,6 @@ public class SQLConnector {
                     config.get("url"),
                     config.get("username"),
                     config.get("password"));
-            conn.setAutoCommit(false);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             LOGGER.error(e.getMessage(), e);
@@ -63,18 +63,25 @@ public class SQLConnector {
         }
     }
 
-    public boolean add(int number, int count) {
+    public boolean add(XmlUsage.User toMarshall) {
         try {
+            conn.setAutoCommit(false);
             if (conn != null) {
-                PreparedStatement tableItems = conn.prepareStatement(
-                        "insert into entry(field) values(?);"
-                );
-                tableItems.setString(1, String.valueOf(number));
-                tableItems.executeUpdate();
+                for (XmlUsage.Field field : toMarshall.getValues()) {
+                    try (PreparedStatement tableItems = conn.prepareStatement(
+                            "insert into entry(field) values(?);")) {
+                        tableItems.setString(1, String.valueOf(field.getValue()));
+                        tableItems.executeUpdate();
+                        if (count == 100000) {
+                            conn.commit();
+                        }
+                    } catch (SQLException e) {
+                        System.out.println(e.getMessage());
+                        LOGGER.error(e.getMessage(), e);
+                    }
+                }
             }
-            if (count == 100000) {
-                conn.commit();
-            }
+            conn.setAutoCommit(true);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
             LOGGER.error(e.getMessage(), e);

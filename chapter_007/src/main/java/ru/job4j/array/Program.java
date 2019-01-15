@@ -35,10 +35,8 @@ public class Program {
         System.out.println("Сгенерирован список  за " + timeSpent + " миллисекунд");
 
         startTime = System.currentTimeMillis();
-        for (XmlUsage.Field field : toMarshall.getValues()) {
-            sql.add(field.getValue(), count);
-            count++;
-        }
+        sql.add(toMarshall);
+
         timeSpent = System.currentTimeMillis() - startTime;
         System.out.println("Напонение БД за " + timeSpent + " миллисекунд");
 
