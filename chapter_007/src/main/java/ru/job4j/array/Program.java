@@ -15,15 +15,15 @@ public class Program {
         sql = new SQLConnector(config);
         xml = new XmlUsage();
         stylizer = new Stylizer();
-        String fileSource = "/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/Users.xml";
-        source = new File(fileSource);
-        String fileDest = "/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/TransformedUsers.xml";
-        dest = new File(fileDest);
-        style = new File("/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/style.xml");
+
     }
 
-    public void start(int elements) {
-        int count = 0;
+    public void start(String path, int elements) {
+        String fileSource = path + "Users.xml";
+        source = new File(fileSource);
+        String fileDest = path + "TransformedUsers.xml";
+        dest = new File(fileDest);
+        style = new File(path + "style.xml");
         long startTime = System.currentTimeMillis();
         sql.createNewDB();
         long timeSpent = System.currentTimeMillis() - startTime;
