@@ -1,29 +1,30 @@
 package ru.job4j.array;
 
 import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 
 public class Program {
     private SQLConnector sql;
     private XmlUsage xml;
     private Stylizer stylizer;
-    private File source;
-    private File dest;
-    private File style;
 
     public Program() {
         Config config = new Config();
         sql = new SQLConnector(config);
         xml = new XmlUsage();
         stylizer = new Stylizer();
-
     }
 
-    public void start(String path, int elements) {
-        String fileSource = path + "Users.xml";
-        source = new File(fileSource);
-        String fileDest = path + "TransformedUsers.xml";
-        dest = new File(fileDest);
-        style = new File(path + "style.xml");
+    public void start(int elements) throws URISyntaxException {
+        URL resUsers = Program.class.getResource("Users.xml");
+        final File source = Paths.get(resUsers.toURI()).toFile();
+        URL resTransformedUsers = Program.class.getResource("TransformedUsers.xml");
+        final File dest = Paths.get(resTransformedUsers.toURI()).toFile();
+        URL resStyle = Program.class.getResource("style.xml");
+        final File style = Paths.get(resStyle.toURI()).toFile();
+
         long startTime = System.currentTimeMillis();
         sql.createNewDB();
         long timeSpent = System.currentTimeMillis() - startTime;

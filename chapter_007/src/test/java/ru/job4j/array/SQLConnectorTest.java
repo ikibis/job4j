@@ -3,6 +3,8 @@ package ru.job4j.array;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.net.URISyntaxException;
+
 public class SQLConnectorTest {
     Program program;
     String path = "/home/ilya/job4j/chapter_007/src/main/java/ru/job4j/array/";
@@ -13,9 +15,9 @@ public class SQLConnectorTest {
     }
 
     @Test
-    public void startProgram() {
+    public void startProgram() throws URISyntaxException {
         long startTime = System.currentTimeMillis();
-        program.start(path, 100);
+        program.start(100);
         long timeSpent = System.currentTimeMillis() - startTime;
         System.out.println("программа выполнялась " + timeSpent / 1000 + " секунд");
     }
