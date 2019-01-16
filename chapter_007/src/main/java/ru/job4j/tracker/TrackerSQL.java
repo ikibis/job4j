@@ -21,33 +21,23 @@ public class TrackerSQL implements ITracker, AutoCloseable {
 
     @Override
     public Item add(Item item) {
-        try {
-            PreparedStatement insertLine = connection.prepareStatement(
-                    "insert into items(name, description) values(?, ?);"
-            );
+        try (PreparedStatement insertLine = connection.prepareStatement(
+                "insert into items(name, description) values(?, ?);"
+        )) {
             insertLine.setString(1, item.getName());
             insertLine.setString(2, item.getDescription());
             insertLine.executeUpdate();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (this.connection != null) {
-                try {
-                    this.close();
-                } catch (IOException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
         return item;
     }
 
     @Override
     public void replace(String id, Item item) {
-        try {
-            PreparedStatement replacedLine = this.connection.prepareStatement(
-                    "update items set name = ?, description = ? where items.id = ?;"
-            );
+        try (PreparedStatement replacedLine = this.connection.prepareStatement(
+                "update items set name = ?, description = ? where items.id = ?;"
+        )) {
             replacedLine.setString(1, item.getName());
             replacedLine.setString(2, item.getDescription());
             replacedLine.setInt(3, Integer.valueOf(id));
@@ -67,24 +57,14 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public boolean delete(String id) {
         boolean result = true;
-        try {
-            PreparedStatement deletedLine = connection.prepareStatement(
-                    "delete from items where items.id = ?;"
-            );
+        try (PreparedStatement deletedLine = connection.prepareStatement(
+                "delete from items where items.id = ?;"
+        )) {
             deletedLine.setInt(1, Integer.valueOf(id));
             deletedLine.executeUpdate();
         } catch (SQLException e) {
             result = false;
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (this.connection != null) {
-                try {
-                    this.close();
-                } catch (IOException e) {
-                    result = false;
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
         return result;
     }
@@ -92,26 +72,16 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public List<Item> findAll() {
         List<Item> result = new ArrayList<>();
-        try {
-            PreparedStatement selectedLine = connection.prepareStatement(
-                    "select * from items;"
-            );
+        try (PreparedStatement selectedLine = connection.prepareStatement(
+                "select * from items;"
+        )) {
             ResultSet rs = selectedLine.executeQuery();
             while (rs.next()) {
                 result.add(new Item(rs.getString("name"), rs.getString("description")));
                 System.out.println(String.format("%s %s", rs.getString("name"), rs.getString("description")));
             }
-            rs.close();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (this.connection != null) {
-                try {
-                    this.close();
-                } catch (IOException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
         return result;
     }
@@ -119,27 +89,17 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public List<Item> findByName(String key) {
         List<Item> result = new ArrayList<>();
-        try {
-            PreparedStatement selectedLine = connection.prepareStatement(
-                    "select * from items where items.name = ?;"
-            );
+        try (PreparedStatement selectedLine = connection.prepareStatement(
+                "select * from items where items.name = ?;"
+        )) {
             selectedLine.setString(1, key);
             ResultSet rs = selectedLine.executeQuery();
             while (rs.next()) {
                 result.add(new Item(rs.getString("name"), rs.getString("description")));
                 System.out.println(String.format("%s %s", rs.getString("name"), rs.getString("description")));
             }
-            rs.close();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (this.connection != null) {
-                try {
-                    this.close();
-                } catch (IOException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
         return result;
     }
@@ -147,25 +107,15 @@ public class TrackerSQL implements ITracker, AutoCloseable {
     @Override
     public Item findById(String id) {
         Item result = null;
-        try {
-            PreparedStatement selectedLine = connection.prepareStatement(
-                    "select from items where items.id = ?;"
-            );
+        try (PreparedStatement selectedLine = connection.prepareStatement(
+                "select from items where items.id = ?;"
+        )) {
             selectedLine.setInt(1, Integer.valueOf(id));
             ResultSet rs = selectedLine.executeQuery();
             result = new Item(rs.getString("name"), rs.getString("description"));
             System.out.println(String.format("%s %s", rs.getString("name"), rs.getString("description")));
-            rs.close();
         } catch (SQLException e) {
             LOGGER.error(e.getMessage(), e);
-        } finally {
-            if (this.connection != null) {
-                try {
-                    this.close();
-                } catch (IOException e) {
-                    LOGGER.error(e.getMessage(), e);
-                }
-            }
         }
         return result;
     }
