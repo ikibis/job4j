@@ -6,6 +6,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.io.InputStream;
 
+
 public class ByteStreamCheck {
     private static final Logger LOGGER = LogManager.getLogger(ByteStreamCheck.class.getName());
 

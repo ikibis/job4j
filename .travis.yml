@@ -6,10 +6,11 @@ jdk:
 sudo: false
 services:
   - sqlite
-  - - postgresql
+  - postgresql
 
 before_install:
   - psql -c 'create database tracker;' -U postgres
+  - sqlite -c 'create database array;' -U sqlite
 
 # после выполнения сборки запустить скрипт, который будет собирать статистику по JaCoCo
 # Здесь используется сторонни сервис https://codecov.io/
