@@ -33,6 +33,6 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        createNewDatabase(Program.class.getResource("/test.db"));
+        createNewDatabase(Program.class.getResource("/ru/job4j/array/test.db"));
     }
 }
