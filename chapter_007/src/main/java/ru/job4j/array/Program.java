@@ -18,11 +18,11 @@ public class Program {
     }
 
     public void start(int elements) throws URISyntaxException {
-        URL resUsers = Program.class.getResource("Users.xml");
+        URL resUsers = Program.class.getResource("/Users.xml");
         final File source = Paths.get(resUsers.toURI()).toFile();
-        URL resTransformedUsers = Program.class.getResource("TransformedUsers.xml");
+        URL resTransformedUsers = Program.class.getResource("/TransformedUsers.xml");
         final File dest = Paths.get(resTransformedUsers.toURI()).toFile();
-        URL resStyle = Program.class.getResource("style.xml");
+        URL resStyle = Program.class.getResource("/style.xml");
         final File style = Paths.get(resStyle.toURI()).toFile();
 
         long startTime = System.currentTimeMillis();

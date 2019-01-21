@@ -1,6 +1,7 @@
 package ru.job4j.array;
 
 import java.io.InputStream;
+import java.sql.DriverManager;
 import java.util.Properties;
 
 public class Config {
