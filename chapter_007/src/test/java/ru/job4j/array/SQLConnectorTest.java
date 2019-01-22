@@ -12,7 +12,7 @@ public class SQLConnectorTest {
     public void createConnection() {
         program = new Program();
     }
-/*
+
     @Test
     public void startProgram() throws URISyntaxException {
         long startTime = System.currentTimeMillis();
@@ -20,7 +20,7 @@ public class SQLConnectorTest {
         long timeSpent = System.currentTimeMillis() - startTime;
         System.out.println("программа выполнялась " + timeSpent / 1000 + " секунд");
     }
-*/
+
     @Test
     public void propertiesTest() {
         Config conf = new Config();
