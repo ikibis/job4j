@@ -13,13 +13,13 @@ public class SQLConnectorTest {
         program = new Program();
     }
 
-    @Test
-    public void startProgram() throws URISyntaxException {
-        long startTime = System.currentTimeMillis();
-        program.start(10000);
-        long timeSpent = System.currentTimeMillis() - startTime;
-        System.out.println("программа выполнялась " + timeSpent / 1000 + " секунд");
-    }
+       @Test
+      public void startProgram() throws URISyntaxException {
+           long startTime = System.currentTimeMillis();
+      //     program.start(10000);
+           long timeSpent = System.currentTimeMillis() - startTime;
+           System.out.println("программа выполнялась " + timeSpent / 1000 + " секунд");
+       }
 
     @Test
     public void propertiesTest() {
