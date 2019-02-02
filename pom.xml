@@ -44,7 +44,6 @@
                 <db.driver>org.postgresql.Driver</db.driver>
             </properties>
         </profile>
-
     </profiles>
 
     <modules>

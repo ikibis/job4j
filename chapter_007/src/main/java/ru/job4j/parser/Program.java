@@ -20,6 +20,6 @@ public class Program {
         while (!this.storage.empty()) {
             sql.add(this.storage.poll());
         }
-        sql.deleteDB();
+        //sql.deleteDB();
     }
 }

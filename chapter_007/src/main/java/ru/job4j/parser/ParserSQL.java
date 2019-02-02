@@ -14,7 +14,7 @@ public class ParserSQL implements Closeable {
     private Connection connection;
 
     public boolean init() {
-        try (InputStream in = ParserSQL.class.getClassLoader().getResourceAsStream("appParser.properties")) {
+        try (InputStream in = ParserSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));
