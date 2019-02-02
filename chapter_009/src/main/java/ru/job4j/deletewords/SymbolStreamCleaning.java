@@ -9,15 +9,15 @@ public class SymbolStreamCleaning {
         try (BufferedReader br = new BufferedReader(new InputStreamReader(in));
              BufferedReader brCheck = new BufferedReader(new InputStreamReader(new ByteArrayInputStream(abuse.getBytes())))
         ) {
-            System.out.println(br.readLine());
-            /*
+            //System.out.println(br.readLine());
+
             String s;
             while ((s = br.readLine()) != null) {
                 if (!s.equals(abuse)) {
                     System.out.println(s); // записываем в аутпут
                 }
             }
-*/
+
 
 
 
