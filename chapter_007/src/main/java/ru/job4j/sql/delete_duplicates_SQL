@@ -1,0 +1,29 @@
+В системе есть таблица cities. с полями id, name.
+Система парсит объявления и записывывать города.
+В коде системы оказался баг. Он записывал дубликаты городов.
+Москва, Москва, СПб, Казань.
+Багу поправили на уровне приложения,
+но таблица все равно содержит дубликаты.
+Ваша задача написать sql скрипт,
+который оставит в таблице только уникальные города.
+Если было три раза написана Москва. то нужно оставить только одну Москву.
+
+CREATE TABLE cities(
+id integer NOT NULL,
+name character varying,
+CONSTRAINT cities_key PRIMARY KEY (id)
+);
+
+insert into cities(id, name) values(1, 'Москва');
+insert into cities(id, name) values(2, 'Москва');
+insert into cities(id, name) values(3, 'СПб');
+insert into cities(id, name) values(4, 'Казань');
+insert into cities(id, name) values(5, 'Москва');
+insert into cities(id, name) values(6, 'СПб');
+insert into cities(id, name) values(7, 'Казань');
+
+DELETE FROM cities
+WHERE id NOT IN (
+SELECT max(id) FROM cities
+GROUP BY name HAVING count(id)>1
+);
