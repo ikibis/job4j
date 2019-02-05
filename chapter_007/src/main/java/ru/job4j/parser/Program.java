@@ -1,6 +1,7 @@
 package ru.job4j.parser;
 
 import java.io.IOException;
+import java.text.ParseException;
 
 public class Program {
 
@@ -14,9 +15,9 @@ public class Program {
         this.sql = new ParserSQL();
     }
 
-    public void start() throws IOException {
+    public void start() throws IOException, ParseException {
         sql.createNewDB();
-        this.parser.parse();
+        this.parser.parseIt();
         while (!this.storage.empty()) {
             sql.add(this.storage.poll());
         }

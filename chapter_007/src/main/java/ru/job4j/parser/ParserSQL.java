@@ -35,9 +35,10 @@ public class ParserSQL implements Closeable {
                 PreparedStatement tableItems = connection.prepareStatement(
                         "create table vacancy ( "
                                 + "id serial primary key, "
-                                + "name varchar(200), "
+                                + "name varchar(2000), "
                                 + "url varchar(2000), "
-                                + "description varchar(2000));"
+                                + "description varchar(2000), "
+                                + "date varchar(2000));"
                 );
                 tableItems.executeUpdate();
             } catch (SQLException e) {
@@ -80,11 +81,12 @@ public class ParserSQL implements Closeable {
             try {
                 if (!this.duplicateCheck(vacancy)) {
                     PreparedStatement insertLine = connection.prepareStatement(
-                            "insert into vacancy(name, url, description) values(?, ?, ?);"
+                            "insert into vacancy(name, url, description, date) values(?, ?, ?, ?);"
                     );
                     insertLine.setString(1, vacancy.getName());
                     insertLine.setString(2, vacancy.getUrl());
                     insertLine.setString(3, vacancy.getDescription());
+                    insertLine.setString(4, vacancy.getDate());
                     insertLine.executeUpdate();
                 }
             } catch (SQLException e) {
@@ -129,4 +131,3 @@ public class ParserSQL implements Closeable {
         }
     }
 }
-
