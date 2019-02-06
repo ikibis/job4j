@@ -6,8 +6,6 @@ import org.jsoup.select.*;
 
 import java.io.*;
 import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 public class Parser {
 
@@ -16,19 +14,23 @@ public class Parser {
     private String url;
     private String toSearch;
     private String notSearch;
+    private DateConverter dConv;
 
     public Parser(String url, String toSearch, String notSearch, Storage storage) {
         this.url = url;
         this.toSearch = toSearch;
         this.notSearch = notSearch;
         this.storage = storage;
+        this.dConv = new DateConverter();
     }
 
     public void parseIt() throws IOException, ParseException {
-        for (int i = 0; i < 10; i++) {
+        boolean parseFlag = true;
+        int count = 0;
+        while (parseFlag) {
             String page;
-            if (i != 0) {
-                page = String.valueOf(i);
+            if (count != 0) {
+                page = String.valueOf(count);
             } else {
                 page = "";
             }
@@ -49,24 +51,18 @@ public class Parser {
                     }
                     Element dateElement = doc1.select(".msgFooter").first();
                     String vacancyDate = dateElement.text();
-                    vacancyDate = vacancyDate.substring(0, vacancyDate.indexOf(','));
-                    System.out.println(vacancyDate);
-              /*      if (date.equals("вчера")) {
-                        Calendar calendar = Calendar.getInstance();
-                        SimpleDateFormat sdf = new SimpleDateFormat("d MMM yy");
-                        calendar.setTime(sdf.parse(new Date().toString()));
-                        calendar.add(Calendar.DATE, -1);
-                        date = sdf.format(calendar.getTime());
+
+                    vacancyDate = dConv.dateConvert(vacancyDate);
+
+                    if (dConv.dateCheck(vacancyDate)) {
+                        this.storage.add(new Vacancy(vacancyName, vacancyUrl, vacancyDescription, vacancyDate));
+                    } else {
+                        parseFlag = false;
+                        break;
                     }
-                    */
-                    if (vacancyDate.equals("сегодня")) {
-                        SimpleDateFormat sdf = new SimpleDateFormat("d MMM yy");
-                        Date currentDate = new Date();
-                        vacancyDate = sdf.format(currentDate);
-                    }
-                    this.storage.add(new Vacancy(vacancyName, vacancyUrl, vacancyDescription, vacancyDate));
                 }
             }
+            count++;
         }
     }
 }

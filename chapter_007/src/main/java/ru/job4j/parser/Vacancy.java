@@ -10,6 +10,7 @@ public class Vacancy {
         this.name = name;
         this.url = url;
         this.description = description;
+        this.date = date;
     }
 
     public String getName() {

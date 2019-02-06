@@ -13,6 +13,7 @@ public class Program {
         this.storage = new Storage();
         this.parser = new Parser(url, toSearch, notSearch, this.storage);
         this.sql = new ParserSQL();
+        sql.init();
     }
 
     public void start() throws IOException, ParseException {
@@ -21,6 +22,6 @@ public class Program {
         while (!this.storage.empty()) {
             sql.add(this.storage.poll());
         }
-        //sql.deleteDB();
+        sql.deleteDB();
     }
 }
