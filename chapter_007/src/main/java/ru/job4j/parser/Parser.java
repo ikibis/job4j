@@ -5,7 +5,6 @@ import org.jsoup.nodes.*;
 import org.jsoup.select.*;
 
 import java.io.*;
-import java.text.ParseException;
 
 public class Parser {
 
@@ -24,7 +23,7 @@ public class Parser {
         this.dConv = new DateConverter();
     }
 
-    public void parseIt() throws IOException, ParseException {
+    public void parseIt() throws IOException {
         boolean parseFlag = true;
         int count = 0;
         while (parseFlag) {

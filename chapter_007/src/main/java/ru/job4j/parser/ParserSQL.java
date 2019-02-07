@@ -12,7 +12,7 @@ public class ParserSQL {
     private Connection connection;
 
     public boolean init() {
-        try (InputStream in = ParserSQL.class.getClassLoader().getResourceAsStream("app.properties")) {
+        try (InputStream in = ParserSQL.class.getClassLoader().getResourceAsStream("appParser.properties")) {
             Properties config = new Properties();
             config.load(in);
             Class.forName(config.getProperty("driver-class-name"));

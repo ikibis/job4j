@@ -1,25 +1,21 @@
 package ru.job4j.parser;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
 public class DateConverter {
-    public String dateConvert(String date) throws ParseException {
+    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+    public String dateConvert(String date) {
         String[] months = {"янв", "фев", "мар", "апр", "май", "июн", "июл", "авг", "сен", "окт", "ноя", "дек"};
         date = date.substring(0, date.indexOf(','));
         if (date.equals("вчера")) {
-            Calendar calendar = Calendar.getInstance();
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
-            calendar.setTime(sdf.parse(new Date().toString()));
-            calendar.add(Calendar.DATE, -1);
-            date = sdf.format(calendar.getTime());
+            Calendar cal = Calendar.getInstance();
+            cal.add(Calendar.DATE, -1);
+            date = sdf.format(new Date(cal.getTimeInMillis()));
         } else if (date.equals("сегодня")) {
-            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
             Date currentDate = new Date();
             date = sdf.format(currentDate);
-
         } else {
             int dayIndex = date.indexOf(' ') + 1;
             int yearIndex = date.lastIndexOf(' ') + 1;
@@ -39,9 +35,9 @@ public class DateConverter {
 
     public boolean dateCheck(String date) {
         boolean result = true;
-        SimpleDateFormat sdf = new SimpleDateFormat("yy");
+        SimpleDateFormat sdfYear = new SimpleDateFormat("yy");
         Date currentDate = new Date();
-        String year = sdf.format(currentDate);
+        String year = sdfYear.format(currentDate);
         String dateYear = date.substring(date.lastIndexOf('.') + 1, date.lastIndexOf('.') + 3);
         if (!year.equals(dateYear)) {
             result = false;

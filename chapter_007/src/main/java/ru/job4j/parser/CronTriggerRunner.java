@@ -5,38 +5,30 @@ import org.apache.logging.log4j.Logger;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
+import static org.quartz.CronScheduleBuilder.cronSchedule;
+import static org.quartz.JobBuilder.newJob;
+import static org.quartz.TriggerBuilder.newTrigger;
+
 
 public class CronTriggerRunner {
     private static final Logger LOGGER = LogManager.getLogger(CronTriggerRunner.class.getName());
 
-    public void cron() throws SchedulerException {
-        // Запускаем Schedule Factory
-        SchedulerFactory schedulerFactory = new StdSchedulerFactory();
-        // Извлекаем планировщик из schedule factory
-        Scheduler scheduler = schedulerFactory.getScheduler();
-
-        // текущее время
-        long ctime = System.currentTimeMillis();
-
-        // Запускаем JobDetail с именем задания,
-        // группой задания и классом выполняемого задания
-        JobDetail jobDetail =
-                new JobDetail("jobDetail2", "jobDetailGroup2", SimpleQuartzJob.class);
-        // Запускаем CronTrigger с его именем и именем группы
-        CronTrigger cronTrigger = new CronTrigger("cronTrigger", "triggerGroup2");
-        try {
-            // Устанавливаем CronExpression
-            CronExpression cexp = new CronExpression("0 0 12 * * ?");
-            // Присваиваем CronExpression CronTrigger'у
-            cronTrigger.setCronExpression(cexp);
-        } catch (Exception e) {
-            LOGGER.error(e.getMessage(), e);
-        }
-        // Планируем задание с помощью JobDetail и Trigger
-        scheduler.scheduleJob(jobDetail, cronTrigger);
-
-        // Запускаем планировщик
+    public void task() throws SchedulerException {
+        SchedulerFactory sf = new StdSchedulerFactory();
+        Scheduler scheduler = sf.getScheduler();
+        JobDetail job = newJob(SimpleQuartzJob.class).withIdentity("job1", "group1").build();
+        CronTrigger trigger = newTrigger().withIdentity("trigger1", "group1").
+                withSchedule(cronSchedule("* * 12 * * ?"))
+                .build();
         scheduler.start();
+        scheduler.scheduleJob(job, trigger);
     }
 
+    public static void main(String[] args) {
+        try {
+            new CronTriggerRunner().task();
+        } catch (SchedulerException e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+    }
 }
