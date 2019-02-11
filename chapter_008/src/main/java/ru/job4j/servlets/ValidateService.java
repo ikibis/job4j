@@ -1,5 +1,9 @@
 package ru.job4j.servlets;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 public class ValidateService {
     private static ValidateService service;
     private final Store memory = MemoryStore.getInstance();
@@ -27,11 +31,11 @@ public class ValidateService {
         return memory.delete(user);
     }
 
-    public String findAll() {
-        StringBuilder usersToServlet = new StringBuilder();
+    public List<String> findAll() {
+        List<String> usersToServlet = new CopyOnWriteArrayList<>();
         for (User user : memory.findAll()) {
-            usersToServlet.append(user.getName()).append(" ");
+            usersToServlet.add(user.getName());
         }
-        return usersToServlet.toString();
+        return usersToServlet;
     }
 }
