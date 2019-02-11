@@ -3,7 +3,7 @@ package ru.job4j.servlets;
 import java.util.List;
 
 public interface Store {
-    boolean add(User user);
+    boolean add(String name);
 
     boolean update(User user, String newName);
 
