@@ -13,6 +13,7 @@ public class UserUpdateServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html");
         String id = req.getParameter("id");
+        String name = req.getParameter("name");
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         writer.append("<!DOCTYPE html>"
                 + "<html lang=\"en\">"
@@ -23,7 +24,7 @@ public class UserUpdateServlet extends HttpServlet {
                 + "<body>"
                 + "<form action'" + req.getContextPath() + "/servlets/" + "user_update_servlet" + "' method='post'>"
                 + "<input required type='text' value='" + id + "'>"
-                + "<input required type='text' value='new_name'>"
+                + "<input required type='text' name='name' >"
                 + "<input type = 'submit' value = 'Save Changes'>"
                 + "</form>"
                 + "<br/>"
@@ -37,7 +38,8 @@ public class UserUpdateServlet extends HttpServlet {
         resp.setContentType("text/html");
         String id = req.getParameter("id");
         System.out.println(id);
-        String newName = req.getParameter("new_name");
+        String newName = req.getParameter("name");
+        System.out.println(newName);
         validateService.update(id, newName);
         doGet(req, resp);
     }

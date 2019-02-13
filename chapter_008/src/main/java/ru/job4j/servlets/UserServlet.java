@@ -1,5 +1,6 @@
 package ru.job4j.servlets;
 
+import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,17 +19,23 @@ public class UserServlet extends HttpServlet {
         for (String name : validateService.findAll()) {
             sb.append("<tr><td>" + name + "</td>"
                     + "<td>"
-                    + "<form action'" + req.getContextPath() + "/servlets/user_update_servlet?id={12}" + "'" + "method='get'>"
+                    + "<form action'" + req.getContextPath() + "/servlets/user_update_servlet method='post'>"
                     + "<input type='submit' value='Edit'>"
+                    + "<input type=hidden name='action' value='edit' >"
+                    + "<input type=hidden name='name' value='" + name + "' >"
+                    + "<input type=hidden name='id' value='" + count + "' >"
                     + "</form>"
                     + "</td>"
                     + "<td>"
-                    + "<form action'" + req.getContextPath() + "/servlets' method='delete'>"
+                    + "<form action'" + req.getContextPath() + "/servlets' method='post'>"
                     + "<input type='submit' value='Delete'>"
+                    + "<input type=hidden name='action' value='delete' >"
+                    + "<input type='hidden' name='id' value='" + count + "' >"
                     + "</form>"
                     + "</td>"
                     + "</tr>"
             );
+            count++;
         }
         sb.append("</table>");
 
@@ -40,7 +47,8 @@ public class UserServlet extends HttpServlet {
                 + "</head>"
                 + "<body>"
                 + "<br/>"
-                + "<form action'" + req.getContextPath() + "/servlets/user_create_servlet" + "' method='get'>"
+                + "<form action'" + req.getContextPath() + "/servlets" + "' method='post'>"
+                + "<input type=hidden name='action' value='add' >"
                 + "<input type='submit' value='Add User'>"
                 + "</form>"
                 + sb.toString()
@@ -50,9 +58,22 @@ public class UserServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setContentType("text/html");
-        resp.sendRedirect(req.getContextPath() + "/user_create_servlet");
+        switch (req.getParameter("action")) {
+            case "add":
+                resp.sendRedirect("servlets/user_create_servlet");
+                break;
+            case "edit":
+                req.getRequestDispatcher("servlets/user_update_servlet").forward(req, resp);
+                break;
+            case "delete":
+                String idToDelete = req.getParameter("id");
+                validateService.delete(idToDelete);
+                break;
+            default:
+                break;
+        }
         doGet(req, resp);
     }
 
