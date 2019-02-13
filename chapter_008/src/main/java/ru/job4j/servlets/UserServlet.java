@@ -14,16 +14,17 @@ public class UserServlet extends HttpServlet {
         resp.setContentType("text/html");
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         StringBuilder sb = new StringBuilder("<table>");
+        int count = 0;
         for (String name : validateService.findAll()) {
             sb.append("<tr><td>" + name + "</td>"
                     + "<td>"
-                    + "<form action'" + req.getContextPath() + "/servlets' method='post'>"
-                    + "<input type='submit'>"
+                    + "<form action'" + req.getContextPath() + "/servlets/user_update_servlet?id={12}" + "'" + "method='get'>"
+                    + "<input type='submit' value='Edit'>"
                     + "</form>"
                     + "</td>"
                     + "<td>"
-                    + "<form action'" + req.getContextPath() + "/servlets' method='post'>"
-                    + "<input type='submit'>"
+                    + "<form action'" + req.getContextPath() + "/servlets' method='delete'>"
+                    + "<input type='submit' value='Delete'>"
                     + "</form>"
                     + "</td>"
                     + "</tr>"
@@ -39,6 +40,9 @@ public class UserServlet extends HttpServlet {
                 + "</head>"
                 + "<body>"
                 + "<br/>"
+                + "<form action'" + req.getContextPath() + "/servlets/user_create_servlet" + "' method='get'>"
+                + "<input type='submit' value='Add User'>"
+                + "</form>"
                 + sb.toString()
                 + "</body>"
                 + "</html>");
@@ -48,25 +52,10 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html");
-        switch (req.getParameter("action")) {
-            case "add":
-                String name = req.getParameter("name");
-                validateService.add(name);
-                break;
-            case "update":
-                String id = req.getParameter("id");
-                String newName = req.getParameter("new_name");
-                validateService.update(id, newName);
-                break;
-            case "delete":
-                String idToDelete = req.getParameter("id");
-                validateService.delete(idToDelete);
-                break;
-            default:
-                break;
-        }
+        resp.sendRedirect(req.getContextPath() + "/user_create_servlet");
         doGet(req, resp);
     }
+
 }
 
 /*

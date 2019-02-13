@@ -1,0 +1,400 @@
+GET http://localhost:8080/chapter_008/servlets/UserCreateServlet?action=add&name=7876867
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T084633.404.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=7876867
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T082615.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=7876867
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T082503.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=7876867
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T082338.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=7876867
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T082334.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=7876867
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T082325.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=7876867
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T081207.404.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=7876867
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T081204.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=7876867
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T081116.404.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=7876867
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T081110.404.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=235424524
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T081103.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=121212
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T081037.404.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=121212
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T081032.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/echo/EchoServlet?action=add&name=121212
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T080925.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=121212
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T080837.404.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=121212
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T080823.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=121212
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T080813.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets/UserServlet?action=add&name=121212
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T074239.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets?action=add&name=121212
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T074052.404.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=121212
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-13T074047.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets?login=wrgsfgfg
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T092133.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets/UserServlet?login=wrgsfgfg
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T091311.404.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets/UserServlet?login=wrgsfgfg
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T091306.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets/UserServlet?name=wrgsfgfg
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T091051.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets/UserServlet?name=wrgsfgfg
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T091030.404.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets/UserCreateServlet?name=wrgsfgfg
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T091003.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets/UserCreateServlet?action=add&name=222
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T090934.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets?action=add&name=222
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084851.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=222
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084848.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084841.200.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084832.200.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084827.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084823.404.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084802.200.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084758.200.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084722.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084719.200.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084650.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084642.405.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084557.200.html
+
+###
+
+GET http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084554.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084549.405.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=333
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-12T084532.405.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=333
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-11T112105.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=333
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-11T110211.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=222
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-11T110206.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=111
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-11T110202.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=45454545
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-11T105927.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=34343434
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-11T105920.200.html
+
+###
+
+POST http://localhost:8080/chapter_008/servlets?action=add&name=121212
+Accept: */*
+Cache-Control: no-cache
+
+<> 2019-02-11T105912.200.html
+
+###
+
