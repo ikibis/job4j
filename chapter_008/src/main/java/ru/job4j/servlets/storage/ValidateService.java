@@ -1,6 +1,7 @@
-package ru.job4j.servlets;
+package ru.job4j.servlets.storage;
 
-import java.util.ArrayList;
+import ru.job4j.servlets.model.User;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -15,14 +16,15 @@ public class ValidateService {
         return service;
     }
 
-    public boolean add(String name) {
-        return memory.add(name);
+    public boolean add(String name, String login, String email) {
+        System.out.println("public boolean add(String name)) ValidateService");
+        return memory.add(name, login, email);
     }
 
-    public boolean update(String id, String newName) {
+    public boolean update(String id, String newName, String newLogin, String newEmail) {
         int idToStore = Integer.parseInt(id);
         User user = memory.findById(idToStore);
-        return memory.update(user, newName);
+        return memory.update(user, newName, newLogin, newEmail);
     }
 
     public boolean delete(String id) {
@@ -31,11 +33,7 @@ public class ValidateService {
         return memory.delete(user);
     }
 
-    public List<String> findAll() {
-        List<String> usersToServlet = new CopyOnWriteArrayList<>();
-        for (User user : memory.findAll()) {
-            usersToServlet.add(user.getName());
-        }
-        return usersToServlet;
+    public List<User> findAll() {
+        return memory.findAll();
     }
 }

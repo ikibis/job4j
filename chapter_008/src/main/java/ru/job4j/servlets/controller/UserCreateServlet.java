@@ -1,4 +1,6 @@
-package ru.job4j.servlets;
+package ru.job4j.servlets.controller;
+
+import ru.job4j.servlets.storage.ValidateService;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -20,9 +22,11 @@ public class UserCreateServlet extends HttpServlet {
                 + "<title>Create User</title>"
                 + "</head>"
                 + "<body>"
-                + "<form action'" + req.getContextPath() + "/servlets/" + "user_create_servlet" + "' method='post'>"
+                + "<form action='" + req.getContextPath() + "/servlets/user_create_servlet' " + "method='post'>"
                 + "<input required type='text' name='name'>"
-                + "<input type = 'submit' value = 'Save'>"
+                + "<input required type='text' name='login'>"
+                + "<input required type='text' name='email'>"
+                + "<button type = 'submit'> Save</button>"
                 + "</form>"
                 + "<br/>"
                 + "</body>"
@@ -34,32 +38,16 @@ public class UserCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html");
         String name = req.getParameter("name");
-        validateService.add(name);
-        doGet(req, resp);
+        System.out.println(name);
+        String login = req.getParameter("login");
+        System.out.println(login);
+        String email = req.getParameter("email");
+        System.out.println(email);
+        if (validateService.add(name, login, email)) {
+            System.out.println("validateService.add(name) ValidateService");
+            resp.sendRedirect(String.format("%s/servlets", req.getContextPath()));
+        } else {
+            doGet(req, resp);
+        }
     }
 }
-
-/*
-@Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("text/html");
-        switch (req.getParameter("action")) {
-            case "add":
-                String name = req.getParameter("name");
-                validateService.add(name);
-                break;
-            case "update":
-                String id = req.getParameter("id");
-                String newName = req.getParameter("new_name");
-                validateService.update(id, newName);
-                break;
-            case "delete":
-                String idToDelete = req.getParameter("id");
-                validateService.delete(idToDelete);
-                break;
-            default:
-                break;
-        }
-        doGet(req, resp);
-    }
- */

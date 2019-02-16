@@ -1,4 +1,4 @@
-package ru.job4j.servlets;
+package ru.job4j.servlets.model;
 
 public class User {
     private int id;
@@ -7,9 +7,11 @@ public class User {
     private String email;
     private String createDate;
 
-    public User(int id, String name, String createDate) {
+    public User(int id, String name, String login, String email, String createDate) {
         this.id = id;
         this.name = name;
+        this.login = login;
+        this.email = email;
         this.createDate = createDate;
     }
 
