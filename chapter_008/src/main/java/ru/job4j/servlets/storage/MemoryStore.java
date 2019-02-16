@@ -1,7 +1,6 @@
 package ru.job4j.servlets.storage;
 
 import ru.job4j.servlets.model.User;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +9,6 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class MemoryStore implements Store {
     private static Store store;
     private List<User> users = new CopyOnWriteArrayList<>();
-    private int idCounter;
     SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
 
     public static Store getInstance() {
@@ -24,7 +22,8 @@ public class MemoryStore implements Store {
     public boolean add(String name, String login, String email) {
         boolean result = true;
         String date = sdf.format(new Date());
-        User user = new User(idCounter++, name, login, email, date);
+        int id = users.size();
+        User user = new User(id, name, login, email, date);
         for (User userSearched : users) {
             String userSearchedLogin = userSearched.getLogin();
             String userSearchedEmail = userSearched.getEmail();
