@@ -3,7 +3,6 @@ package ru.job4j.servlets.storage;
 import ru.job4j.servlets.model.User;
 
 import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 public class ValidateService {
     private static ValidateService service;
