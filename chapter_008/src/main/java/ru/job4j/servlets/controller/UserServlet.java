@@ -64,7 +64,6 @@ public class UserServlet extends HttpServlet {
         resp.setContentType("text/html");
         switch (req.getParameter("action")) {
             case "edit":
-                System.out.println("here");
                 req.getRequestDispatcher("servlets/user_update_servlet").forward(req, resp);
                 break;
             case "delete":
@@ -74,6 +73,6 @@ public class UserServlet extends HttpServlet {
             default:
                 break;
         }
-        doGet(req, resp);
+        resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
     }
 }

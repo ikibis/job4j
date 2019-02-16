@@ -17,7 +17,6 @@ public class UserUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        System.out.println("doGet");
         resp.setContentType("text/html");
         id = req.getParameter("id");
         name = req.getParameter("name");
@@ -50,7 +49,7 @@ public class UserUpdateServlet extends HttpServlet {
         login = req.getParameter("login");
         email = req.getParameter("email");
         if (validateService.update(id, name, login, email)) {
-            resp.sendRedirect(String.format("%s/servlets", req.getContextPath()));
+            resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
         } else {
             doGet(req, resp);
         }

@@ -38,14 +38,10 @@ public class UserCreateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         resp.setContentType("text/html");
         String name = req.getParameter("name");
-        System.out.println(name);
         String login = req.getParameter("login");
-        System.out.println(login);
         String email = req.getParameter("email");
-        System.out.println(email);
         if (validateService.add(name, login, email)) {
-            System.out.println("validateService.add(name) ValidateService");
-            resp.sendRedirect(String.format("%s/servlets", req.getContextPath()));
+            resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
         } else {
             doGet(req, resp);
         }

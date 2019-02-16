@@ -17,7 +17,6 @@ public class ValidateService {
     }
 
     public boolean add(String name, String login, String email) {
-        System.out.println("public boolean add(String name)) ValidateService");
         return memory.add(name, login, email);
     }
 

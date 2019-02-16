@@ -22,7 +22,6 @@ public class MemoryStore implements Store {
 
     @Override
     public boolean add(String name, String login, String email) {
-        System.out.println("public boolean add(String name)) MemoryStore");
         boolean result = true;
         String date = sdf.format(new Date());
         User user = new User(idCounter++, name, login, email, date);
@@ -37,7 +36,6 @@ public class MemoryStore implements Store {
         }
         if (result) {
             users.add(user);
-            System.out.println(user.getName());
         }
         return result;
     }
