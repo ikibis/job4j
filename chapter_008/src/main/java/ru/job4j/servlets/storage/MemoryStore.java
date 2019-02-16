@@ -9,7 +9,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 public class MemoryStore implements Store {
     private static Store store;
     private List<User> users = new CopyOnWriteArrayList<>();
-    SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
+    private SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
 
     public static Store getInstance() {
         if (store == null) {
@@ -58,8 +58,8 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public boolean delete(User user) {
-        return users.remove(user);
+    public boolean delete(String id) {
+        return users.remove(this.findById(Integer.valueOf(id)));
     }
 
     @Override
@@ -80,7 +80,7 @@ public class MemoryStore implements Store {
         return result;
     }
 
-    @Override
+
     public User findByLogin(String login) {
         User result = null;
         for (User userSearched : users) {
@@ -93,7 +93,7 @@ public class MemoryStore implements Store {
         return result;
     }
 
-    @Override
+
     public User findByEmail(String email) {
         User result = null;
         for (User userSearched : users) {

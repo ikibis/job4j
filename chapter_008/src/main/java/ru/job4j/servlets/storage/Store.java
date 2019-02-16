@@ -9,14 +9,10 @@ public interface Store {
 
     boolean update(User user, String newName, String newLogin, String newEmail);
 
-    boolean delete(User user);
+    boolean delete(String id);
 
     List<User> findAll();
 
     User findById(int id);
-
-    User findByLogin(String login);
-
-    User findByEmail(String email);
 
 }

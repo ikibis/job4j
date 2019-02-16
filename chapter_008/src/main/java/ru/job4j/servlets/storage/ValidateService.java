@@ -6,7 +6,7 @@ import java.util.List;
 
 public class ValidateService {
     private static ValidateService service;
-    private final Store memory = MemoryStore.getInstance();
+    private final Store memory = DbStore.getInstance();
 
     public static ValidateService getInstance() {
         if (service == null) {
@@ -26,9 +26,7 @@ public class ValidateService {
     }
 
     public boolean delete(String id) {
-        int idToStore = Integer.parseInt(id);
-        User user = memory.findById(idToStore);
-        return memory.delete(user);
+        return memory.delete(id);
     }
 
     public List<User> findAll() {
