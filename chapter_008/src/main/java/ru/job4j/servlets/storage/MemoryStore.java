@@ -5,12 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class MemoryStore implements Store {
     private static Store store;
     private List<User> users = new CopyOnWriteArrayList<>();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
-
+    private AtomicInteger id = new AtomicInteger(0);
     public static Store getInstance() {
         if (store == null) {
             store = new MemoryStore();
@@ -22,8 +23,7 @@ public class MemoryStore implements Store {
     public boolean add(String name, String login, String email) {
         boolean result = true;
         String date = sdf.format(new Date());
-        int id = users.size();
-        User user = new User(id, name, login, email, date);
+        User user = new User(id.incrementAndGet(), name, login, email, date);
         for (User userSearched : users) {
             String userSearchedLogin = userSearched.getLogin();
             String userSearchedEmail = userSearched.getEmail();
