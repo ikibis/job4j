@@ -1,12 +1,12 @@
 package ru.job4j.servlets.storage;
 
 import ru.job4j.servlets.model.User;
-
 import java.util.List;
 
 public class ValidateService {
     private static ValidateService service;
     private final Store memory = MemoryStore.getInstance();
+
 
     public static ValidateService getInstance() {
         if (service == null) {
@@ -15,14 +15,22 @@ public class ValidateService {
         return service;
     }
 
-    public boolean add(String name, String login, String email) {
-        return memory.add(name, login, email);
+    public boolean add(User user) {
+        boolean result = false;
+        if (user.getName() != null && user.getLogin() != null
+                && user.getPassword() != null && user.getEmail() != null) {
+            result = memory.add(user);
+        }
+        return result;
     }
 
-    public boolean update(String id, String newName, String newLogin, String newEmail) {
-        int idToStore = Integer.parseInt(id);
-        User user = memory.findById(idToStore);
-        return memory.update(user, newName, newLogin, newEmail);
+    public boolean update(User user, User udatedUser) {
+        boolean result = false;
+        if (udatedUser.getName() != null && udatedUser.getLogin() != null
+                && udatedUser.getPassword() != null && udatedUser.getEmail() != null) {
+            result = memory.update(user, udatedUser);
+        }
+        return result;
     }
 
     public boolean delete(String id) {

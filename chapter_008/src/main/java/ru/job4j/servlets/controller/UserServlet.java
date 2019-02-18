@@ -15,7 +15,7 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        resp.setContentType("text/html");
+  /*      resp.setContentType("text/html");
         PrintWriter writer = new PrintWriter(resp.getOutputStream());
         StringBuilder sb = new StringBuilder("<table>");
         for (User user : validateService.findAll()) {
@@ -28,6 +28,7 @@ public class UserServlet extends HttpServlet {
                     + "<input type=hidden name='id' value='" + user.getId() + "' >"
                     + "<input type=hidden name='name' value='" + user.getName() + "' >"
                     + "<input type=hidden name='login' value='" + user.getLogin() + "' >"
+                    + "<input type=hidden name='login' value='" + user.getPassword() + "' >"
                     + "<input type=hidden name='email' value='" + user.getEmail() + "' >"
                     + "<button type = 'submit'> Edit</button>"
                     + "</form>"
@@ -57,10 +58,12 @@ public class UserServlet extends HttpServlet {
                 + "</body>"
                 + "</html>");
         writer.flush();
+        */
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+   /*
         resp.setContentType("text/html");
         switch (req.getParameter("action")) {
             case "edit":
@@ -74,5 +77,6 @@ public class UserServlet extends HttpServlet {
                 break;
         }
         resp.sendRedirect(String.format("%s/index.jsp", req.getContextPath()));
+        */
     }
 }

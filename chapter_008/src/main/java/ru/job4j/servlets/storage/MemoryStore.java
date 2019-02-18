@@ -1,17 +1,13 @@
 package ru.job4j.servlets.storage;
 
 import ru.job4j.servlets.model.User;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MemoryStore implements Store {
     private static Store store;
     private List<User> users = new CopyOnWriteArrayList<>();
-    private SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
-    private AtomicInteger id = new AtomicInteger(0);
+
     public static Store getInstance() {
         if (store == null) {
             store = new MemoryStore();
@@ -20,10 +16,8 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public boolean add(String name, String login, String email) {
+    public boolean add(User user) {
         boolean result = true;
-        String date = sdf.format(new Date());
-        User user = new User(id.incrementAndGet(), name, login, email, date);
         for (User userSearched : users) {
             String userSearchedLogin = userSearched.getLogin();
             String userSearchedEmail = userSearched.getEmail();
@@ -33,25 +27,29 @@ public class MemoryStore implements Store {
                 }
             }
         }
-        if (result) {
+        if (result && user != null) {
             users.add(user);
         }
         return result;
     }
 
     @Override
-    public boolean update(User user, String newName, String newLogin, String newEmail) {
+    public boolean update(User user, User updatedUser) {
         boolean result = false;
-        if (!newName.equals(user.getName())) {
-            user.setName(newName);
+        if (!updatedUser.getName().equals(user.getName())) {
+            user.setName(updatedUser.getName());
             result = true;
         }
-        if (!newLogin.equals(user.getLogin()) && this.findByLogin(newLogin) == null) {
-            user.setLogin(newLogin);
+        if (!updatedUser.getLogin().equals(user.getLogin()) && this.findByLogin(updatedUser.getLogin()) == null) {
+            user.setLogin(updatedUser.getLogin());
             result = true;
         }
-        if (!newEmail.equals(user.getEmail()) && this.findByEmail(newEmail) == null) {
-            user.setEmail(newEmail);
+        if (!updatedUser.getEmail().equals(user.getEmail()) && this.findByEmail(updatedUser.getEmail()) == null) {
+            user.setEmail(updatedUser.getEmail());
+            result = true;
+        }
+        if (!updatedUser.getPassword().equals(user.getPassword())) {
+            user.setPassword(updatedUser.getPassword());
             result = true;
         }
         return result;

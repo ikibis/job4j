@@ -7,7 +7,7 @@
 </head>
 <body>
 <h2>
-    <a href="<%=request.getContextPath()%>/servlets/user_create_servlet"> Add User</a>
+    <a href="<%=request.getContextPath()%>/create.jsp"> Add User</a>
 </h2>
 <br/>
 <br/>
@@ -15,6 +15,7 @@
     <tr>
         <th>name</th>
         <th>login</th>
+        <th>password</th>
         <th>email</th>
         <th>Button 1</th>
         <th>Button 2</th>
@@ -25,14 +26,18 @@
         </td>
         <td><%=user.getLogin()%>
         </td>
+        <td><%=user.getPassword()%>
+        </td>
         <td><%=user.getEmail()%>
         </td>
         <td>
-            <form action="<%=request.getContextPath()%>/servlets/user_update_servlet" method="get">
+            <form action="<%=request.getContextPath()%>/update.jsp" method="get">
                 <input type=hidden name="id" value="<%=user.getId()%>">
                 <input type=hidden name="name" value="<%=user.getName()%>">
                 <input type=hidden name="login" value="<%=user.getLogin()%>">
+                <input type=hidden name="password" value="<%=user.getPassword()%>">
                 <input type=hidden name="email" value="<%=user.getEmail()%>">
+                <%request.setAttribute("user", user);%>
                 <button type="submit"> Edit</button>
             </form>
         </td>

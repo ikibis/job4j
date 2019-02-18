@@ -5,9 +5,9 @@ import ru.job4j.servlets.model.User;
 import java.util.List;
 
 public interface Store {
-    boolean add(String name, String login, String email);
+    boolean add(User user);
 
-    boolean update(User user, String newName, String newLogin, String newEmail);
+    boolean update(User user, User updatedUser);
 
     boolean delete(String id);
 
