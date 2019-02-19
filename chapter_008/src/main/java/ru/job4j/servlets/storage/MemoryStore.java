@@ -56,8 +56,8 @@ public class MemoryStore implements Store {
     }
 
     @Override
-    public boolean delete(String id) {
-        return users.remove(this.findById(Integer.valueOf(id)));
+    public boolean delete(User user) {
+        return users.remove(user);
     }
 
     @Override

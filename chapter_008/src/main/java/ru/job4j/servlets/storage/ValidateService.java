@@ -33,11 +33,15 @@ public class ValidateService {
         return result;
     }
 
-    public boolean delete(String id) {
-        return memory.delete(id);
+    public boolean delete(User user) {
+        return memory.delete(user);
     }
 
     public List<User> findAll() {
         return memory.findAll();
+    }
+
+    public User findById(int id) {
+        return memory.findById(id);
     }
 }

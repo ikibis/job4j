@@ -9,7 +9,7 @@ public interface Store {
 
     boolean update(User user, User updatedUser);
 
-    boolean delete(String id);
+    boolean delete(User user);
 
     List<User> findAll();
 

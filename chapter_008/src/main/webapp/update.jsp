@@ -18,20 +18,17 @@
     <tr>
         <form action="<%=request.getContextPath()%>/servlets/user_update_servlet" method="post">
             <td>
-                <input type=hidden name="id" value="<%=request.getParameter("id")%>">
-                <%=request.getParameter("id")%>
-                <%User user = (User) request.getAttribute("user");%>
-                <%request.setAttribute("user", user);%>
+                <%User user = (User)request.getSession().getAttribute("user");%>
+                <%=user.getId()%>
             </td>
-            <td><input required type=text name="name" value="<%=request.getParameter("name")%>"></td>
-            <td><input required type=text name="login" value="<%=request.getParameter("login")%>"></td>
-            <td><input required type=text name="password" value="<%=request.getParameter("password")%>"></td>
-            <td><input required type=text name="email" value="<%=request.getParameter("email")%>"></td>
+            <td><input required type=text name="name" value="<%=user.getName()%>"></td>
+            <td><input required type=text name="login" value="<%=user.getLogin()%>"></td>
+            <td><input required type=text name="password" value="<%=user.getPassword()%>"></td>
+            <td><input required type=text name="email" value="<%=user.getEmail()%>"></td>
             <td>
                 <button type="submit"> Save Changes</button>
             </td>
         </form>
-        </td>
     </tr>
 </table>
 </body>

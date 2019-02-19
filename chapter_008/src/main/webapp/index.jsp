@@ -1,5 +1,5 @@
 <%@ page import="ru.job4j.servlets.model.User" %>
-<%@ page import="ru.job4j.servlets.storage.ValidateService" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -20,7 +20,8 @@
         <th>Button 1</th>
         <th>Button 2</th>
     </tr>
-    <% for (User user : ValidateService.getInstance().findAll()) { %>
+    <% List<User> users = (List<User>) request.getAttribute("users");%>
+    <% for (User user : users) { %>
     <tr>
         <td><%=user.getName()%>
         </td>
@@ -32,12 +33,7 @@
         </td>
         <td>
             <form action="<%=request.getContextPath()%>/update.jsp" method="get">
-                <input type=hidden name="id" value="<%=user.getId()%>">
-                <input type=hidden name="name" value="<%=user.getName()%>">
-                <input type=hidden name="login" value="<%=user.getLogin()%>">
-                <input type=hidden name="password" value="<%=user.getPassword()%>">
-                <input type=hidden name="email" value="<%=user.getEmail()%>">
-                <%request.setAttribute("user", user);%>
+                <% request.getSession().setAttribute("user", user);%>
                 <button type="submit"> Edit</button>
             </form>
         </td>
