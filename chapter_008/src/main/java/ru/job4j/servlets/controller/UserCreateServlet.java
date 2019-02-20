@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class UserCreateServlet extends HttpServlet {
     private final ValidateService validateService = ValidateService.getInstance();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
-    private AtomicInteger id = new AtomicInteger(0);
+
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -30,7 +30,7 @@ public class UserCreateServlet extends HttpServlet {
         String password = req.getParameter("password");
         String email = req.getParameter("email");
         String date = sdf.format(new Date());
-        User user = new User(id.incrementAndGet(), name, login, password, email, date);
+        User user = new User(name, login, password, email, date);
         if (validateService.add(user)) {
             resp.sendRedirect(String.format("%s/servlets", req.getContextPath()));
         } else {

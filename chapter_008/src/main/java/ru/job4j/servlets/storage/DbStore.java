@@ -107,7 +107,7 @@ public class DbStore implements Store {
              PreparedStatement st = connection.prepareStatement(
                      "delete from users where users.id = ?;"
              )) {
-            st.setInt(1, user.getId());
+            st.setInt(1, user.getId().get());
             st.executeUpdate();
         } catch (SQLException e) {
             result = false;
@@ -126,7 +126,6 @@ public class DbStore implements Store {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 result.add(new User(
-                        Integer.valueOf(rs.getString("id")),
                         rs.getString("name"),
                         rs.getString("login"),
                         rs.getString("password"),
@@ -150,7 +149,6 @@ public class DbStore implements Store {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             result = new User(
-                    Integer.valueOf(rs.getString("id")),
                     rs.getString("name"),
                     rs.getString("login"),
                     rs.getString("password"),
