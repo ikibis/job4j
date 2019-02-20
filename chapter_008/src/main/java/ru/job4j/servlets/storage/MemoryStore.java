@@ -3,7 +3,6 @@ package ru.job4j.servlets.storage;
 import ru.job4j.servlets.model.User;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class MemoryStore implements Store {
     private static Store store;

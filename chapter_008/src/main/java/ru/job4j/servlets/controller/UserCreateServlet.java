@@ -10,7 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class UserCreateServlet extends HttpServlet {
     private final ValidateService validateService = ValidateService.getInstance();
