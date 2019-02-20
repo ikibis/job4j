@@ -34,7 +34,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>UserUpdateServlet</servlet-name>
-        <url-pattern>/servlets/user_update_servlet</url-pattern>
+        <url-pattern>/user_update_servlet</url-pattern>
     </servlet-mapping>
 </web-app>
 
