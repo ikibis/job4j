@@ -16,7 +16,7 @@
         <th>Button 1</th>
     </tr>
     <tr>
-        <form action="<%=request.getContextPath()%>/servlets/user_update_servlet" method="post">
+        <form action="<%=request.getContextPath()%>/user_update_servlet" method="post">
             <td>
                 <%User user = (User)request.getSession().getAttribute("user");%>
                 <%=user.getId()%>
