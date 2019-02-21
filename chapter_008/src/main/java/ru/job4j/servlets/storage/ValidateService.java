@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ValidateService {
     private static ValidateService service;
-    private final Store memory = MemoryStore.getInstance();
+    private final Store memory = DbStore.getInstance();
 
 
     public static ValidateService getInstance() {

@@ -12,8 +12,8 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-public class DbStore { // implements Store {
-/*
+public class DbStore implements Store {
+
     private static final Logger LOGGER = LogManager.getLogger(DbStore.class.getName());
     private static final BasicDataSource SOURCE = new BasicDataSource();
     private static DbStore store;
@@ -30,7 +30,7 @@ public class DbStore { // implements Store {
         this.createNewDB();
     }
 
-    public static DbStore getInstance() {
+    public static Store getInstance() {
         if (store == null) {
             store = new DbStore();
         }
@@ -175,5 +175,4 @@ public class DbStore { // implements Store {
         }
         return writeFlag;
     }
-    */
 }
