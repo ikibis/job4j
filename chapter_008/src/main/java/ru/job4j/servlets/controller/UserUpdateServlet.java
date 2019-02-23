@@ -14,22 +14,17 @@ public class UserUpdateServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        int id = Integer.valueOf(req.getParameter("id"));
+        if (validateService.findById(id)) {
+            User user = validateService.getUserById(id);
+            req.setAttribute("user", user);
+        }
         req.getRequestDispatcher("/WEB-INF/view/update.jsp").forward(req, resp);
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        resp.setContentType("text/html");
-        String name = req.getParameter("name");
-        String login = req.getParameter("login");
-        String password = req.getParameter("password");
-        String email = req.getParameter("email");
-        User user = (User) req.getSession().getAttribute("user");
-        User udatedUser = new User(name, login, password, email);
-        if (validateService.update(user, udatedUser)) {
-            resp.sendRedirect(String.format("%s/servlets", req.getContextPath()));
-        } else {
-            doGet(req, resp);
-        }
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) {
     }
 }
+

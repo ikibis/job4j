@@ -9,9 +9,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class UserServlet extends HttpServlet {
     private final ValidateService validateService = ValidateService.getInstance();
+    private Action action = new Action();
+    ConcurrentHashMap<String, String[]> map = new ConcurrentHashMap<>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -22,13 +25,9 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        resp.setContentType("text/html");
-        String action = req.getParameter("action");
-        String idToDelete = req.getParameter("id");
-        User user = validateService.findById(Integer.valueOf(idToDelete));
-        if (action.equals("delete")) {
-            validateService.delete(user);
-        }
+        map.putAll(req.getParameterMap());
+        action.doAction(map);
+        map.clear();
         doGet(req, resp);
     }
 }

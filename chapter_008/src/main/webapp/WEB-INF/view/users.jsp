@@ -14,6 +14,7 @@
 <br/>
 <table style="border: 1px solid black" cellpadding="1" cellspacing="1" border="1">
     <tr>
+        <th>id</th>
         <th>name</th>
         <th>login</th>
         <th>password</th>
@@ -24,6 +25,8 @@
     <% List<User> users = (List<User>) request.getAttribute("users");%>
     <% for (User user : users) { %>
     <tr>
+        <td><%=user.getId()%>
+        </td>
         <td><%=user.getName()%>
         </td>
         <td><%=user.getLogin()%>
@@ -34,7 +37,7 @@
         </td>
         <td>
             <form action="<%=request.getContextPath()%>/user_update_servlet" method="get">
-                <% request.getSession().setAttribute("user", user);%>
+                <input type="hidden" name="id" value="<%=user.getId()%>">
                 <button type="submit"> Edit</button>
             </form>
         </td>

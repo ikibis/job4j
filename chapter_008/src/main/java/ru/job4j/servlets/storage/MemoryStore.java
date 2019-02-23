@@ -1,6 +1,7 @@
 package ru.job4j.servlets.storage;
 
 import ru.job4j.servlets.model.User;
+
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -69,7 +70,7 @@ public class MemoryStore implements Store {
     public User findById(int id) {
         User result = null;
         for (User userSearched : users) {
-            int userSearchedId = userSearched.getId().get();
+            int userSearchedId = userSearched.getId();
             if (userSearchedId == id) {
                 result = userSearched;
                 break;
@@ -77,7 +78,6 @@ public class MemoryStore implements Store {
         }
         return result;
     }
-
 
     public User findByLogin(String login) {
         User result = null;
@@ -90,7 +90,6 @@ public class MemoryStore implements Store {
         }
         return result;
     }
-
 
     public User findByEmail(String email) {
         User result = null;

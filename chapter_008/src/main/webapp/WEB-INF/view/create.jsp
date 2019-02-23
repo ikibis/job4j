@@ -13,7 +13,8 @@
         <th>Button 1</th>
     </tr>
     <tr>
-        <form action="<%=request.getContextPath()%>/user_create_servlet" method="post">
+        <form action="<%=request.getContextPath()%>/servlets" method="post">
+            <input type="hidden" name="action" value="create">
             <td><input required type='text' name='name'></td>
             <td><input required type='text' name='login'></td>
             <td><input required type='text' name='password'></td>

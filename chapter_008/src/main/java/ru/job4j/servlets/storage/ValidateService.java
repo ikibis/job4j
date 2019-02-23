@@ -5,7 +5,7 @@ import java.util.List;
 
 public class ValidateService {
     private static ValidateService service;
-    private final Store memory = DbStore.getInstance();
+    private final Store memory = MemoryStore.getInstance();
 
 
     public static ValidateService getInstance() {
@@ -33,7 +33,8 @@ public class ValidateService {
         return result;
     }
 
-    public boolean delete(User user) {
+    public boolean delete(int id) {
+        User user =  this.getUserById(id);
         return memory.delete(user);
     }
 
@@ -41,7 +42,19 @@ public class ValidateService {
         return memory.findAll();
     }
 
-    public User findById(int id) {
-        return memory.findById(id);
+    public boolean findById(int id) {
+        boolean result = false;
+        if (memory.findById(id) != null) {
+            result = true;
+        }
+        return result;
+    }
+
+    public User getUserById(int id) {
+        User result = null;
+        if (memory.findById(id) != null) {
+            result = memory.findById(id);
+        }
+        return result;
     }
 }
