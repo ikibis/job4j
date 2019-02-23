@@ -27,12 +27,12 @@ public class DbStore implements Store {
         SOURCE.setMinIdle(5);
         SOURCE.setMaxIdle(10);
         SOURCE.setMaxOpenPreparedStatements(100);
-        this.createNewDB();
     }
 
     public static Store getInstance() {
         if (store == null) {
             store = new DbStore();
+            store.createNewDB();
         }
         return store;
     }
