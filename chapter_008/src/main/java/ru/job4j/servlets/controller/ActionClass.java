@@ -10,7 +10,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class Action {
+public class ActionClass {
     private final ValidateService validateService = ValidateService.getInstance();
     private SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
     private AtomicInteger identifier = new AtomicInteger(0);

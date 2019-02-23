@@ -1,5 +1,7 @@
 package ru.job4j.servlets.controller;
 
+import ru.job4j.servlets.action.Action;
+import ru.job4j.servlets.action.ActionFactory;
 import ru.job4j.servlets.model.User;
 import ru.job4j.servlets.storage.ValidateService;
 
@@ -13,11 +15,16 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class UserServlet extends HttpServlet {
     private final ValidateService validateService = ValidateService.getInstance();
-    private Action action = new Action();
+    private ActionClass action = new ActionClass();
+    //private ActionFactory actionFactory = new ActionFactory();
     ConcurrentHashMap<String, String[]> map = new ConcurrentHashMap<>();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        resp.setContentType("text/html");
+        //Action action = actionFactory.createAction(req.getParameterMap());
+        //final List<User> allUsers = action.findAll(validateService);
+        //map.clear();
         final List<User> allUsers = validateService.findAll();
         req.setAttribute("users", allUsers);
         req.getRequestDispatcher("/WEB-INF/view/users.jsp").forward(req, resp);
@@ -25,9 +32,13 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        resp.setContentType("text/html");
+        //Action action = actionFactory.createAction(req.getParameterMap());
+        //action.doAction(validateService, req.getParameterMap());
+        //map.clear();
         map.putAll(req.getParameterMap());
         action.doAction(map);
         map.clear();
-        doGet(req, resp);
+          doGet(req, resp);
     }
 }

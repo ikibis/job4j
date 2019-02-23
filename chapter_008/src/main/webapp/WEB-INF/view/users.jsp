@@ -8,7 +8,9 @@
 </head>
 <body>
 <h2>
-    <a href="<%=request.getContextPath()%>/user_create_servlet"> Add User</a>
+    <form action="<%=request.getContextPath()%>/user_create_servlet" method="get">
+        <button type="submit"> Add User</button>
+    </form>
 </h2>
 <br/>
 <br/>
