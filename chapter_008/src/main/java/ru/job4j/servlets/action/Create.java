@@ -3,17 +3,19 @@ package ru.job4j.servlets.action;
 import ru.job4j.servlets.model.User;
 import ru.job4j.servlets.storage.ValidateService;
 
+import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Create implements Action {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
     private AtomicInteger identifier = new AtomicInteger(0);
+
     @Override
-    public boolean doAction(ValidateService validateService, Map<String, String[]> map) {
+    public boolean doAction(ValidateService validateService, HttpServletRequest req) {
+        final Map<String, String[]> map = req.getParameterMap();
         boolean result = false;
         String date = sdf.format(new Date());
         User user = new User(identifier.getAndIncrement(),
@@ -26,12 +28,6 @@ public class Create implements Action {
         }
         return result;
     }
-
-    @Override
-    public List<User> findAll(ValidateService validateService) {
-        return null;
-    }
-
 }
 
 

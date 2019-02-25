@@ -1,5 +1,7 @@
 package ru.job4j.servlets.controller;
 
+import ru.job4j.servlets.action.ActionFactory;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 public class UserCreateServlet extends HttpServlet {
+    private ActionFactory factory = ActionFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -16,6 +19,9 @@ public class UserCreateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        factory.action("create", req);
         resp.setContentType("text/html");
+        resp.sendRedirect(req.getContextPath() + "/servlets");
+
     }
 }

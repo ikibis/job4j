@@ -1,5 +1,6 @@
 package ru.job4j.servlets.controller;
 
+import ru.job4j.servlets.action.ActionFactory;
 import ru.job4j.servlets.model.User;
 import ru.job4j.servlets.storage.ValidateService;
 
@@ -11,6 +12,7 @@ import java.io.IOException;
 
 public class UserUpdateServlet extends HttpServlet {
     private final ValidateService validateService = ValidateService.getInstance();
+    private ActionFactory factory = ActionFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -25,7 +27,9 @@ public class UserUpdateServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        factory.action("update", req);
         resp.setContentType("text/html");
+        resp.sendRedirect(req.getContextPath() + "/servlets");
     }
 }
 

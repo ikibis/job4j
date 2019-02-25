@@ -3,13 +3,15 @@ package ru.job4j.servlets.action;
 import ru.job4j.servlets.model.User;
 import ru.job4j.servlets.storage.ValidateService;
 
-import java.util.List;
+import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 import java.util.Objects;
 
 public class Update implements Action {
+
     @Override
-    public boolean doAction(ValidateService validateService, Map<String, String[]> map) {
+    public boolean doAction(ValidateService validateService, HttpServletRequest req) {
+        final Map<String, String[]> map = req.getParameterMap();
         boolean result = false;
         User user = null;
         int idToUpdate = Integer.valueOf(Objects.requireNonNull(map.get("id")[0]));
@@ -24,10 +26,5 @@ public class Update implements Action {
             result = true;
         }
         return result;
-    }
-
-    @Override
-    public List<User> findAll(ValidateService validateService) {
-        return null;
     }
 }
