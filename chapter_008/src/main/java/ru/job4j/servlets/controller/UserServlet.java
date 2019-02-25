@@ -1,9 +1,6 @@
 package ru.job4j.servlets.controller;
 
-import ru.job4j.servlets.action.Action;
 import ru.job4j.servlets.action.ActionFactory;
-import ru.job4j.servlets.model.User;
-import ru.job4j.servlets.storage.ValidateService;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

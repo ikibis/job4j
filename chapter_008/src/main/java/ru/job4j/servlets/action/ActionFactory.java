@@ -30,9 +30,11 @@ public class ActionFactory {
     public void action(String action, HttpServletRequest req) {
         actionMap.getOrDefault(action, new UnknownAction()).doAction(service, req);
     }
+
     public List<User> action(String action) {
         return actionMap.getOrDefault(action, new UnknownAction()).doAction(service);
     }
+
     class UnknownAction implements Action {
 
         @Override
