@@ -6,6 +6,7 @@ import ru.job4j.servlets.storage.ValidateService;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -27,6 +28,11 @@ public class Create implements Action {
             result = true;
         }
         return result;
+    }
+
+    @Override
+    public List<User> doAction(ValidateService validateService) {
+        return null;
     }
 }
 

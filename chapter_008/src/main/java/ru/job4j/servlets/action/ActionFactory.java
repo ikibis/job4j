@@ -1,9 +1,11 @@
 package ru.job4j.servlets.action;
 
+import ru.job4j.servlets.model.User;
 import ru.job4j.servlets.storage.ValidateService;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ActionFactory {
@@ -28,12 +30,19 @@ public class ActionFactory {
     public void action(String action, HttpServletRequest req) {
         actionMap.getOrDefault(action, new UnknownAction()).doAction(service, req);
     }
-
+    public List<User> action(String action) {
+        return actionMap.getOrDefault(action, new UnknownAction()).doAction(service);
+    }
     class UnknownAction implements Action {
 
         @Override
         public boolean doAction(ValidateService validateService, HttpServletRequest req) {
             return false;
+        }
+
+        @Override
+        public List<User> doAction(ValidateService validateService) {
+            return null;
         }
     }
 }

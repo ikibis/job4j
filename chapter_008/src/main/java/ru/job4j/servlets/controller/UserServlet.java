@@ -10,17 +10,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.util.List;
 
 public class UserServlet extends HttpServlet {
-    private final ValidateService validateService = ValidateService.getInstance();
     private ActionFactory factory = ActionFactory.getInstance();
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         resp.setContentType("text/html");
-        final List<User> allUsers = validateService.findAll();
-        req.setAttribute("users", allUsers);
+        req.setAttribute("users", factory.action("findAll"));
         req.getRequestDispatcher("/WEB-INF/view/users.jsp").forward(req, resp);
     }
 

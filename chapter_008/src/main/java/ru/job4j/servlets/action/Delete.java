@@ -1,8 +1,10 @@
 package ru.job4j.servlets.action;
 
+import ru.job4j.servlets.model.User;
 import ru.job4j.servlets.storage.ValidateService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -18,5 +20,10 @@ public class Delete implements Action {
             result = true;
         }
         return result;
+    }
+
+    @Override
+    public List<User> doAction(ValidateService validateService) {
+        return null;
     }
 }
