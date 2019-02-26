@@ -1,6 +1,9 @@
 package ru.job4j.servlets.model;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 public class User {
+    private final static AtomicInteger identifier = new AtomicInteger(0);
     private int id;
     private String name;
     private String login;
@@ -8,8 +11,8 @@ public class User {
     private String email;
     private String createDate;
 
-    public User(int id, String name, String login, String password, String email, String createDate) {
-        this.id = id;
+    public User(String name, String login, String password, String email, String createDate) {
+        this.id = identifier.getAndIncrement();
         this.name = name;
         this.login = login;
         this.password = password;

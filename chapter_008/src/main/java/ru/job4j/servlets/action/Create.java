@@ -8,18 +8,16 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Create implements Action {
     private SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yy");
-    private AtomicInteger identifier = new AtomicInteger(0);
 
     @Override
     public boolean doAction(ValidateService validateService, HttpServletRequest req) {
         final Map<String, String[]> map = req.getParameterMap();
         boolean result = false;
         String date = sdf.format(new Date());
-        User user = new User(identifier.getAndIncrement(),
+        User user = new User(
                 map.get("name")[0],
                 map.get("login")[0],
                 map.get("password")[0],

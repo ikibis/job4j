@@ -1,5 +1,7 @@
 package ru.job4j.servlets.storage;
 
+
+
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -16,25 +18,22 @@ public class DbStore implements Store {
 
     private static final Logger LOGGER = LogManager.getLogger(DbStore.class.getName());
     private static final BasicDataSource SOURCE = new BasicDataSource();
-    private static DbStore store;
+    private static final DbStore INSTANCE = new DbStore();
 
     public DbStore() {
         Config conf = new Config();
-        SOURCE.setUrl(conf.get("url"));
-        SOURCE.setUsername(conf.get("username"));
-        SOURCE.setPassword(conf.get("password"));
-        SOURCE.setDriverClassName(conf.get("driver-class-name"));
+        SOURCE.setUrl("jdbc:postgresql://127.0.0.1:5432/tracker");
+        SOURCE.setUsername("postgres");
+        SOURCE.setPassword("fastin");
+        SOURCE.setDriverClassName("org.postgresql.Driver");
         SOURCE.setMinIdle(5);
         SOURCE.setMaxIdle(10);
         SOURCE.setMaxOpenPreparedStatements(100);
     }
 
     public static Store getInstance() {
-        if (store == null) {
-            store = new DbStore();
-            store.createNewDB();
-        }
-        return store;
+        INSTANCE.createNewDB();
+        return INSTANCE;
     }
 
     public void createNewDB() {
@@ -124,7 +123,6 @@ public class DbStore implements Store {
             ResultSet rs = st.executeQuery();
             while (rs.next()) {
                 result.add(new User(
-                        Integer.valueOf(rs.getString("id")),
                         rs.getString("name"),
                         rs.getString("login"),
                         rs.getString("password"),
@@ -148,7 +146,6 @@ public class DbStore implements Store {
             st.setInt(1, id);
             ResultSet rs = st.executeQuery();
             result = new User(
-                    Integer.valueOf(rs.getString("id")),
                     rs.getString("name"),
                     rs.getString("login"),
                     rs.getString("password"),
