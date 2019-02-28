@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <html>
 <head>
     <title>Create User</title>
@@ -13,7 +14,7 @@
         <th>Button 1</th>
     </tr>
     <tr>
-        <form action="<%=request.getContextPath()%>/user_create_servlet" method="post">
+        <form action="${pageContext.servletContext.contextPath}/user_create_servlet" method="post">
             <input type="hidden" name="action" value="create">
             <td><input required type='text' name='name'></td>
             <td><input required type='text' name='login'></td>
