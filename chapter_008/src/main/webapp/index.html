@@ -12,7 +12,8 @@
             var result = true;
             var name = $('#name').val();
             var lastname = $('#lastname').val();
-            var sex = $('input[name="sex"]:checked').val();
+            var selectedOption = $('[name="sex"]:checked').val();
+            var desc = $('#comment').val();
             if (name == '') {
                 result = false;
                 alert('Please, enter your Firstname');
@@ -21,9 +22,13 @@
                 result = false;
                 alert('Please, enter your LastName');
             }
-            if (sex == '') {
+            if (selectedOption == null) {
                 result = false;
                 alert('Please, enter your Sex');
+            }
+            if (desc == '') {
+                result = false;
+                alert('Please, enter your Description');
             }
             return result;
         }
@@ -31,8 +36,8 @@
         function addRow() {
             var name = $('#name').val();
             var lastname = $('#lastname').val();
-            var sex = $('input[name="sex"]:checked').val();
-            var description = $('#description').val();
+            var sex = $('[name="sex"]:checked').val();
+            var description = $('#comment').val();
             $('#dynamic tr:last').after('<tr>' +
                 '<td>' + name + '</td>' +
                 '<td>' + lastname + '</td>' +
@@ -45,22 +50,21 @@
 <body>
 <div class="container">
     <h2>Users form</h2>
-    <form action="/action_page.php">
+    <form action="/index.html">
         <div class="form-group">
             <label for="name">Name:</label>
-            <input type="name" class="form-control" id="name" placeholder="Enter your Firstname" name="name">
+            <input type="text" class="form-control" id="name" placeholder="Enter your Firstname">
         </div>
         <div class="form-group">
             <label for="lastname">LastName:</label>
-            <input type="lastname" class="form-control" id="lastname" placeholder="Enter your LastName"
-                   lastname="lastname">
+            <input type="text" class="form-control" id="lastname" placeholder="Enter your LastName">
         </div>
-        <div>
-            <p>Enter your sex:</p>
-        </div>
+
         <div class="form-group">
-            <label class="radio-inline"><input type="radio" name="sex" value="Male">Male</label>
-            <label class="radio-inline"><input type="radio" name="sex" value="Female">Female</label>
+            <label class="radio-inline">
+                <input type="radio" name="sex" value="Male">Male</label>
+            <label class="radio-inline">
+                <input type="radio" name="sex" value="Female">Female</label>
         </div>
         <div class="form-group">
             <label for="comment">Description:</label>
