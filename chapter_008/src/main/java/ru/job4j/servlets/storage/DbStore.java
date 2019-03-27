@@ -39,7 +39,7 @@ public class DbStore implements Store {
     public void createNewDB() {
         try (Connection connection = SOURCE.getConnection();
              PreparedStatement st = connection.prepareStatement(
-                     "create table users ( "
+                     "create table if not exists users ( "
                              + "id serial primary key, "
                              + "name varchar(2000), "
                              + "login varchar(2000), "
