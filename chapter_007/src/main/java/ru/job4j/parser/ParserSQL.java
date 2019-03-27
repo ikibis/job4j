@@ -29,7 +29,7 @@ public class ParserSQL {
 
     public void createNewDB() {
         try (PreparedStatement tableItems = connection.prepareStatement(
-                "create table vacancy ( "
+                "create table if not exists vacancy  ( "
                         + "id serial primary key, "
                         + "name varchar(2000), "
                         + "url varchar(2000), "

@@ -42,6 +42,9 @@ public class Parser {
                     Element links2 = link.select("a").first();
                     String vacancyName = links2.text();
                     String vacancyUrl = links2.attr("abs:href");
+                    if (vacancyUrl.contains("memberinfo")) {
+                        continue;
+                    }
                     Document doc1 = Jsoup.connect(vacancyUrl).get();
                     Element desc = doc1.select(".msgBody").get(1);
                     String vacancyDescription = desc.text();
