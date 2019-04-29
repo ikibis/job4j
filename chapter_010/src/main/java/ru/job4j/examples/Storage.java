@@ -1,5 +1,11 @@
 package ru.job4j.examples;
 
+import java.util.List;
+
 public interface Storage {
-    void add(User user);
+    User add(User user);
+
+    List<User> findAll();
+
+    User findById(int id);
 }
