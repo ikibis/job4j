@@ -1,3 +1,4 @@
+/*
 package ru.job4j.examples;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,3 +36,4 @@ public class MemoryStorage implements Storage {
                 .orElse(null);
     }
 }
+*/

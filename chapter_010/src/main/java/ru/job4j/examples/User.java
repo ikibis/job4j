@@ -1,9 +1,11 @@
 package ru.job4j.examples;
 
+import org.springframework.data.annotation.PersistenceConstructor;
+
 import javax.persistence.*;
 
-@Entity
-@Table(name = "users")
+
+@Entity(name = "users")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -16,6 +18,7 @@ public class User {
     public User() {
     }
 
+    @PersistenceConstructor
     public User(String name) {
         this.name = name;
     }

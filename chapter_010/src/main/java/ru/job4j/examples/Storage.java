@@ -1,9 +1,12 @@
 package ru.job4j.examples;
 
-import java.util.List;
+import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
-public interface Storage {
-    User add(User user);
+import java.util.List;
+@Repository
+public interface Storage extends CrudRepository<User, Integer> {
+    //User add(User user);
 
     List<User> findAll();
 

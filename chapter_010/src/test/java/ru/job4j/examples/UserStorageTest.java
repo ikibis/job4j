@@ -13,25 +13,17 @@ public class UserStorageTest {
     @Test
     public void whenLoadContextShouldGetMemoryStorage() {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
-        MemoryStorage memory = context.getBean(MemoryStorage.class);
-        memory.add(new User());
+        DbStorage memory = context.getBean(DbStorage.class);
+        memory.add(new User("Elena"));
         assertNotNull(memory);
     }
 
     @Test
     public void whenLoadContextShouldGetUserStorage() {
         ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
-        MemoryStorage memory = context.getBean(MemoryStorage.class);
-        memory.add(new User());
+        DbStorage memory = context.getBean(DbStorage.class);
+        memory.add(new User("Ivan"));
         assertNotNull(memory);
-    }
-
-    @Test
-    public void whenAddUserToMemoryShouldSafeIt() {
-        ApplicationContext context = new ClassPathXmlApplicationContext("spring-context.xml");
-        MemoryStorage memory = context.getBean(MemoryStorage.class);
-        User user = memory.add(new User("Mark"));
-        assertThat(memory.findById(user.getId()), is(user));
     }
 
     @Test
