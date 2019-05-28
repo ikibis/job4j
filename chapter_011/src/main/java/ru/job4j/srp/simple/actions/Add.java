@@ -1,4 +1,4 @@
-package ru.job4j.srp.actions;
+package ru.job4j.srp.simple.actions;
 
 public class Add implements Action {
     @Override

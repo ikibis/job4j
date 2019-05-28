@@ -1,10 +1,9 @@
-package ru.job4j.srp;
+package ru.job4j.srp.simple;
 
-import ru.job4j.srp.actions.ActionFactory;
+import ru.job4j.srp.simple.actions.ActionFactory;
 import ru.job4j.srp.io.Input;
 import ru.job4j.srp.io.Output;
 import ru.job4j.srp.io.ValidateInput;
-import ru.job4j.srp.menu.Menu;
 
 import java.util.Scanner;
 
@@ -20,6 +19,7 @@ public class Calculator {
         double secondNumber;
         double result = 0;
         while (carryOn) {
+            System.out.println("Что вы хотите сделать? Для использования результата предыдущего вычисленя вместо числа введите MR");
             menu.showMenu();
             Input inputOfPointMenu = new Input(scanner.next(), "PointOfMenu");
             Output respOnSelectedPoint = validateInput.check(inputOfPointMenu);
@@ -48,7 +48,7 @@ public class Calculator {
                 result = factory.calculate(menu.getActionByNumber(selectedPoint), firstNumber, secondNumber);
                 System.out.println("Результат вычисления " + result);
                 System.out.println();
-            } else if (selectedPoint == 5) {
+            } else if (selectedPoint == 0) {
                 carryOn = false;
             } else {
                 System.out.println("Введите корректный номер пункта меню от 1 до 6");

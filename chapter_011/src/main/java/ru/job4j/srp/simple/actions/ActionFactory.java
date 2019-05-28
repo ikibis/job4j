@@ -1,4 +1,4 @@
-package ru.job4j.srp.actions;
+package ru.job4j.srp.simple.actions;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -16,6 +16,10 @@ public class ActionFactory {
 
     public static ActionFactory getInstance() {
         return FACTORY;
+    }
+
+    public Map<String, Action> getActionMap() {
+        return this.actionMap;
     }
 
     public double calculate(String action, double first, double second) {
