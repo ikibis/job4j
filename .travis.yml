@@ -9,7 +9,7 @@ services:
 
 before_install:
   - psql -c 'create database tracker;' -U postgres
-
+  - psql -c 'create database users;' -U postgres
 test:
   adapter: sqlite3
   database: ":memory:"
