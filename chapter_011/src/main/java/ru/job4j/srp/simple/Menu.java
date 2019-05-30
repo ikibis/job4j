@@ -14,19 +14,23 @@ public class Menu {
     private final ArrayList<PointMenu> points = new ArrayList<>();
 
     {
-        points.add(new PointMenu(0, "Выйти", "exit"));
-        points.add(new PointMenu(1, "Сложить", "+"));
-        points.add(new PointMenu(2, "Вычесть", "-"));
-        points.add(new PointMenu(3, "Умножить", "*"));
-        points.add(new PointMenu(4, "Разделить", "/"));
+        points.add(new PointMenu(0, "Выйти", "exit", 0));
+        points.add(new PointMenu(1, "Сложить", "+", 2));
+        points.add(new PointMenu(2, "Вычесть", "-", 2));
+        points.add(new PointMenu(3, "Умножить", "*", 2));
+        points.add(new PointMenu(4, "Разделить", "/", 2));
     }
 
     public ArrayList<PointMenu> getMenu() {
         return this.points;
     }
 
-    public String getDescByNumber(int number) {
+    public String getDescByPointOfMenuNumber(int number) {
         return points.get(number).getDescription();
+    }
+
+    public int getNumbersByPointOfMenuNumber(int number) {
+        return points.get(number).getNumbers();
     }
 
     public void showMenu() {

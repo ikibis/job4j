@@ -16,14 +16,7 @@ public class ValidateInput {
                     response = new Output(Integer.valueOf(input.getInput()), "ok");
                 }
                 break;
-            case "FirstNumber":
-                if (this.isNumberChecker(input)) {
-                    response = new Output(Double.valueOf(input.getInput()), "ok");
-                } else if (input.getInput().toUpperCase().equals("MR")) {
-                    response = new Output("MR", "ok");
-                }
-                break;
-            case "SecondNumber":
+            case "Number":
                 if (this.isNumberChecker(input)) {
                     response = new Output(Double.valueOf(input.getInput()), "ok");
                 } else if (input.getInput().toUpperCase().equals("MR")) {

@@ -4,11 +4,13 @@ public class PointMenu {
     private int number;
     private String description;
     private String action;
+    private int numbers;
 
-    public PointMenu(int number, String description, String action) {
+    public PointMenu(int number, String description, String action, int numbers) {
         this.number = number;
         this.description = description;
         this.action = action;
+        this.numbers = numbers;
     }
 
     public int getNumber() {
@@ -21,5 +23,9 @@ public class PointMenu {
 
     public String getAction() {
         return action;
+    }
+
+    public int getNumbers() {
+        return numbers;
     }
 }

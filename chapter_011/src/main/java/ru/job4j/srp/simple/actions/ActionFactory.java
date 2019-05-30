@@ -1,6 +1,7 @@
 package ru.job4j.srp.simple.actions;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ActionFactory {
@@ -22,13 +23,13 @@ public class ActionFactory {
         return this.actionMap;
     }
 
-    public double calculate(String action, double first, double second) {
-        return actionMap.getOrDefault(action, new UnknownAction()).compute(first, second);
+    public double calculate(String action, List<Double> list) {
+        return actionMap.getOrDefault(action, new UnknownAction()).compute(list);
     }
 
     class UnknownAction implements Action {
         @Override
-        public double compute(double first, double second) {
+        public double compute(List<Double> list) {
             return 0;
         }
     }
