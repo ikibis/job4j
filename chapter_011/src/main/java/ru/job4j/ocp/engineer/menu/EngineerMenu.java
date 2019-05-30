@@ -1,4 +1,4 @@
-package ru.job4j.srp.engineer.menu;
+package ru.job4j.ocp.engineer.menu;
 
 import ru.job4j.srp.menu.PointMenu;
 import ru.job4j.srp.simple.Menu;
@@ -15,10 +15,10 @@ public class EngineerMenu extends Menu {
     private final ArrayList<PointMenu> points = super.getMenu();
 
     {
-        points.add(new PointMenu(5, "Косинус", "cos"));
-        points.add(new PointMenu(6, "Синус", "sin"));
-        points.add(new PointMenu(7, "Тангенс", "tg"));
-        points.add(new PointMenu(8, "Котангенс", "ctg"));
+        points.add(new PointMenu(5, "Косинус", "cos", 1));
+        points.add(new PointMenu(6, "Синус", "sin", 1));
+        points.add(new PointMenu(7, "Тангенс", "tg", 1));
+        points.add(new PointMenu(8, "Котангенс", "ctg", 1));
 
     }
 

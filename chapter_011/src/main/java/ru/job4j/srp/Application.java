@@ -9,14 +9,14 @@ import ru.job4j.srp.simple.actions.ActionFactory;
 
 public class Application {
 
-    private static final ActionFactory FACTORY = ActionFactory.getInstance();
-    private static final Menu MENU = Menu.getInstance();
+    /*private static final ActionFactory FACTORY = ActionFactory.getInstance();
+    private static final Menu MENU = Menu.getInstance();*/
 
-    /*private static final ActionFactory factory = EngineerActionFactory.getInstance();
-    private static final Menu menu = EngineerMenu.getInstance();*/
+    private static final ActionFactory factory = EngineerActionFactory.getInstance();
+    private static final Menu menu = EngineerMenu.getInstance();
 
     public static void main(String[] args) {
-        //new EngineerCalculator(factory, menu).run();
-        new Calculator(FACTORY, MENU).run();
+        new EngineerCalculator(factory, menu).run();
+        //new Calculator(FACTORY, MENU).run();
     }
 }

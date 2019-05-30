@@ -1,8 +1,9 @@
-package ru.job4j.srp.engineer.actions;
+package ru.job4j.ocp.engineer.actions;
 
 import ru.job4j.srp.simple.actions.Action;
 import ru.job4j.srp.simple.actions.ActionFactory;
 
+import java.util.List;
 import java.util.Map;
 
 public class EngineerActionFactory extends ActionFactory {
@@ -20,13 +21,13 @@ public class EngineerActionFactory extends ActionFactory {
         return FACTORY;
     }
 
-    public double calculate(String action, double first, double second) {
-        return actionMap.getOrDefault(action, new EngineerActionFactory.UnknownAction()).compute(first, second);
+    public double calculate(String action, List<Double> list) {
+        return actionMap.getOrDefault(action, new EngineerActionFactory.UnknownAction()).compute(list);
     }
 
     class UnknownAction implements Action {
         @Override
-        public double compute(double first, double second) {
+        public double compute(List<Double> list) {
             return 0;
         }
     }
