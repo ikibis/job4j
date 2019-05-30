@@ -12,11 +12,11 @@ public class Application {
     /*private static final ActionFactory FACTORY = ActionFactory.getInstance();
     private static final Menu MENU = Menu.getInstance();*/
 
-    private static final ActionFactory factory = EngineerActionFactory.getInstance();
-    private static final Menu menu = EngineerMenu.getInstance();
+    private static final ActionFactory FACTORY = EngineerActionFactory.getInstance();
+    private static final Menu MENU = EngineerMenu.getInstance();
 
     public static void main(String[] args) {
-        new EngineerCalculator(factory, menu).run();
+        new EngineerCalculator(FACTORY, MENU).run();
         //new Calculator(FACTORY, MENU).run();
     }
 }

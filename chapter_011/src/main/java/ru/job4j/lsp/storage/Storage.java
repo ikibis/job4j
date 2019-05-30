@@ -6,7 +6,9 @@ import java.util.List;
 
 public interface Storage {
 
-    public void add(Food food);
+    void add(Food food);
 
-    public List<Food> getStorage();
+    boolean accept(Food food);
+
+    List<Food> getStorage();
 }
