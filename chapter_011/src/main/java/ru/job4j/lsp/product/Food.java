@@ -2,7 +2,7 @@ package ru.job4j.lsp.product;
 
 import java.util.Date;
 
-public class Food {
+public class Food implements Recycling, Vegetable {
     private String name;
     private Date expireDate;
     private Date createDate;
@@ -39,5 +39,15 @@ public class Food {
 
     public void setDiscount(boolean discount) {
         this.discount = discount;
+    }
+
+    @Override
+    public boolean isCanRecycling() {
+        return false;
+    }
+
+    @Override
+    public boolean isVegetable() {
+        return false;
     }
 }

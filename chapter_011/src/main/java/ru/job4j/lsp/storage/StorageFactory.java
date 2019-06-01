@@ -13,8 +13,10 @@ public class StorageFactory {
 
     {
         storageList.add(new Warehouse());
+        storageList.add(new NewWarehouse());
         storageList.add(new Shop());
         storageList.add(new Trash());
+        storageList.add(new Refrigerator());
     }
 
     public List<Storage> getStorageList() {
