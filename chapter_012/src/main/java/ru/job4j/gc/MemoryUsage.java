@@ -4,9 +4,9 @@ public class MemoryUsage {
 
     public static void main(String[] args) {
         System.out.println("Start");
-       // MemoryInfo.getInfo();
+        // MemoryInfo.getInfo();
         // -Xmx3m
-        for(int i =0 ; i < 13772; i++) {
+        for (int i = 0; i < 13772; i++) {
             User user = new User();
             user = null;
         }
@@ -14,6 +14,6 @@ public class MemoryUsage {
 
         //System.gc();
         System.out.println("Finish");
-       // MemoryInfo.getInfo();
+        // MemoryInfo.getInfo();
     }
 }
