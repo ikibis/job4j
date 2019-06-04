@@ -1,23 +1,17 @@
 package ru.job4j.isp;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
 public class Storage {
-    private static final Storage STORAGE = new Storage();
-
-    public static Storage getInstance() {
-        return STORAGE;
-    }
 
     private Map<String, Item> items = new TreeMap<>();
 
     public void addItem(String name, String parentNumber) {
         if (parentNumber.equals("0")) {
             String number = String.valueOf(items.size() + 1);
-            Item item = new Item(number, name);
+            Item item = new Item(parentNumber, name);
             items.put(number, item);
         } else {
             Item parent = items.get(parentNumber);
