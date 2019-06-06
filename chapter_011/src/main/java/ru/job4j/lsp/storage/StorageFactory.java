@@ -12,11 +12,12 @@ public class StorageFactory {
     }
 
     {
-        storageList.add(new Warehouse());
-        storageList.add(new NewWarehouse());
-        storageList.add(new Shop());
-        storageList.add(new Trash());
-        storageList.add(new Refrigerator());
+        storageList.add(Warehouse.getInstance());
+        storageList.add(NewWarehouse.getInstance());
+        storageList.add(Shop.getInstance());
+        storageList.add(Trash.getInstance());
+        storageList.add(Refrigerator.getInstance());
+        storageList.add(RecycleStorage.getInstance());
     }
 
     public List<Storage> getStorageList() {

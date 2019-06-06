@@ -1,6 +1,8 @@
 package ru.job4j.lsp;
 
+import ru.job4j.lsp.product.CanRecyclingFood;
 import ru.job4j.lsp.product.Food;
+import ru.job4j.lsp.product.RefrigeratorFood;
 import ru.job4j.lsp.storage.*;
 
 import java.util.ArrayList;
@@ -16,6 +18,21 @@ public class ControlQuality {
             }
         }
     }
+
+    public void add(CanRecyclingFood food) {
+        Storage storage = RecycleStorage.getInstance();
+        if (storage.accept(food)) {
+            storage.add(food);
+        }
+    }
+
+    public void add(RefrigeratorFood food) {
+        Storage storage = Refrigerator.getInstance();
+        if (storage.accept(food)) {
+            storage.add(food);
+        }
+    }
+
 
     public void resort() {
         List<Food> foods = new ArrayList<>();

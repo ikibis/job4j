@@ -7,7 +7,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Trash implements Storage {
+    private static final Storage FACTORY = new Trash();
 
+    public static Storage getInstance() {
+        return FACTORY;
+    }
     private final List<Food> storage = new LinkedList<>();
 
     public void add(Food food) {

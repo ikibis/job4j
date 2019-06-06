@@ -1,5 +1,6 @@
 package ru.job4j.lsp.storage;
 
+import ru.job4j.lsp.product.CanRecyclingFood;
 import ru.job4j.lsp.product.Food;
 
 import java.util.Date;
@@ -7,7 +8,11 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class RecycleStorage implements Storage {
+    private static final Storage FACTORY = new RecycleStorage();
 
+    public static Storage getInstance() {
+        return FACTORY;
+    }
     private final List<Food> storage = new LinkedList<>();
 
     @Override
@@ -18,7 +23,7 @@ public class RecycleStorage implements Storage {
     @Override
     public boolean accept(Food food) {
         boolean result = false;
-        if (food.isCanRecycling()) {
+        if (((CanRecyclingFood) food).isCanRecycling()) {
             long createDate = food.getCreateDate().getTime();
             long expireDate = food.getExpireDate().getTime();
             long currentDate = new Date().getTime();
