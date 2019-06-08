@@ -13,15 +13,17 @@ public class UserConvertTest {
         User firstUser = new User(12, "Mark", "Ekaterinburg");
         User secondUser = new User(14, "Eva", "Moscow");
         User thirdUser = new User(16, "Ekaterina", "Novouralsk");
-        List<User> list = new ArrayList<>();
-        list.add(firstUser);
-        list.add(secondUser);
-        list.add(thirdUser);
-        HashMap<Integer, User> result = new UserConvert().process(list);
-        HashMap<Integer, User> expect = new HashMap<Integer, User>();
-        expect.put(12, firstUser);
-        expect.put(14, secondUser);
-        expect.put(16, thirdUser);
+        List<User> list = List.of(
+                firstUser,
+                secondUser,
+                thirdUser
+        );
+        Map<Integer, User> result = new UserConvert().process(list);
+        Map<Integer, User> expect = Map.of(
+                12, firstUser,
+                14, secondUser,
+                16, thirdUser
+        );
         assertThat(result, is(expect));
     }
 }
