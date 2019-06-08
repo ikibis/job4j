@@ -41,7 +41,7 @@ public class SchoolTest {
 
     @Test
     public void whenA() {
-        predicate = (s) -> s.score > 70 && s.score < 100;
+        predicate = (s) -> s.getScore() > 70 && s.getScore() < 100;
         List<Student> result = school.collect(list, predicate);
         List<Student> expected = new ArrayList<>();
         expected.add(mark);
@@ -50,7 +50,7 @@ public class SchoolTest {
 
     @Test
     public void whenB() {
-        predicate = (s) -> s.score > 50 && s.score < 70;
+        predicate = (s) -> s.getScore() > 50 && s.getScore() < 70;
         List<Student> result = school.collect(list, predicate);
         List<Student> expected = new ArrayList<>();
         expected.add(andrey);
@@ -60,7 +60,7 @@ public class SchoolTest {
 
     @Test
     public void whenC() {
-        predicate = (s) -> s.score > 0 && s.score < 50;
+        predicate = (s) -> s.getScore() > 0 && s.getScore() < 50;
         List<Student> result = school.collect(list, predicate);
         List<Student> expected = new ArrayList<>();
         expected.add(alex);
@@ -70,12 +70,22 @@ public class SchoolTest {
 
     @Test
     public void whenListOfStudentsToMap() {
-        predicate = (s) -> s.score > 0 && s.score < 50;
+        predicate = (s) -> s.getScore() > 0 && s.getScore() < 50;
         Map<String, Student> result = school.studentsToMap(list);
         Map<String, Student> expected = new HashMap<>();
         for (Student student : list) {
             expected.put(student.getName(), student);
         }
+        assertThat(result, is(expected));
+    }
+
+    @Test
+    public void whenListOfStudentsUpperBound() {
+        List<Student> result = school.levelOf(list, 50);
+        List<Student> expected = new ArrayList<>();
+        expected.add(andrey);
+        expected.add(ilya);
+        expected.add(mark);
         assertThat(result, is(expected));
     }
 }
