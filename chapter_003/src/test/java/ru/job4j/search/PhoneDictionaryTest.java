@@ -9,15 +9,15 @@ import static org.junit.Assert.assertThat;
 public class PhoneDictionaryTest {
     @Test
     public void whenFindByName() {
-        PhoneDictionary phones = new PhoneDictionary();
+        var phones = new PhoneDictionary();
         phones.add(
                 new Person("Petr", "Arsentev", "534872", "Bryansk")
         );
         phones.add(
                 new Person("Petr1", "Arsentev1", "5348721", "Bryansk1")
         );
-        List<Person> persons = phones.find("r1");
-        for (Person person : persons) {
+        var persons = phones.find("r1");
+        for (var person : persons) {
             assertThat(person.getSurname(), is("Arsentev1"));
         }
     }

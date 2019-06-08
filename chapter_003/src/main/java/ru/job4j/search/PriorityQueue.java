@@ -10,12 +10,13 @@ public class PriorityQueue {
      * Метод должен вставлять в нужную позицию элемент.
      * Позиция определять по полю приоритет.
      * Для вставик использовать add(int index, E value)
+     *
      * @param task задача
      */
     public void put(Task task) {
-        int entrySize = this.tasks.size();
+        var entrySize = this.tasks.size();
 
-       int index = tasks.stream().filter(
+        var index = tasks.stream().filter(
                 tasks -> tasks.getPriority() < task.getPriority()
         ).collect(Collectors.toList()).size();
         this.tasks.add(index, task);
