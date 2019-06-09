@@ -28,6 +28,6 @@ public class ScriptLoaderTest {
     public void whenA() {
         List result = new ScriptLoader().load(map, 1);
         System.out.println(result);
-        assertThat(result, is(List.of(1, 2, 3, 4, 5)));
+        assertThat(result, is(List.of(4, 2, 4, 5, 3, 1)));
     }
 }
