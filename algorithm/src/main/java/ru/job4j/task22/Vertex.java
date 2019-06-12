@@ -5,8 +5,6 @@ public class Vertex {
     public int value;
     public int x;
     public int y;
-    private boolean isVisited;
-    public Vertex previous;
 
     public Vertex(int value, int x, int y) {
         this.value = value;
@@ -14,21 +12,32 @@ public class Vertex {
         this.y = y;
     }
 
-    public boolean isVisited() {
-        return isVisited;
+    public int getX() {
+        return x;
     }
 
-    public void setVisited(boolean visited) {
-        isVisited = visited;
+    public int getY() {
+        return y;
+    }
+
+    public int getValue() {
+        return value;
     }
 
     @Override
     public String toString() {
-        return "x = " + this.x + " y = " + this.y + " value = " + this.value + " isVisited = " + this.isVisited();
+        return "" + this.x + this.y;
+        //return "x = " + this.x + " y = " + this.y + " value = " + this.value + " isVisited = " + this.isVisited();
     }
-   /* @Override
+
+    @Override
     public boolean equals(Object obj) {
         Vertex vertex = (Vertex) obj;
-        return this.value == vertex.value && this.x == vertex.x && this.y == vertex.y;
-    }*/
+        return this.x == vertex.x && this.y == vertex.y;
+    }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
 }
