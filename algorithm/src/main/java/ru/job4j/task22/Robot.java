@@ -3,7 +3,7 @@ package ru.job4j.task22;
 import java.util.*;
 
 public class Robot {
-    int optimalWay(int[][] board, int sx, int sy, int fx, int fy) {
+    public int optimalWay(int[][] board, int sx, int sy, int fx, int fy) {
         Vertex start = new Vertex(board[sy][sx], sx, sy);
         Vertex finish = new Vertex(board[fy][fx], fx, fy);
         Map<String, List<Vertex>> wayMap = fillVertexMap(board);
@@ -12,7 +12,7 @@ public class Robot {
         return this.shortestWay(filteredWays);
     }
 
-    int shortestWay(List<LinkedList<Vertex>> filteredWays) {
+    public int shortestWay(List<LinkedList<Vertex>> filteredWays) {
         Map<Integer, LinkedList<Vertex>> map = new HashMap<>();
         for (LinkedList<Vertex> list : filteredWays) {
             int way = 0;
@@ -30,7 +30,7 @@ public class Robot {
     }
 
 
-    List<LinkedList<Vertex>> filterWays(List<LinkedList<Vertex>> allWays, Vertex finish) {
+    public List<LinkedList<Vertex>> filterWays(List<LinkedList<Vertex>> allWays, Vertex finish) {
         List<LinkedList<Vertex>> filteredResult = new LinkedList<>();
         for (LinkedList<Vertex> list : allWays) {
             if (finish.equals(list.getLast())) {
@@ -40,7 +40,7 @@ public class Robot {
         return filteredResult;
     }
 
-    List<LinkedList<Vertex>> fillWayList(Map<String, List<Vertex>> wayMap, Vertex start, Vertex finish) {
+    public List<LinkedList<Vertex>> fillWayList(Map<String, List<Vertex>> wayMap, Vertex start, Vertex finish) {
         List<LinkedList<Vertex>> result = new LinkedList<>();
         Stack<Vertex> stack = new Stack<>();
         stack.push(start);
@@ -71,7 +71,7 @@ public class Robot {
         return result;
     }
 
-    Map<String, List<Vertex>> fillVertexMap(int[][] board) {
+    public Map<String, List<Vertex>> fillVertexMap(int[][] board) {
         int vert = board.length;
         int horizon = board[0].length;
         Map<String, List<Vertex>> wayMap = new HashMap<>();
