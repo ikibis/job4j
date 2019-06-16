@@ -6,8 +6,8 @@ public class MemoryUsage {
         System.out.println("Start");
         // MemoryInfo.getInfo();
         // -Xmx3m
-        for (int i = 0; i < 13772; i++) {
-            User user = new User();
+        for (int i = 0; i < 130772; i++) {
+            User user = new User("one");
             user = null;
         }
         //System.out.println(user);
